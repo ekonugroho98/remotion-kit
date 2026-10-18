@@ -15,7 +15,8 @@ const prep = spawn('node', ['scripts/prep-server.mjs'], {
   stdio: 'inherit',
 });
 
-const studio = spawn('npx', ['remotion', 'studio'], {
+const studioPort = process.env.STUDIO_PORT || '3000';
+const studio = spawn('npx', ['remotion', 'studio', `--port=${studioPort}`], {
   cwd: rootDir,
   stdio: 'inherit',
 });
