@@ -81,6 +81,19 @@ function toPascalCase(slug) {
     .join('');
 }
 
+const STYLE_RECIPES = {
+  L01: 'Gunakan kanvas gelap #0F0F0E dengan dot-matrix halus & radial spotlight glow. Kartu Faux-UI gelap (#171716, border #2D2C2A) dengan aksen coral (#E87B58) dan sage green (#8AC98A), kursor klik interaktif, dan window 3D tilt.',
+  L02: 'KINETIC TYPOGRAPHY: Tonjolkan tipografi raksasa yang bergerak enerjik mengikuti ketukan kata di data.json (spring cepat stiffness: 220, damping: 12). Kata kunci utama diberi soft multi-layer neon bloom dan badge miring (skewX(-8deg)), dipadukan kartu visual yang punchy dan dinamis.',
+  L03: 'ISOMETRIC 3D: Gunakan WindowCard dengan tilt3D aktif (perspective(1100px) rotateX(8deg) rotateY(-10deg)), bayangan berlapis dalam, dan FloatingSticker yang melayang di sekitar kartu utama.',
+  L04: 'PAPER EDITORIAL: Gunakan BackgroundCanvas dengan theme="light" (#F4F1EA), kartu putih bersih dengan border kontras, dan aksen hangat terakota.',
+  L05: 'NEON CYBERPUNK: Gunakan kanvas gelap pekat dengan kombinasi aksen purple (#B58DED) dan blue (#7CA6D8), pendaran neon ganda pada judul dan kartu.',
+};
+
+function getStyleRecipe(styleId, styleName) {
+  if (STYLE_RECIPES[styleId]) return STYLE_RECIPES[styleId];
+  return `Terapkan karakter visual "${styleName || styleId}" secara konsisten pada pemilihan warna aksen, ritme spring animation, dan tata letak kartu di panggung utama (Y: 540px–1460px).`;
+}
+
 function buildPromptTxt(payload) {
   const slug = sanitizeSlug(payload.project);
   const compId = toPascalCase(slug);
@@ -92,15 +105,19 @@ function buildPromptTxt(payload) {
   const assets = Array.isArray(payload.assets) ? payload.assets : [];
   const assetLines =
     assets.length > 0
-      ? assets.map((a) => `  - ${a}`).join('\n')
-      : '  - (tidak ada file aset tambahan, gunakan komponen Faux-UI React)';
+      ? assets.map((a) => `  - ${a} -> gunakan <Img src={staticFile('${slug}/assets/${a}')} />`).join('\n')
+      : '  - (tidak ada file aset gambar, gunakan komponen Faux-UI React murni)';
 
+  const styleId = payload.styleId || 'L01';
+  const styleName = payload.styleName || 'Minimalist / AGY Dark UI';
   const styleInfo =
     payload.styleMode === 'reference'
       ? `Clone style dari video referensi: public/${slug}/reference.mp4 (${payload.referenceNotes || 'warna, tipografi, ritme'})`
       : payload.styleMode === 'free'
       ? 'Bebas (sesuaikan otomatis dengan mood naskah & brief)'
-      : `${payload.styleId || 'L01'} — ${payload.styleName || 'Minimalist / Claude Dark'} (${payload.styleDesc || ''})`;
+      : `${styleId} — ${styleName} (${payload.styleDesc || ''})`;
+
+  const styleRecipe = getStyleRecipe(styleId, styleName);
 
   const sourceLine =
     payload.sourceType === 'clipper'
@@ -112,7 +129,7 @@ function buildPromptTxt(payload) {
 
 ▌ TUGAS
 Buat video baru "${compId}" di repo Remotion ini dari bahan yang sudah disiapkan di public/${slug}/.
-Semua proses (baca transkrip, susun adegan, coding komponen React, cek still frame) dikerjakan oleh kamu (Claude / AI Agent) mengikuti aturan di CLAUDE.md.
+Semua proses (baca transkrip, susun adegan, coding komponen React, cek still frame) dikerjakan oleh kamu (Antigravity / Claude Agent) mengikuti aturan di CLAUDE.md dan .agents/rules/remotion.md.
 
 ▌ SPESIFIKASI
 • Composition id : ${compId}
@@ -120,8 +137,11 @@ Semua proses (baca transkrip, susun adegan, coding komponen React, cek still fra
 • File kode      : ${codeFile}
 • Folder bahan   : public/${slug}/
 • Bahasa         : ${payload.language || 'Indonesia'}
-• Font           : ${payload.font || 'Noto Sans KR (default)'}
+• Font           : ${payload.font || 'Plus Jakarta Sans (default)'}
 • Style visual   : ${styleInfo}
+
+▌ RESEP GAYA VISUAL (${styleId})
+• ${styleRecipe}
 
 ▌ BAHAN
 • Sumber utama   : ${sourceLine}
@@ -132,11 +152,20 @@ Semua proses (baca transkrip, susun adegan, coding komponen React, cek still fra
 ${assetLines}
 • Brief          : public/${slug}/concept.md
 
+▌ ATURAN TEKNIS REMOTION 4.x (WAJIB DIIKUTI AGENT)
+1. Import resmi dari 'remotion': AbsoluteFill, Sequence, Audio, Img, staticFile, useCurrentFrame, useVideoConfig, spring, interpolate.
+2. WAJIB tampilkan semua file di public/${slug}/assets/ menggunakan <Img src={staticFile('${slug}/assets/<nama-file>')} /> (DILARANG memakai tag <img> HTML biasa agar tidak flicker saat render).
+3. Susun 4-Layer Kanvas (1080×1920):
+   - Layer 1: <BackgroundCanvas accent="..." /> (ganti warna aksen tiap ganti bab/langkah).
+   - Layer 2: <TopHudBar leftLabel="REMOTION × ANTIGRAVITY" steps={[...]} activeStep={...} />.
+   - Layer 3: <SceneHeader /> (soft neon bloom tanpa kotak kaku) + Panggung Tengah (WindowCard, PromptInputCard dengan chip miring skewX(-8deg), AnimatedCursor, dan showcase aset gambar).
+   - Layer 4: <KaraokeSubtitle phrases={data.phrases} /> (1 baris, maks 4 kata) + <DiagonalStripeTransition /> + SFX dari public/sfx/.
+4. Semua animasi wajib deterministik dari useCurrentFrame() + spring() / interpolate(..., { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }). Dilarang memakai CSS transition/@keyframes.
+
 ▌ INSTRUKSI EKSEKUSI
 1. Baca public/${slug}/transcript.txt dan public/${slug}/concept.md.
-2. Buat komponen video di ${codeFile} dan daftarkan Composition "${compId}" di src/Root.tsx.
-3. Gunakan komponen reusable di src/components/ (BackgroundCanvas, TopHudBar, SceneHeader, WindowCard, PromptInputCard, KaraokeSubtitle, DiagonalStripeTransition) dan pasang efek suara dari public/sfx/.
-4. Jalankan \`npx tsc --noEmit\` dan \`node scripts/verify-stills.mjs ${compId}\` untuk mengecek still frame kunci sebelum melapor selesai.
+2. Buat atau perbarui komponen video di ${codeFile} dan pastikan Composition "${compId}" terdaftar di src/Root.tsx dengan durationInFrames sesuai data.json.
+3. Jalankan \`npx tsc --noEmit\` dan \`node scripts/verify-stills.mjs ${compId}\` untuk mengecek still frame kunci di out/stills/${compId}/ sebelum melapor selesai.
 `;
 }
 
@@ -259,6 +288,26 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
+    if (req.method === 'GET' && url.pathname === '/api/download-bundle') {
+      const slug = sanitizeSlug(url.searchParams.get('project') || 'karaya-showcase');
+      const projDir = path.join(publicDir, slug);
+      if (!fs.existsSync(projDir)) {
+        res.writeHead(404);
+        return res.end('Project folder not found');
+      }
+      const tarPath = path.join('/tmp', `${slug}-remotion-bundle.tar.gz`);
+      const itemsToPack = [`public/${slug}`, 'CLAUDE.md'];
+      if (fs.existsSync(path.join(rootDir, '.agents'))) {
+        itemsToPack.push('.agents');
+      }
+      execFileSync('tar', ['-czf', tarPath, ...itemsToPack], { cwd: rootDir });
+      res.writeHead(200, {
+        'Content-Type': 'application/gzip',
+        'Content-Disposition': `attachment; filename="${slug}-remotion-bundle.tar.gz"`,
+      });
+      return fs.createReadStream(tarPath).pipe(res);
+    }
+
     if (req.method === 'POST' && url.pathname === '/api/submit') {
       const body = await readJsonBody(req);
       const slug = sanitizeSlug(body.project);
@@ -268,13 +317,19 @@ const server = http.createServer(async (req, res) => {
 
       const existingAssets = fs.readdirSync(assetsDir).filter((f) => !f.startsWith('.'));
       const payload = { ...body, project: slug, assets: existingAssets };
+      const styleId = payload.styleId || 'L01';
+      const styleName = payload.styleName || 'Antigravity Dark UI';
 
       const conceptMd = `# Concept & Brief — ${slug}
 
 - **Format**: ${payload.aspectRatio || '9:16'} @ ${payload.fps || 30} fps
-- **Style**: ${payload.styleId || 'L01'} — ${payload.styleName || 'Minimalist / Claude Dark'}
-- **Font**: ${payload.font || 'Noto Sans KR'}
+- **Style**: ${styleId} — ${styleName}
+- **Font**: ${payload.font || 'Plus Jakarta Sans (default)'}
 - **Bahasa**: ${payload.language || 'Indonesia'}
+- **Aset Gambar**: ${existingAssets.length > 0 ? existingAssets.join(', ') : 'Tidak ada'}
+
+## Resep Gaya Visual (${styleId})
+${getStyleRecipe(styleId, styleName)}
 
 ## Brief / Alur Cerita
 ${payload.brief || 'Buat video motion graphic edukatif dengan hook kuat di 3 detik pertama, animasi spring halus, dan subtitle karaoke otomatis.'}

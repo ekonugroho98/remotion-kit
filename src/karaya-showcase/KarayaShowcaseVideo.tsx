@@ -2,6 +2,7 @@ import React from 'react';
 import {
   AbsoluteFill,
   Audio,
+  Img,
   Sequence,
   interpolate,
   spring,
@@ -169,10 +170,16 @@ const PrepPanelScene: React.FC = () => {
   const { fps } = useVideoConfig();
 
   const styles = [
-    { id: 'L01', name: 'AGY DARK UI', tag: 'TUTORIAL • UI', active: true, color: '#E07A5F' },
-    { id: 'L02', name: 'KINETIC TYPO', tag: 'HOOK • CEPAT', active: false, color: '#F2C94C' },
-    { id: 'L03', name: 'ISOMETRIC 3D', tag: 'DATA • TECH', active: false, color: '#4DA3FF' },
+    { id: 'L01', name: 'AGY DARK UI', tag: 'TUTORIAL • UI', active: frame < 95, color: '#E87B58' },
+    { id: 'L02', name: 'KINETIC TYPO', tag: 'HOOK • CEPAT', active: frame >= 95, color: '#EBC36A' },
+    { id: 'L03', name: 'ISOMETRIC 3D', tag: 'DATA • TECH', active: false, color: '#7CA6D8' },
   ];
+
+  const assetDropSpring = spring({
+    frame: Math.max(0, frame - 135),
+    fps,
+    config: { damping: 12, stiffness: 200 },
+  });
 
   const isSubmitted = frame >= 200;
   const btnScale =
@@ -181,20 +188,20 @@ const PrepPanelScene: React.FC = () => {
       : 1;
 
   return (
-    <AbsoluteFill style={{ padding: '230px 64px 260px 64px', justifyContent: 'flex-start', gap: 56 }}>
+    <AbsoluteFill style={{ padding: '230px 64px 260px 64px', justifyContent: 'flex-start', gap: 40 }}>
       <SceneHeader
         stepNumber={1}
         badgeText="LANGKAH PERTAMA"
         accent="green"
         titleLines={[
           { text: 'BUKA PREP PANEL' },
-          { text: 'PILIH 25+ STYLE', accentWord: '25+ STYLE', highlightBox: true },
+          { text: 'PILIH 25+ STYLE', accentWord: '25+ STYLE' },
         ]}
       />
 
-      <div style={{ position: 'relative' }}>
-        <WindowCard title="localhost:3030 • Prep Panel" accent="green" tilt3D delay={8}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
+      <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <WindowCard title="prep.cortex-ai.my.id • Prep Panel" accent="green" tilt3D delay={8}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             {/* 25+ Style Cards Row */}
             <div>
               <div
@@ -219,30 +226,31 @@ const PrepPanelScene: React.FC = () => {
                     <div
                       key={st.id}
                       style={{
-                        padding: '18px 16px',
+                        padding: '16px 14px',
                         borderRadius: 16,
-                        backgroundColor: st.active ? 'rgba(86, 194, 136, 0.14)' : '#22221F',
-                        border: st.active ? '2px solid #56C288' : '1.5px solid rgba(255,255,255,0.08)',
-                        transform: `scale(${pop})`,
+                        backgroundColor: st.active ? 'rgba(138, 201, 138, 0.16)' : '#22221F',
+                        border: st.active ? '2.5px solid #8AC98A' : '1.5px solid rgba(255,255,255,0.08)',
+                        boxShadow: st.active ? '0 0 28px rgba(138, 201, 138, 0.25)' : 'none',
+                        transform: `scale(${pop * (st.active ? 1.03 : 1)})`,
                         opacity: pop,
                       }}
                     >
                       <div
                         style={{
-                          height: 68,
+                          height: 60,
                           borderRadius: 10,
                           backgroundColor: '#141412',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          marginBottom: 12,
-                          border: `1px solid ${st.color}44`,
+                          marginBottom: 10,
+                          border: `1px solid ${st.color}55`,
                         }}
                       >
                         <span style={{ fontSize: 18, fontWeight: 900, color: st.color }}>{st.id}</span>
                       </div>
-                      <div style={{ fontSize: 20, fontWeight: 800, color: '#FFFFFF' }}>{st.name}</div>
-                      <div style={{ fontSize: 15, fontWeight: 600, color: 'rgba(255,255,255,0.45)' }}>
+                      <div style={{ fontSize: 19, fontWeight: 800, color: '#FFFFFF' }}>{st.name}</div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.45)' }}>
                         {st.tag}
                       </div>
                     </div>
@@ -251,11 +259,11 @@ const PrepPanelScene: React.FC = () => {
               </div>
             </div>
 
-            {/* Audio + Assets Dropzone Row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+            {/* Audio + Uploaded Asset Dropzone Row */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 14 }}>
               <div
                 style={{
-                  padding: '16px 20px',
+                  padding: '14px 18px',
                   borderRadius: 14,
                   backgroundColor: '#22221F',
                   border: '1.5px solid rgba(255,255,255,0.1)',
@@ -265,52 +273,72 @@ const PrepPanelScene: React.FC = () => {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)', fontWeight: 700 }}>
+                  <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.5)', fontWeight: 700 }}>
                     VOICE-OVER
                   </div>
-                  <div style={{ fontSize: 21, color: '#F5F4F0', fontWeight: 800, marginTop: 4 }}>
+                  <div style={{ fontSize: 20, color: '#F5F4F0', fontWeight: 800, marginTop: 4 }}>
                     🎵 audio.wav
                   </div>
                 </div>
-                <span style={{ color: '#56C288', fontSize: 20, fontWeight: 900 }}>✓ SIAP</span>
+                <span style={{ color: '#8AC98A', fontSize: 18, fontWeight: 900 }}>✓ SIAP</span>
               </div>
 
               <div
                 style={{
-                  padding: '16px 20px',
+                  padding: '12px 16px',
                   borderRadius: 14,
                   backgroundColor: '#22221F',
-                  border: '1.5px solid rgba(255,255,255,0.1)',
+                  border: '1.5px solid rgba(138, 201, 138, 0.35)',
                   display: 'flex',
                   alignItems: 'center',
+                  gap: 14,
                   justifyContent: 'space-between',
                 }}
               >
-                <div>
-                  <div style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)', fontWeight: 700 }}>
-                    ASET VISUAL
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div
+                    style={{
+                      width: 54,
+                      height: 54,
+                      borderRadius: 10,
+                      overflow: 'hidden',
+                      backgroundColor: '#FFFFFF',
+                      border: '1.5px solid rgba(255,255,255,0.2)',
+                      flexShrink: 0,
+                      transform: `scale(${Math.max(0.7, assetDropSpring)})`,
+                    }}
+                  >
+                    <Img
+                      src={staticFile('karaya-showcase/assets/Gemini_Generated_Image_eu5fqpeu5fqpeu5f (1).jpeg')}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
                   </div>
-                  <div style={{ fontSize: 21, color: '#F5F4F0', fontWeight: 800, marginTop: 4 }}>
-                    🖼️ 4 File PNG
+                  <div>
+                    <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.5)', fontWeight: 700 }}>
+                      ASET VISUAL
+                    </div>
+                    <div style={{ fontSize: 18, color: '#F5F4F0', fontWeight: 800, marginTop: 2 }}>
+                      🖼️ Logo Karaya.jpeg
+                    </div>
                   </div>
                 </div>
-                <span style={{ color: '#56C288', fontSize: 20, fontWeight: 900 }}>✓ SIAP</span>
+                <span style={{ color: '#8AC98A', fontSize: 18, fontWeight: 900 }}>✓ SIAP</span>
               </div>
             </div>
 
             {/* Submit Button */}
             <div
               style={{
-                padding: '20px 28px',
+                padding: '18px 28px',
                 borderRadius: 16,
-                backgroundColor: isSubmitted ? '#56C288' : '#2E8B57',
+                backgroundColor: isSubmitted ? '#8AC98A' : '#3C8D5B',
                 color: '#0F0F0E',
-                fontSize: 26,
+                fontSize: 25,
                 fontWeight: 900,
                 textAlign: 'center',
                 letterSpacing: '0.06em',
                 transform: `scale(${btnScale})`,
-                boxShadow: isSubmitted ? '0 0 36px rgba(86, 194, 136, 0.5)' : 'none',
+                boxShadow: isSubmitted ? '0 0 36px rgba(138, 201, 138, 0.5)' : 'none',
               }}
             >
               {isSubmitted ? '✓ PROMPT.TXT SIAP DISALIN!' : 'SUBMIT & GENERATE PROMPT →'}
@@ -318,11 +346,68 @@ const PrepPanelScene: React.FC = () => {
           </div>
         </WindowCard>
 
+        {/* Uploaded Asset Showcase Strip (Pops in when VO says "drop voice over dan gambar pendukung") */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 22,
+            padding: '18px 24px',
+            borderRadius: 22,
+            backgroundColor: '#171716',
+            border: '2px solid rgba(235, 195, 106, 0.45)',
+            boxShadow: '0 16px 40px rgba(0,0,0,0.45)',
+            transform: `scale(${assetDropSpring}) translateY(${(1 - assetDropSpring) * 24}px)`,
+            opacity: assetDropSpring,
+          }}
+        >
+          <div
+            style={{
+              width: 96,
+              height: 96,
+              borderRadius: 16,
+              overflow: 'hidden',
+              backgroundColor: '#FFFFFF',
+              flexShrink: 0,
+              border: '2px solid #EBC36A',
+            }}
+          >
+            <Img
+              src={staticFile('karaya-showcase/assets/Gemini_Generated_Image_eu5fqpeu5fqpeu5f (1).jpeg')}
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <div
+              style={{
+                display: 'inline-block',
+                alignSelf: 'flex-start',
+                padding: '4px 12px',
+                borderRadius: 6,
+                backgroundColor: '#EBC36A',
+                color: '#111110',
+                fontSize: 15,
+                fontWeight: 900,
+                letterSpacing: '0.06em',
+                transform: 'skewX(-8deg)',
+              }}
+            >
+              L02 • KINETIC TYPOGRAPHY + ASSET
+            </div>
+            <div style={{ fontSize: 25, fontWeight: 900, color: '#F5F4F0' }}>
+              KELUARGA BERKEMBANG
+            </div>
+            <div style={{ fontSize: 18, fontWeight: 600, color: 'rgba(255,255,255,0.6)' }}>
+              public/karaya-showcase/assets/ • Siap dianimasikan AI
+            </div>
+          </div>
+        </div>
+
         <AnimatedCursor
           fromX={760}
-          fromY={140}
+          fromY={120}
           toX={480}
-          toY={470}
+          toY={450}
           moveStartFrame={155}
           clickFrame={198}
           accent="green"
@@ -353,19 +438,19 @@ const ClaudeCodeScene: React.FC = () => {
         accent="purple"
         titleLines={[
           { text: 'PASTE PROMPT KE' },
-          { text: 'ANTIGRAVITY', accentWord: 'ANTIGRAVITY', highlightBox: true },
+          { text: 'ANTIGRAVITY', accentWord: 'ANTIGRAVITY' },
         ]}
       />
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 22, position: 'relative' }}>
         <PromptInputCard
           accent="purple"
-          promptText="Bikin video baru dari folder public/karaya-showcase/ (audio.wav, data.json, concept.md sudah siap). Pakai animasi spring & subtitle karaoke otomatis."
+          promptText="Buat video baru KarayaShowcase dari public/karaya-showcase/ dengan style L02 Kinetic Typography, 1 aset gambar pendukung, animasi spring & subtitle karaoke."
           chips={[
-            { label: '1080×1920', accent: 'purple' },
-            { label: '30 FPS', accent: 'green' },
-            { label: 'SPRING PHYSICS', accent: 'coral' },
-            { label: 'MULTIMODAL CHECK', accent: 'gold' },
+            { label: 'L02 KINETIC TYPO', accent: 'gold' },
+            { label: '1080×1920 • 30FPS', accent: 'purple' },
+            { label: '1 ASET GAMBAR', accent: 'green' },
+            { label: 'AUTO SUBTITLE', accent: 'coral' },
           ]}
         />
 
@@ -390,15 +475,15 @@ const ClaudeCodeScene: React.FC = () => {
               marginBottom: 14,
             }}
           >
-            <span>✓ ANTIGRAVITY MENYUSUN SEQUENCE & CEK VIDEO</span>
+            <span>✓ ANTIGRAVITY MENYUSUN SEQUENCE & CEK STILL</span>
             <span>TYPECHECK: 0 ERROR</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1.3fr 1.2fr 1fr', gap: 10 }}>
             {[
-              { name: '<HookScene />', frames: '0–246f', color: '#E07A5F' },
-              { name: '<PrepPanel />', frames: '246–507f', color: '#56C288' },
-              { name: '<Antigravity />', frames: '507–790f', color: '#B07CFB' },
-              { name: '<RenderMP4 />', frames: '790–1062f', color: '#F2C94C' },
+              { name: '<HookScene />', frames: '0–230f', color: '#E87B58' },
+              { name: '<PrepPanel />', frames: '230–508f', color: '#8AC98A' },
+              { name: '<Antigravity />', frames: '508–790f', color: '#B58DED' },
+              { name: '<RenderMP4 />', frames: '790–1251f', color: '#EBC36A' },
             ].map((seq) => (
               <div
                 key={seq.name}

@@ -1,51 +1,101 @@
-# CLAUDE.md — Aturan Produksi Video Motion Graphics (Remotion × AI Studio Kit)
+# CLAUDE.md — Panduan & Aturan Wajib Produksi Video Remotion 4.x × Antigravity
 
-Repo ini adalah studio produksi video programatik berbasis **Remotion 4.x + React + TypeScript** yang dirancang untuk menghasilkan video vertikal (`9:16 • 1080×1920`) maupun landscape (`16:9 • 1920×1080`) selevel kreator motion graphics profesional (`@galihry.id` / `GalihLabs`).
+Repo ini adalah studio produksi video motion graphics berbasis kode (**Remotion 4.x + React 18 + TypeScript**) untuk membuat video vertikal (`9:16 • 1080×1920`) maupun landscape (`16:9 • 1920×1080`) dengan kualitas setara studio profesional (`@galihry.id` / `GalihLabs`).
+
+Semua AI Agent (**Antigravity**, **Claude Code**, **Hermes**, **Cursor**) yang menulis atau memodifikasi video di repo ini **WAJIB** mematuhi seluruh aturan arsitektur, teknis Remotion, resep style, dan verifikasi visual di bawah ini.
 
 ---
 
 ## 1. Alur Kerja Standar (`public/<slug>/` → Komponen React → Verifikasi Still)
 
-Setiap project video memiliki folder bahan di `public/<slug>/` yang disiapkan oleh **Prep Panel (`http://localhost:3030`)** atau CLI:
-- `public/<slug>/audio.wav` — Voice-over utama.
-- `public/<slug>/data.json` & `transcript.txt` — Transkrip dengan **word-level timestamps** (`words` dan `phrases`) untuk sinkronisasi adegan dan subtitle karaoke.
-- `public/<slug>/concept.md` — Brief singkat, pilihan style (`L01`–`L25`), dan pembagian alur adegan.
-- `public/<slug>/prompt.txt` — Instruksi lengkap spesifikasi composition.
-- `public/<slug>/assets/` — Screenshot aplikasi, logo, atau video pendukung (opsional).
+Setiap project video memiliki folder bahan di `public/<slug>/` yang dihasilkan oleh **Prep Panel (`http://localhost:3030` / `prep.cortex-ai.my.id`)**:
+- `public/<slug>/audio.wav` — File suara Voice-Over utama.
+- `public/<slug>/data.json` & `transcript.txt` — Transkrip dengan **word-level timestamps** (`words` dan `phrases`, maksimal 4 kata per baris) untuk sinkronisasi adegan dan subtitle karaoke.
+- `public/<slug>/concept.md` — Brief singkat, pilihan style (`L01`–`L25`), dan resep gaya visual.
+- `public/<slug>/prompt.txt` — Spesifikasi lengkap tugas untuk AI Agent.
+- `public/<slug>/assets/` — Gambar/screenshot/logo pendukung yang di-upload user (opsional).
 
-Saat user meminta: *"Bikin video baru dari folder `public/<slug>/`"* atau menempelkan isi `prompt.txt`, lakukan langkah berikut secara berurutan:
-1. Baca **hanya** `public/<slug>/transcript.txt` dan `public/<slug>/concept.md` terlebih dahulu, serta cek daftar file di `public/<slug>/assets/`.
-2. Susun pembagian frame setiap adegan (`<Sequence from={...} durationInFrames={...}>`) mengikuti detik/frame kalimat di `transcript.txt`.
-3. Tulis komponen video di `src/<slug>/<CompId>Video.tsx` menggunakan komponen reusable di `src/components/`.
-4. Daftarkan `<Composition id="<CompId>" ... />` di `src/Root.tsx` dengan `durationInFrames` mengikuti `data.json`.
+Saat user meminta pembuatan/perubahan video dari `public/<slug>/`:
+1. **Baca Bahan**: Baca `public/<slug>/transcript.txt` dan `public/<slug>/concept.md` terlebih dahulu, lalu cek semua file di `public/<slug>/assets/`.
+2. **Peta Frame (`<Sequence>`)**: Bagi adegan menggunakan `<Sequence from={...} durationInFrames={...}>` berdasarkan nomor frame (`F0000`) yang tertera di `transcript.txt` agar visual masuk 100% sinkron dengan kalimat yang diucapkan VO.
+3. **Tulis Kode Komponen**: Buat file `src/<slug>/<CompId>Video.tsx` dan daftarkan `<Composition id="<CompId>" ... />` di `src/Root.tsx` dengan `durationInFrames={data.durationInFrames}`.
+4. **Verifikasi Visual Wajib**: Jalankan `npx tsc --noEmit` dan `node scripts/verify-stills.mjs <CompId>` lalu lihat hasil gambar PNG di `out/stills/<CompId>/` sebelum melapor selesai.
 
 ---
 
-## 2. Arsitektur 4-Layer yang Wajib Menempel di Semua Scene
+## 2. Aturan Teknis Remotion 4.x (Dilarang Melanggar!)
 
-Setiap video wajib memiliki 4 elemen permanen agar tampak hidup, konsisten, dan profesional:
+1. **Import Resmi Remotion**:
+   - Selalu gunakan komponen dari paket `'remotion'`:
+     ```tsx
+     import {
+       AbsoluteFill,
+       Audio,
+       Img,
+       Sequence,
+       interpolate,
+       spring,
+       staticFile,
+       useCurrentFrame,
+       useVideoConfig,
+     } from 'remotion';
+     ```
+2. **Wajib Pakai `<Img>` + `staticFile()`, DILARANG Pakai `<img>` Biasa**:
+   - Jika ada gambar di `public/<slug>/assets/<nama-file>`, **WAJIB** merendernya dengan:
+     ```tsx
+     <Img
+       src={staticFile(`${slug}/assets/${fileName}`)}
+       style={{ width: ..., height: ..., objectFit: 'contain' }}
+     />
+     ```
+   - Tag `<img>` HTML biasa menyebabkan gambar berkedip (*flicker*) atau gagal termuat saat proses `remotion render`.
+3. **Semua Animasi Wajib Berdasarkan `useCurrentFrame()`**:
+   - **DILARANG KERAS** memakai CSS transition (`transition: all 0.3s`), CSS `@keyframes`, atau `setTimeout`. Semua perubahan posisi, ukuran, rotasi, dan opacity **harus** dihitung secara deterministik dari `const frame = useCurrentFrame()`.
+4. **Gunakan `spring()` & `interpolate()` dengan Clamping**:
+   - Untuk kemunculan elemen, selalu gunakan:
+     ```tsx
+     const enter = spring({ frame, fps, config: { damping: 14, stiffness: 150 } });
+     ```
+   - Setiap pemanggilan `interpolate()` **WAJIB** menyertakan `{ extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }` agar nilai tidak bocor di luar rentang frame.
+5. **Font Global Sans-Serif di Dalam `<Sequence>`**:
+   - Di dalam wrapper utama `<AbsoluteFill>`, selalu sertakan tag `<style>{'* { box-sizing: border-box; font-family: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif; }'}</style>` agar semua elemen di dalam `<Sequence>` tidak jatuh ke font serif default browser.
+
+---
+
+## 3. Arsitektur 4-Layer Kanvas (`1080 × 1920`)
+
+Setiap adegan wajib disusun dalam 4 zona vertikal agar rapi dan tidak pernah bertumpukan (*overlap*):
+
 1. **Layer 1 — Dynamic Background (`<BackgroundCanvas />`)**:
    - Mode `dark` (`#0F0F0E` dengan dot-matrix halus & radial spotlight glow di tengah) atau `light` (`#F4F1EA` kertas krem dengan grid halus).
-   - Ubah warna aksen (`coral`, `green`, `purple`, `blue`, `gold`) setiap kali berganti bab/langkah utama.
-2. **Layer 2 — Top HUD Bar (`<TopHudBar />`)**:
-   - Pill kiri atas dengan ikon spark berputar (`ClaudeSparkIcon`) + pill kanan atas (nama brand atau penghitung `FRAME 0000`) + progress bar langkah di bawahnya.
-3. **Layer 3 — Main Stage (`Y: 230px – 1480px`)**:
-   - Bagian atas: `<SceneHeader />` berisi badge langkah (`1 LANGKAH`) dan Headline **2–3 baris huruf kapital tebal** dengan kata kunci diberi warna aksen atau `highlightBox`.
-   - Bagian tengah: Gunakan `<WindowCard />` (dengan `tilt3D`), `<PromptInputCard />`, `<FloatingSticker />`, dan `<AnimatedCursor />`, atau tampilkan gambar dari `public/<slug>/assets/` dengan animasi zoom/pan halus.
-   - **Aturan Anti-Berantakan**: Maksimal 3–4 elemen kartu per adegan, ukuran font minimal `20px` untuk label dan `28px–70px` untuk teks utama agar terbaca jelas di layar HP.
-4. **Layer 4 — Karaoke Subtitle (`<KaraokeSubtitle />`) & Transisi (`<DiagonalStripeTransition />`)**:
-   - Pasang `<KaraokeSubtitle phrases={data.phrases} />` di bagian bawah layar.
-   - Pasang `<DiagonalStripeTransition startFrame={...} />` + `<Audio src={staticFile('sfx/whoosh.wav')} />` di setiap pergantian adegan utama, serta `sfx/pop.wav`, `sfx/click.wav`, dan `sfx/success.wav` pada elemen interaktif.
+   - Ganti warna aksen (`coral`, `green`, `purple`, `blue`, `gold`) di setiap pergantian bab/langkah.
+2. **Layer 2 — Top HUD Bar (`Y: 60px – 180px`, `<TopHudBar />`)**:
+   - Pill kiri atas (`REMOTION × ANTIGRAVITY` dengan spark berputar), pill kanan atas (`FRAME 0000`), dan progress bar 4 langkah di bawahnya.
+3. **Layer 3 — Main Stage (`Y: 220px – 1480px`)**:
+   - **Bagian Atas (`Y: 220px – 520px`)**: `<SceneHeader />` berisi badge langkah (`01 LANGKAH PERTAMA`), Headline **2–3 baris huruf kapital ekstrabal (`82px–92px`)** dengan kata kunci diberi *soft multi-layer neon bloom* (bukan kotak kaku), serta `subtitleLines` opsional di bawahnya.
+   - **Bagian Tengah (`Y: 540px – 1460px`)**: Panggung visual utama. Gunakan `<WindowCard />` (dengan `tilt3D`), `<PromptInputCard />` (dengan chip miring `skewX(-8deg)`), `<FloatingSticker />`, `<AnimatedCursor />`, dan tampilkan gambar dari `public/<slug>/assets/` jika tersedia.
+   - **Aturan Anti-Sesak**: Maksimal 3–4 kartu/elemen utama per layar. Ukuran font minimal `20px` untuk label kecil dan `32px–76px` untuk judul kartu.
+4. **Layer 4 — Karaoke Subtitle 1 Baris (`Y: 1620px – 1820px`, `<KaraokeSubtitle />`) & Transisi**:
+   - Subtitle di bawah layar maksimal **4 kata per frasa** (`max 25 karakter`) agar selalu muat **1 baris horizontal**, dengan kata aktif meloncat halus (`translateY(-5px)`) dan berpendar sesuai warna aksen scene.
+   - Pasang `<DiagonalStripeTransition startFrame={...} />` + `<Audio src={staticFile('sfx/whoosh.wav')} />` di setiap perpindahan adegan utama.
 
 ---
 
-## 3. Aturan Verifikasi Kualitas (Wajib Sebelum Melapor Selesai!)
+## 4. Kamus Resep Gaya Visual (`L01` s/d `L25`)
 
-1. **Jangan pernah pakai animasi linear kaku**: Selalu gunakan `spring({ frame, fps, config: { damping: 14, stiffness: 150 } })` untuk kemunculan kartu, teks, dan stiker.
-2. **Jalankan Typecheck & Visual Still Loop**:
-   ```bash
-   node scripts/verify-stills.mjs <CompId> <durationInFrames> 12
-   ```
-3. **Inspeksi Still Frame**: Lihat file gambar di `out/stills/<CompId>/` untuk memastikan tidak ada teks yang bertumpukan (*overlap*), terpotong, atau kontrasnya mati.
-4. **Penutup CTA Lead Magnet (Khusus Reels/TikTok)**: Jika naskah ditutup dengan ajakan komentar (misal *"Buat yang mau link Remotion-nya, langsung comment MAU di kolom komentar!"*), tambahkan scene penutup khusus berisi kartu Faux-UI kolom komentar Instagram dengan efek ketik otomatis kata kunci (`MAU`), animasi kursor mengeklik tombol `KIRIM ↑`, dan balasan `⚡ AUTO-DM OTOMATIS TERKIRIM!`.
-5. Jangan merender MP4 penuh kecuali diminta user (atau saat membuat video final dengan `npx remotion render <CompId> out/<slug>.mp4`).
+Sesuaikan tata letak panggung tengah (Layer 3) dengan style yang dipilih di `concept.md`:
+
+- **`L01 — Minimalist / AGY Dark UI`**: Kanvas `#0F0F0E`, aksen `#E87B58` (coral) & `#8AC98A` (sage green), kartu UI gelap `#171716` dengan border `#2D2C2A`, window 3D tilt, kursor interaktif.
+- **`L02 — Kinetic Typography`**: Fokus pada tipografi raksasa yang bergerak dinamis mengikuti ketukan kata VO (`spring` cepat `stiffness: 220, damping: 12`), kata kunci meledak/scale-up dengan *neon bloom* kuat, badge kata kunci miring (`skewX(-8deg)`), dipadukan kartu visual yang ringkas dan punchy.
+- **`L03 — Isometric 3D Cards`**: Semua kartu utama diberi transformasi perspektif 3D (`perspective(1100px) rotateX(8deg) rotateY(-10deg)`), bayangan berlapis dalam, dan stiker melayang di sekitarnya.
+- **`L04 — Paper / Editorial Light`**: Mode `theme="light"` (`#F4F1EA`), kartu putih gading `#FFFFFF` dengan border tegas `#1A1A18`, tipografi kontras hitam pekat & aksen terakota.
+- **`L05 — Neon Cyberpunk Glow`**: Kanvas hitam pekat `#09090D`, pendaran ganda ungu `#B58DED` & biru siber `#7CA6D8`, garis border bercahaya.
+- **`L06` s/d `L25`**: Ikuti karakter nama style di `concept.md` sambil tetap menjaga keterbacaan di layar vertikal HP dan struktur 4-layer di atas.
+
+---
+
+## 5. Checklist Verifikasi Wajib Sebelum Selesai
+
+1. Jalankan `npx tsc --noEmit` — harus **0 error**.
+2. Jalankan `node scripts/verify-stills.mjs <CompId>` untuk merender gambar *still frame* dari setiap adegan.
+3. Periksa gambar-gambar di `out/stills/<CompId>/` secara visual: pastikan tidak ada teks yang bertumpukan, tidak ada gambar aset yang gepeng/pecah, dan subtitle bawah tetap 1 baris rapi.

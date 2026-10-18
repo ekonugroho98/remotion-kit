@@ -721,9 +721,9 @@
       ]
     },
     {
-      "text": "Pilih satu dari dua puluh",
+      "text": "Pilih satu dari dua",
       "start": 10.962,
-      "end": 12.458,
+      "end": 12.102,
       "words": [
         {
           "word": "Pilih",
@@ -744,19 +744,19 @@
           "word": "dua",
           "start": 11.888,
           "end": 12.102
-        },
-        {
-          "word": "puluh",
-          "start": 12.102,
-          "end": 12.458
         }
       ]
     },
     {
-      "text": "lima style animasi,",
-      "start": 12.458,
+      "text": "puluh lima style animasi,",
+      "start": 12.102,
       "end": 13.669,
       "words": [
+        {
+          "word": "puluh",
+          "start": 12.102,
+          "end": 12.458
+        },
         {
           "word": "lima",
           "start": 12.458,

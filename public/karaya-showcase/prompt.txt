@@ -11,16 +11,16 @@ Semua proses (baca transkrip, susun adegan, coding komponen React, cek still fra
 • File kode      : src/karaya-showcase/KarayaShowcaseVideo.tsx
 • Folder bahan   : public/karaya-showcase/
 • Bahasa         : Indonesia
-• Font           : Plus Jakarta Sans
-• Style visual   : L01 — Claude Dark UI (tutorial · faux-ui · spark)
+• Font           : Plus Jakarta Sans (default)
+• Style visual   : L02 — Kinetic Typography (hook · voice-over · quote)
 
 ▌ BAHAN
 • Sumber utama   : Voice-over
 • Voice-over     : public/karaya-showcase/audio.wav
 • Word Timestamp : public/karaya-showcase/data.json & public/karaya-showcase/transcript.txt
 • Backsound      : public/sfx/music-loop.wav • volume 0.15
-• Aset pendukung : 0 file di public/karaya-showcase/assets/
-  - (tidak ada file aset tambahan, gunakan komponen Faux-UI React)
+• Aset pendukung : 1 file di public/karaya-showcase/assets/
+  - Gemini_Generated_Image_eu5fqpeu5fqpeu5f (1).jpeg
 • Brief          : public/karaya-showcase/concept.md
 
 ▌ INSTRUKSI EKSEKUSI
