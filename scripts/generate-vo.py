@@ -210,6 +210,26 @@ def get_audio_duration(wav_path: str) -> float:
     return round(float(res.stdout.strip()), 3)
 
 
+import shutil
+import sys
+
+
+def resolve_edge_tts_cmd() -> list[str]:
+    edge_bin = shutil.which("edge-tts")
+    if edge_bin:
+        return [edge_bin]
+    for candidate in ["/usr/local/bin/edge-tts", "/usr/bin/edge-tts", os.path.expanduser("~/.local/bin/edge-tts")]:
+        if os.path.exists(candidate):
+            return [candidate]
+    try:
+        import edge_tts  # noqa: F401
+        return [sys.executable, "-m", "edge_tts"]
+    except ImportError:
+        pass
+    uvx_bin = shutil.which("uvx") or "/Users/macbookpro/.local/bin/uvx"
+    return [uvx_bin, "edge-tts"]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project", required=True, help="Project folder slug in public/")
@@ -240,16 +260,12 @@ def main() -> None:
     spoken_text = to_phonetic_script(text)
     original_tokens = [t for t in re.split(r"\s+", text.strip()) if t]
 
-    uvx_bin = "/Users/macbookpro/.local/bin/uvx"
-    if not os.path.exists(uvx_bin):
-        uvx_bin = "uvx"
+    base_tts_cmd = resolve_edge_tts_cmd()
 
     with tempfile.TemporaryDirectory() as tmpdir:
         mp3_path = os.path.join(tmpdir, "tts.mp3")
         vtt_path = os.path.join(tmpdir, "tts.vtt")
-        cmd = [
-            uvx_bin,
-            "edge-tts",
+        cmd = base_tts_cmd + [
             "--voice", args.voice,
             f"--rate={args.rate}",
             f"--pitch={args.pitch}",
@@ -257,7 +273,7 @@ def main() -> None:
             "--write-media", mp3_path,
             "--write-subtitles", vtt_path,
         ]
-        print(f"[generate-vo] Synthesizing VO with phonetic mapping ({args.voice})...")
+        print(f"[generate-vo] Synthesizing VO with phonetic mapping ({args.voice}) via {base_tts_cmd}...")
         subprocess.run(cmd, check=True)
 
         wav_path = os.path.join(proj_dir, "audio.wav")
@@ -272,7 +288,7 @@ def main() -> None:
             vtt_content = vf.read()
 
     words = parse_vtt_to_words(vtt_content, original_tokens)
-    phrases = group_phrases(words, max_words=5)
+    phrases = group_phrases(words, max_words=4)
     duration = get_audio_duration(wav_path)
 
     data = {
