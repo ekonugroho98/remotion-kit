@@ -14,7 +14,11 @@ import wave
 import struct
 
 
+import sys
+
 WHISPER_PYTHON = "/Users/macbookpro/Projects/02-products/video-tool/venv/bin/python"
+if not os.path.exists(WHISPER_PYTHON):
+    WHISPER_PYTHON = sys.executable
 
 
 def get_audio_duration(wav_path: str) -> float:
@@ -29,13 +33,22 @@ def get_audio_duration(wav_path: str) -> float:
     return round(float(res.stdout.strip()), 3)
 
 
-def group_phrases(words: list[dict], max_words: int = 5) -> list[dict]:
+def group_phrases(words: list[dict], max_words: int = 4) -> list[dict]:
     phrases: list[dict] = []
     buf: list[dict] = []
     for w in words:
+        projected_len = sum(len(x["word"]) + 1 for x in buf) + len(w["word"])
+        if buf and projected_len > 25:
+            phrases.append({
+                "text": " ".join(x["word"] for x in buf),
+                "start": buf[0]["start"],
+                "end": buf[-1]["end"],
+                "words": buf,
+            })
+            buf = []
         buf.append(w)
         ends_sentence = w["word"].endswith((".", "!", "?", ",", ":"))
-        if len(buf) >= max_words or (ends_sentence and len(buf) >= 3):
+        if len(buf) >= max_words or (ends_sentence and len(buf) >= 2):
             phrases.append({
                 "text": " ".join(x["word"] for x in buf),
                 "start": buf[0]["start"],
@@ -131,7 +144,7 @@ def main() -> None:
         print(f"[transcribe] Running Whisper ({args.model}) on {wav_path}...")
         text, words = transcribe_with_whisper(wav_path, args.model)
 
-    phrases = group_phrases(words, max_words=5)
+    phrases = group_phrases(words, max_words=4)
     data = {
         "project": args.project,
         "duration": duration,
