@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remotion Prep Panel — Studio Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F6F5F1;
+      --card: #FFFFFF;
+      --border: #E5E3DC;
+      --text: #141413;
+      --muted: #75746E;
+      --accent: #141413;
+      --coral: #E07A5F;
+      --green: #16A34A;
+      --green-soft: #DCFCE7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+    /* Left Sidebar */
+    .sidebar {
+      width: 256px;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      flex-shrink: 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--text);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+    .brand-sub { color: var(--muted); font-weight: 500; font-size: 13px; }
+    .step-list {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      padding: 6px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .step-item:hover { background: #F2F1EC; }
+    .step-left { display: flex; align-items: center; gap: 9px; }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 3px var(--green-soft);
+    }
+    .step-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .hint-box {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #F7F6F2;
+      border: 1px solid var(--border);
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .sidebar-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .btn-outline {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-outline:hover { background: #F2F1EC; }
+
+    /* Main Workspace */
+    .main-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .topbar {
+      height: 54px;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      font-size: 13px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .breadcrumb { font-weight: 600; color: var(--muted); }
+    .breadcrumb strong { color: var(--text); }
+    .path-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      background: #F3F2ED;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 290px;
+      gap: 24px;
+      padding: 28px 32px 64px 32px;
+      max-width: 1280px;
+    }
+    .sections { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+    }
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1.2fr;
+      gap: 16px;
+      align-items: start;
+    }
+    label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 13.5px;
+      font-family: inherit;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+    }
+    input[type="text"]:focus, textarea:focus {
+      border-color: var(--text);
+    }
+    .sub-hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+    .toggle-group {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #F7F6F2;
+    }
+    .toggle-btn {
+      padding: 8px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .toggle-btn.active {
+      background: var(--text);
+      color: #fff;
+    }
+
+    /* FPS Selector */
+    .fps-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .fps-pill {
+      padding: 10px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #FAF9F6;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .fps-pill.active {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+    .fps-num { font-size: 16px; font-weight: 800; }
+    .fps-lbl { font-size: 10.5px; opacity: 0.7; margin-top: 2px; }
+
+    /* Dropzone */
+    .dropzone {
+      border: 1.5px dashed #CCC9C0;
+      border-radius: 10px;
+      padding: 16px 18px;
+      background: #FAF9F6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .dropzone:hover { border-color: var(--text); background: #F3F2ED; }
+    .asset-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .asset-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      background: #F2F1EC;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Style Gallery (25 Templates) */
+    .mode-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .mode-card {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      background: #fff;
+    }
+    .mode-card.active {
+      border-color: var(--text);
+      background: #FAF9F6;
+    }
+    .mode-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+    .mode-card p { font-size: 11.5px; color: var(--muted); line-height: 1.35; }
+
+    .cat-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .cat-tab {
+      padding: 5px 11px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .cat-tab.active {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .style-card {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    }
+    .style-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+    .style-card.active {
+      border-color: var(--text);
+      box-shadow: 0 0 0 2px var(--text);
+    }
+    .style-Stage {
+      height: 148px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .style-card:hover .anim-target {
+      animation: pulsePop 0.9s infinite alternate ease-in-out;
+    }
+    @keyframes pulsePop {
+      0% { transform: scale(0.94) rotate(-2deg); }
+      100% { transform: scale(1.08) rotate(2deg); }
+    }
+    .style-meta {
+      padding: 10px 12px;
+      border-top: 1px solid var(--border);
+    }
+    .style-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+    .style-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--muted);
+    }
+    .style-tags {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* Sticky Right Summary Card */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      position: sticky;
+      top: 78px;
+      height: fit-content;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 10px;
+      border: none;
+      background: var(--text);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: opacity 0.15s;
+    }
+    .btn-submit:hover { opacity: 0.9; }
+    .btn-coral {
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: none;
+      background: var(--coral);
+      color: #fff;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Modal for Prompt.txt */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 24px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 760px;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+      overflow: hidden;
+    }
+    .modal-head {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-pre {
+      padding: 20px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      line-height: 1.6;
+      background: #FAF9F6;
+      max-height: 70vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <div class="brand">
+        <span class="brand-badge">✦</span>
+        <span>Karaya</span>
+        <span class="brand-sub">Prep Panel</span>
+      </div>
+
+      <div class="step-list">
+        <div class="step-header">
+          <span>Langkah</span>
+          <span id="stepCounter">6/6</span>
+        </div>
+        <div class="step-item" onclick="scrollToSec('sec-project')">
+          <span class="step-left"><span class="dot"></span>Project</span>
+          <span class="step-val" id="sideProject">karaya-showcase</span>
+        </div>
+        <div class="step-item" onclick="scrollToSec('sec-fps')">
+          <span class="step-left"><span class="dot"></span>Frame rate</span>
+          <span class="step-val" id="sideFps">30 fps</span>
+        </div>
+        <div class="step-item" onclick="scrollToSec('sec-vo')">
+          <span class="step-left"><span class="dot"></span>Voice-over</span>
+          <span class="step-val" id="sideVo">tersimpan</span>
+        </div>
+        <div class="step-item" onclick="scrollToSec('sec-music')">
+          <span class="step-left"><span class="dot"></span>Backsound</span>
+          <span class="step-val" id="sideMusic">15%</span>
+        </div>
+        <div class="step-item" onclick="scrollToSec('sec-assets')">
+          <span class="step-left"><span class="dot"></span>Aset</span>
+          <span class="step-val" id="sideAssets">siap</span>
+        </div>
+        <div class="step-item" onclick="scrollToSec('sec-style')">
+          <span class="step-left"><span class="dot"></span>Style</span>
+          <span class="step-val" id="sideStyle">L01</span>
+        </div>
+        <div class="step-item" onclick="scrollToSec('sec-brief')">
+          <span class="step-left"><span class="dot"></span>Brief</span>
+          <span class="step-val" id="sideBrief">siap</span>
+        </div>
+      </div>
+
+      <div class="hint-box">
+        Isi tiap langkah, lalu klik <strong>Submit</strong>. Panel menyiapkan bahan, word-timestamp, dan menulis <code>prompt.txt</code>; Claude / AI Agent yang mengerjakan videonya.
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="btn-outline" onclick="createNewProject()">+ Project baru</button>
+      <a class="btn-outline" href="http://localhost:3000" target="_blank">Buka Studio ↗</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="breadcrumb">Project / <strong id="topSlug">karaya-showcase</strong></div>
+      <div class="path-badge" id="topPath">public/karaya-showcase/</div>
+    </header>
+
+    <div class="content-grid">
+      <div class="sections">
+
+        <!-- 1. Project -->
+        <section class="card" id="sec-project">
+          <div class="card-head">
+            <div>
+              <div class="card-title"><span class="dot"></span> Project</div>
+              <div class="card-desc">Nama folder, sumber audio/video, dan format kanvas</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label>Nama Project (Slug)</label>
+              <input type="text" id="projectInput" value="karaya-showcase" oninput="syncProjectName()" />
+              <div class="sub-hint">Huruf kecil, angka, - atau _</div>
+            </div>
+            <div>
+              <label>Sumber Utama</label>
+              <div class="toggle-group">
+                <button class="toggle-btn active" id="srcVoBtn" onclick="setSource('vo')">Voice-over</button>
+                <button class="toggle-btn" id="srcClipBtn" onclick="setSource('clipper')">YouTube Clipper</button>
+              </div>
+            </div>
+            <div>
+              <label>Format Rasio</label>
+              <div class="toggle-group">
+                <button class="toggle-btn active" id="fmt916Btn" onclick="setAspect('9:16')">▯ 9:16</button>
+                <button class="toggle-btn" id="fmt169Btn" onclick="setAspect('16:9')">▭ 16:9</button>
+              </div>
+              <div class="sub-hint" id="fmtHint">1080 × 1920 · Reels, TikTok, Shorts</div>
+            </div>
+          </div>
+
+          <!-- Clipper Box (Hidden unless YouTube Clipper is chosen) -->
+          <div id="clipperBox" style="display:none; margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+            <label>Link YouTube (Milik Sendiri / Berizin)</label>
+            <input type="text" id="ytUrlInput" placeholder="https://www.youtube.com/watch?v=..." />
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:10px;">
+              <div>
+                <label>Mulai Potong (menit:detik)</label>
+                <input type="text" id="clipStart" value="00:15" />
+              </div>
+              <div>
+                <label>Selesai Potong (menit:detik)</label>
+                <input type="text" id="clipEnd" value="01:00" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Frame rate -->
+        <section class="card" id="sec-fps">
+          <div class="card-head">
+            <div>
+              <div class="card-title"><span class="dot"></span> Frame rate</div>
+              <div class="card-desc">Makin tinggi makin halus, waktu render makin lama</div>
+            </div>
+            <div style="font-size:22px; font-weight:800;"><span id="fpsLabel">30</span> <span style="font-size:13px; color:var(--muted);">fps</span></div>
+          </div>
+          <div class="fps-grid" id="fpsGrid">
+            <div class="fps-pill" onclick="setFps(12)"><div class="fps-num">12</div><div class="fps-lbl">stop motion</div></div>
+            <div class="fps-pill" onclick="setFps(24)"><div class="fps-num">24</div><div class="fps-lbl">sinematik</div></div>
+            <div class="fps-pill" onclick="setFps(25)"><div class="fps-num">25</div><div class="fps-lbl">PAL</div></div>
+            <div class="fps-pill active" onclick="setFps(30)"><div class="fps-num">30</div><div class="fps-lbl">standar sosmed</div></div>
+            <div class="fps-pill" onclick="setFps(50)"><div class="fps-num">50</div><div class="fps-lbl">halus</div></div>
+            <div class="fps-pill" onclick="setFps(60)"><div class="fps-num">60</div><div class="fps-lbl">paling halus</div></div>
+          </div>
+        </section>
+
+        <!-- 3. Voice-over -->
+        <section class="card" id="sec-vo">
+          <div class="card-head">
+            <div>
+              <div class="card-title"><span class="dot"></span> Voice-over & Word Timestamp</div>
+              <div class="card-desc">Upload file .wav dari Google AI Studio (Bodi/Veda) ATAU generate langsung dari naskah</div>
+            </div>
+          </div>
+
+          <div class="dropzone" onclick="document.getElementById('voFileInput').click()">
+            <div>
+              <div style="font-weight:700; font-size:13.5px;" id="voFileName">🎵 audio.wav</div>
+              <div class="sub-hint" id="voStatusHint">Tersimpan · klik atau drop file .wav baru untuk mengganti</div>
+            </div>
+            <span style="font-size:12px; font-weight:700; color:var(--green);">Upload .wav</span>
+            <input type="file" id="voFileInput" accept="audio/*" style="display:none" onchange="uploadVoFile(this)" />
+          </div>
+
+          <audio id="voPlayer" controls src="/public/karaya-showcase/audio.wav" style="width:100%; margin-top:12px; height:38px;"></audio>
+
+          <!-- Direct TTS Generator -->
+          <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <label style="margin:0;">Atau Generate Suara AI + Word Timestamp Langsung dari Naskah:</label>
+              <select id="ttsVoice" style="width:auto; padding:5px 10px; font-size:12px;">
+                <option value="id-ID-ArdiNeural">Ardi (Pria - Energik & Jelas)</option>
+                <option value="id-ID-GadisNeural">Gadis (Wanita - Ramah & Jelas)</option>
+              </select>
+            </div>
+            <textarea id="voScriptText" rows="3" placeholder="Tulis naskah voice-over di sini (gaya bahasa lisan, kalimat pendek)...">Sekarang bikin video motion graphic sekeren ini nggak perlu buka After Effects lagi. Cukup pakai Remotion dan Antigravity. Langkah pertama, buka Prep Panel lokal yang udah disiapin. Pilih satu dari dua puluh lima style animasi, drop voice over dan gambar pendukung, lalu klik Submit. Langkah kedua, kirim instruksi prompt ke Antigravity. Dalam hitungan detik, AI bakal nulis kode komponen React lengkap dengan animasi spring dan subtitle karaoke otomatis. Langkah terakhir, cek preview di Remotion Studio lalu klik Render jadi file MP4. Siap upload ke Reels, TikTok, dan Shorts! Buat yang mau link Remotion-nya, langsung comment MAU di bawah, nanti aku kirim link-nya via DM!</textarea>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+              <span class="sub-hint" id="ttsFeedback">Otomatis membuat audio.wav + data.json + transcript.txt</span>
+              <button class="btn-coral" id="genVoBtn" onclick="generateVoNow()">⚡ Generate VO + Timestamp</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Backsound -->
+        <section class="card" id="sec-music">
+          <div class="card-head">
+            <div>
+              <div class="card-title"><span class="dot"></span> Backsound <span style="font-weight:500; font-size:12px; color:var(--muted);">(opsional)</span></div>
+              <div class="card-desc">Musik latar otomatis mengecil (auto-ducking) saat ada suara bicara</div>
+            </div>
+          </div>
+          <div class="dropzone" onclick="document.getElementById('musicFileInput').click()">
+            <div>
+              <div style="font-weight:700; font-size:13.5px;" id="musicFileName">🎵 music-loop.wav (Built-in Ambient Synth)</div>
+              <div class="sub-hint">Tersimpan · klik untuk upload musik latar sendiri</div>
+            </div>
+            <span style="font-size:12px; font-weight:700;">Ganti Musik</span>
+            <input type="file" id="musicFileInput" accept="audio/*" style="display:none" onchange="uploadMusicFile(this)" />
+          </div>
+          <div style="display:flex; align-items:center; gap:14px; margin-top:14px;">
+            <span style="font-size:12px; color:var(--muted); font-weight:600;">Volume</span>
+            <input type="range" id="musicVol" min="0" max="50" value="15" style="flex:1;" oninput="syncMusicVol()" />
+            <span style="font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:700;" id="musicVolLbl">15%</span>
+          </div>
+        </section>
+
+        <!-- 5. Aset -->
+        <section class="card" id="sec-assets">
+          <div class="card-head">
+            <div>
+              <div class="card-title"><span class="dot"></span> Aset Pendukung</div>
+              <div class="card-desc">Screenshot aplikasi, logo, atau video B-roll (disimpan ke public/&lt;project&gt;/assets/)</div>
+            </div>
+          </div>
+          <div class="dropzone" onclick="document.getElementById('assetFileInput').click()">
+            <div>
+              <div style="font-weight:700; font-size:13.5px;">+ Tambah aset</div>
+              <div class="sub-hint">Pilih banyak file sekaligus · png, jpg, webp, svg, gif, mp4, webm</div>
+            </div>
+            <span style="font-size:12px; font-weight:700;">Browse File</span>
+            <input type="file" id="assetFileInput" multiple accept="image/*,video/*" style="display:none" onchange="uploadAssets(this)" />
+          </div>
+          <div class="asset-list" id="assetList"></div>
+        </section>
+
+        <!-- 6. Style (25+ Template Gallery) -->
+        <section class="card" id="sec-style">
+          <div class="card-head">
+            <div>
+              <div class="card-title"><span class="dot"></span> Style</div>
+              <div class="card-desc">Tentukan gaya visual videonya (25+ template siap pakai atau clone video referensi)</div>
+            </div>
+          </div>
+
+          <div class="mode-cards">
+            <div class="mode-card active" id="modeTpl" onclick="setStyleMode('template')">
+              <h4>▦ Pakai template</h4>
+              <p>Pilih dari koleksi 25 style motion graphics yang sudah teruji.</p>
+            </div>
+            <div class="mode-card" id="modeRef" onclick="setStyleMode('reference')">
+              <h4>◎ Pakai video referensi</h4>
+              <p>Upload video orang lain yang style-nya kamu suka untuk ditiru AI.</p>
+            </div>
+            <div class="mode-card" id="modeFree" onclick="setStyleMode('free')">
+              <h4>∅ Bebas</h4>
+              <p>Tanpa arahan baku, biarkan AI menyesuaikan dengan brief.</p>
+            </div>
+          </div>
+
+          <!-- Template Gallery -->
+          <div id="templateGalleryBox">
+            <div class="cat-tabs" id="catTabs"></div>
+            <div class="style-grid" id="styleGrid"></div>
+          </div>
+
+          <!-- Reference Video Box -->
+          <div id="referenceBox" style="display:none; margin-top:12px;">
+            <div class="dropzone" onclick="document.getElementById('refVideoInput').click()">
+              <div>
+                <div style="font-weight:700; font-size:13.5px;" id="refFileName">🎬 Upload Video Referensi (.mp4)</div>
+                <div class="sub-hint">AI akan meniru palet warna, tipografi, transisi, dan ritme animasinya</div>
+              </div>
+              <input type="file" id="refVideoInput" accept="video/*" style="display:none" onchange="uploadRefVideo(this)" />
+            </div>
+            <div style="margin-top:12px;">
+              <label>Catatan Fokus Referensi</label>
+              <input type="text" id="refNotes" value="Tiru palet warna, gaya kartu UI, transisi antar bab, dan subtitle karaoke di bawah." />
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Brief & Font -->
+        <section class="card" id="sec-brief">
+          <div class="card-head">
+            <div>
+              <div class="card-title"><span class="dot"></span> Brief & Tipografi</div>
+              <div class="card-desc">Instruksi alur adegan dan pilihan font utama</div>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:14px;">
+            <div>
+              <label>Bahasa Video</label>
+              <select id="langSelect">
+                <option value="Indonesia">Indonesia</option>
+                <option value="English">English</option>
+              </select>
+            </div>
+            <div>
+              <label>Font Utama</label>
+              <select id="fontSelect">
+                <option value="Plus Jakarta Sans (default)">Plus Jakarta Sans (default)</option>
+                <option value="Noto Sans KR">Noto Sans KR (Gaya Galihry)</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Inter">Inter</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label>Brief Singkat / Pembagian Adegan</label>
+            <textarea id="briefInput" rows="4">Video tutorial / showcase 40 detik dengan hook kuat di 3 detik pertama. Gunakan tema Dark UI (#0F0F0E dengan titik halus & radial glow), Top HUD Bar di atas, kartu Faux-UI dengan animasi spring & kursor klik, transisi diagonal stripe wipe antar langkah, subtitle karaoke sinkron per kata di bawah, dan akhiri dengan scene CTA Comment "MAU" untuk dapat link Remotion-nya.</textarea>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Sticky Right Summary Column -->
+      <aside class="summary-card">
+        <div style="font-size:12px; font-weight:700; color:var(--muted); margin-bottom:8px;">Style dipilih</div>
+        <div id="selectedStylePreview" style="padding:14px; border-radius:10px; background:#141413; color:#fff; margin-bottom:14px;">
+          <div style="font-size:11px; color:#E07A5F; font-weight:800;" id="sumStyleCode">L01 · CLAUDE DARK</div>
+          <div style="font-size:15px; font-weight:800; margin-top:2px;" id="sumStyleName">Claude Dark UI</div>
+          <div style="font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:4px;" id="sumStyleDesc">tutorial · faux-ui · spark</div>
+        </div>
+        <button class="btn-submit" onclick="submitPrepPanel()">Submit & Buat Prompt</button>
+        <div class="sub-hint" style="margin-top:10px; line-height:1.45;">
+          Menyimpan semua bahan ke <code>public/&lt;project&gt;/</code> lalu membuka <code>prompt.txt</code> siap salin untuk Claude Code / Antigravity.
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Prompt.txt Modal -->
+  <div class="modal-backdrop" id="promptModal">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <div style="font-weight:800; font-size:14px;">✓ Prompt Siap</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted);" id="modalPromptPath">public/karaya-showcase/prompt.txt</div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-outline" style="width:auto; padding:7px 14px;" onclick="closeModal()">Tutup</button>
+          <button class="btn-submit" style="width:auto; margin:0; padding:7px 16px;" id="copyBtn" onclick="copyPromptTxt()">Copy prompt</button>
+        </div>
+      </div>
+      <pre class="modal-pre" id="modalPromptContent"></pre>
+    </div>
+  </div>
+
+  <script>
+    const STYLES = [
+      { id: 'L01', name: 'Antigravity Dark UI', cat: 'Clean', tags: 'tutorial · faux-ui · spark', bg: '#121210', fg: '#E07A5F', label: 'REMOTION × AGY' },
+      { id: 'L02', name: 'Kinetic Typography', cat: 'Type', tags: 'hook · voice-over · quote', bg: '#0E0E0E', fg: '#FACC15', label: 'WORDS MOVE' },
+      { id: 'L03', name: 'Isometric 3D', cat: '3D', tags: 'tech · proses · data', bg: '#EEF2FF', fg: '#4F46E5', label: 'ISO BLOCKS' },
+      { id: 'L04', name: 'Doodle / Hand-drawn', cat: 'Handmade', tags: 'tutorial · edukasi · tips', bg: '#FFFBEB', fg: '#D97706', label: 'BIG IDEA!' },
+      { id: 'L05', name: 'Comic / Pop Art', cat: 'Bold', tags: 'promo · energik · seru', bg: '#FEF08A', fg: '#E11D48', label: 'POW!' },
+      { id: 'L06', name: '3D / CGI Motion', cat: '3D', tags: 'produk · futuristik · depth', bg: '#1E1B4B', fg: '#A855F7', label: 'REAL-TIME 3D' },
+      { id: 'L07', name: 'Swiss / Editorial', cat: 'Clean', tags: 'grid · korporat · rapi', bg: '#F5F5F0', fg: '#DC2626', label: 'SWISS GRID' },
+      { id: 'L08', name: 'Glitch / Digital', cat: 'Digital', tags: 'cyber · tech · hook', bg: '#09090B', fg: '#22D3EE', label: 'GLITCH //' },
+      { id: 'L09', name: 'Memphis Geometric', cat: 'Bold', tags: 'fun · warna-warni · gen-z', bg: '#FFF7ED', fg: '#EC4899', label: 'MEMPHIS' },
+      { id: 'L10', name: 'Infographic Data', cat: 'Data', tags: 'chart · finansial · riset', bg: '#0F172A', fg: '#38BDF8', label: '78% GROWTH' },
+      { id: 'L11', name: 'Paper Cutout', cat: 'Handmade', tags: 'kolase · cerita · hangat', bg: '#E0F2FE', fg: '#15803D', label: 'PAPER WORLD' },
+      { id: 'L12', name: '2D Character', cat: 'Character', tags: 'maskot · cerita · edukasi', bg: '#ECFDF5', fg: '#EA580C', label: 'HI THERE!' },
+      { id: 'L13', name: 'Liquid Motion', cat: 'Digital', tags: 'fluid · gradien · modern', bg: '#0F0728', fg: '#C084FC', label: 'LIQUID' },
+      { id: 'L14', name: 'Flat Design Clean', cat: 'Clean', tags: 'minimal · ikon · jelas', bg: '#F0F9FF', fg: '#0284C7', label: 'FLAT CLEAN' },
+      { id: 'L15', name: 'Corporate Growth', cat: 'Data', tags: 'b2b · saas · presentasi', bg: '#FFFFFF', fg: '#1D4ED8', label: '$4.8M ARR' },
+      { id: 'L16', name: 'Retro / Vintage', cat: 'Handmade', tags: 'klasik · 70s · badge', bg: '#FEF3C7', fg: '#78350F', label: 'RETRO 1970' },
+      { id: 'L17', name: 'Cyberpunk Neon', cat: 'Digital', tags: 'neon · gaming · malam', bg: '#180926', fg: '#38BDF8', label: 'NEO-2099' },
+      { id: 'L18', name: 'Abstract Particles', cat: 'Digital', tags: 'visual · eksperimen · musik', bg: '#09090B', fg: '#F472B6', label: 'RADIAL DOTS' },
+      { id: 'L19', name: 'Kinetic Collage', cat: 'Type', tags: 'zine · sticker · potongan', bg: '#F5F5F4', fg: '#18181B', label: 'CUT & REMIX' },
+      { id: 'L20', name: 'UI/UX App Promo', cat: 'Clean', tags: 'aplikasi · saas · mockup', bg: '#F8FAFC', fg: '#7C3AED', label: 'UPGRADED ✓' },
+      { id: 'L21', name: 'Claymation 3D', cat: '3D', tags: 'clay · playful · lembut', bg: '#FDE68A', fg: '#EA580C', label: 'C L A Y' },
+      { id: 'L22', name: 'Stop Motion', cat: 'Handmade', tags: 'sticky-notes · taktil · unik', bg: '#D97706', fg: '#FEF08A', label: 'STOP MOTION' },
+      { id: 'L23', name: 'Parallax 2.5D', cat: '3D', tags: 'layer · sinematik · dalam', bg: '#0F172A', fg: '#E2E8F0', label: 'D E P T H' },
+      { id: 'L24', name: 'Cinematic Trailer', cat: 'Bold', tags: 'film · dramatis · flare', bg: '#09151B', fg: '#FDE047', label: 'THE LAST FRAME' },
+      { id: 'L25', name: 'Mixed Media', cat: 'Handmade', tags: 'kertas · 3d · coretan', bg: '#F5EFE6', fg: '#E11D48', label: 'MIXED MEDIA' },
+    ];
+
+    let state = {
+      project: 'karaya-showcase',
+      sourceType: 'vo',
+      aspectRatio: '9:16',
+      fps: 30,
+      backsoundFile: '',
+      backsoundVolume: 15,
+      assets: [],
+      styleMode: 'template',
+      selectedCat: 'Semua',
+      styleId: 'L01',
+      styleName: 'Claude Dark UI',
+      styleDesc: 'tutorial · faux-ui · spark',
+    };
+
+    function renderCategories() {
+      const cats = ['Semua', 'Clean', 'Type', '3D', 'Handmade', 'Bold', 'Digital', 'Data', 'Character'];
+      const wrap = document.getElementById('catTabs');
+      wrap.innerHTML = cats.map(c => {
+        const count = c === 'Semua' ? STYLES.length : STYLES.filter(s => s.cat === c).length;
+        const active = state.selectedCat === c ? 'active' : '';
+        return `<button class="cat-tab ${active}" onclick="filterCat('${c}')">${c} <span style="opacity:0.6">${count}</span></button>`;
+      }).join('');
+    }
+
+    function renderStyles() {
+      const list = state.selectedCat === 'Semua'
+        ? STYLES
+        : STYLES.filter(s => s.cat === state.selectedCat);
+      const grid = document.getElementById('styleGrid');
+      grid.innerHTML = list.map(s => {
+        const active = state.styleId === s.id ? 'active' : '';
+        return `
+          <div class="style-card ${active}" onclick="selectStyle('${s.id}')">
+            <div class="style-Stage" style="background:${s.bg}; color:${s.fg};">
+              <div class="anim-target" style="padding:8px 12px; border:2px solid ${s.fg}; border-radius:8px; font-weight:900; font-size:14px; letter-spacing:0.05em; text-align:center;">
+                ${s.label}
+              </div>
+            </div>
+            <div class="style-meta">
+              <div class="style-meta-top">
+                <span>${s.name}</span>
+                <span class="style-code">${s.id}</span>
+              </div>
+              <div class="style-tags">${s.tags}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterCat(cat) {
+      state.selectedCat = cat;
+      renderCategories();
+      renderStyles();
+    }
+
+    function selectStyle(id) {
+      const st = STYLES.find(x => x.id === id);
+      if (!st) return;
+      state.styleId = st.id;
+      state.styleName = st.name;
+      state.styleDesc = st.tags;
+      document.getElementById('sideStyle').textContent = st.id;
+      document.getElementById('sumStyleCode').textContent = `${st.id} · ${st.cat.toUpperCase()}`;
+      document.getElementById('sumStyleName').textContent = st.name;
+      document.getElementById('sumStyleDesc').textContent = st.tags;
+      renderStyles();
+    }
+
+    function syncProjectName() {
+      const raw = document.getElementById('projectInput').value;
+      const slug = raw.toLowerCase().replace(/[^a-z0-9-_]/g, '-') || 'project-1';
+      state.project = slug;
+      document.getElementById('sideProject').textContent = slug;
+      document.getElementById('topSlug').textContent = slug;
+      document.getElementById('topPath').textContent = `public/${slug}/`;
+    }
+
+    function setSource(type) {
+      state.sourceType = type;
+      document.getElementById('srcVoBtn').classList.toggle('active', type === 'vo');
+      document.getElementById('srcClipBtn').classList.toggle('active', type === 'clipper');
+      document.getElementById('clipperBox').style.display = type === 'clipper' ? 'block' : 'none';
+    }
+
+    function setAspect(ratio) {
+      state.aspectRatio = ratio;
+      document.getElementById('fmt916Btn').classList.toggle('active', ratio === '9:16');
+      document.getElementById('fmt169Btn').classList.toggle('active', ratio === '16:9');
+      document.getElementById('fmtHint').textContent = ratio === '9:16'
+        ? '1080 × 1920 · Reels, TikTok, Shorts'
+        : '1920 × 1080 · YouTube Landscape';
+    }
+
+    function setFps(fps) {
+      state.fps = fps;
+      document.getElementById('fpsLabel').textContent = fps;
+      document.getElementById('sideFps').textContent = `${fps} fps`;
+      const pills = document.querySelectorAll('#fpsGrid .fps-pill');
+      pills.forEach(p => {
+        p.classList.toggle('active', p.querySelector('.fps-num').textContent == String(fps));
+      });
+    }
+
+    function syncMusicVol() {
+      const v = document.getElementById('musicVol').value;
+      state.backsoundVolume = Number(v);
+      document.getElementById('musicVolLbl').textContent = `${v}%`;
+      document.getElementById('sideMusic').textContent = `${v}%`;
+    }
+
+    function setStyleMode(mode) {
+      state.styleMode = mode;
+      document.getElementById('modeTpl').classList.toggle('active', mode === 'template');
+      document.getElementById('modeRef').classList.toggle('active', mode === 'reference');
+      document.getElementById('modeFree').classList.toggle('active', mode === 'free');
+      document.getElementById('templateGalleryBox').style.display = mode === 'template' ? 'block' : 'none';
+      document.getElementById('referenceBox').style.display = mode === 'reference' ? 'block' : 'none';
+    }
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function uploadVoFile(input) {
+      const file = input.files[0];
+      if (!file) return;
+      document.getElementById('voStatusHint').textContent = 'Mengupload & mentranskrip word timestamp...';
+      const dataBase64 = await fileToBase64(file);
+      await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project: state.project, kind: 'root', fileName: 'audio.wav', dataBase64 }),
+      });
+      const text = document.getElementById('voScriptText').value.trim();
+      const trRes = await fetch('/api/transcribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project: state.project, text }),
+      }).then(r => r.json());
+      document.getElementById('voFileName').textContent = `🎵 audio.wav (${trRes.duration || '?'}s · ${trRes.wordCount || '?'} kata)`;
+      document.getElementById('voStatusHint').textContent = '✓ Tersimpan & word timestamp siap di data.json';
+      document.getElementById('voPlayer').src = `/public/${state.project}/audio.wav?t=${Date.now()}`;
+    }
+
+    async function generateVoNow() {
+      const text = document.getElementById('voScriptText').value.trim();
+      const voice = document.getElementById('ttsVoice').value;
+      const btn = document.getElementById('genVoBtn');
+      const fb = document.getElementById('ttsFeedback');
+      if (!text) return alert('Tulis naskah voice-over terlebih dahulu!');
+      btn.disabled = true;
+      btn.textContent = '⏳ Generating...';
+      fb.textContent = 'Sedang men-generate suara AI & word-level timestamp...';
+      try {
+        const res = await fetch('/api/generate-vo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ project: state.project, text, voice }),
+        }).then(r => r.json());
+        if (!res.ok) throw new Error(res.error);
+        document.getElementById('voPlayer').src = res.audioUrl;
+        document.getElementById('voFileName').textContent = `🎵 audio.wav (${res.duration}s · ${res.wordCount} kata)`;
+        fb.textContent = `✓ Berhasil! Durasi ${res.duration}s (${res.wordCount} kata, ${res.phraseCount} frasa karaoke)`;
+      } catch (e) {
+        alert('Error: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '⚡ Generate VO + Timestamp';
+      }
+    }
+
+    async function uploadMusicFile(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const dataBase64 = await fileToBase64(file);
+      await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project: state.project, kind: 'root', fileName: 'music.wav', dataBase64 }),
+      });
+      state.backsoundFile = 'music.wav';
+      document.getElementById('musicFileName').textContent = `🎵 music.wav (${file.name})`;
+    }
+
+    async function uploadAssets(input) {
+      const files = Array.from(input.files);
+      for (const file of files) {
+        const dataBase64 = await fileToBase64(file);
+        await fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ project: state.project, kind: 'asset', fileName: file.name, dataBase64 }),
+        });
+        if (!state.assets.includes(file.name)) state.assets.push(file.name);
+      }
+      renderAssetChips();
+    }
+
+    async function uploadRefVideo(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const dataBase64 = await fileToBase64(file);
+      await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project: state.project, kind: 'root', fileName: 'reference.mp4', dataBase64 }),
+      });
+      document.getElementById('refFileName').textContent = `🎬 reference.mp4 (${file.name}) ✓`;
+    }
+
+    function renderAssetChips() {
+      const wrap = document.getElementById('assetList');
+      document.getElementById('sideAssets').textContent = `${state.assets.length} file`;
+      wrap.innerHTML = state.assets.map(a => `<span class="asset-chip">📄 ${a}</span>`).join('');
+    }
+
+    async function submitPrepPanel() {
+      const payload = {
+        ...state,
+        youtubeUrl: document.getElementById('ytUrlInput').value,
+        clipSegments: [{ start: document.getElementById('clipStart').value, end: document.getElementById('clipEnd').value }],
+        referenceNotes: document.getElementById('refNotes').value,
+        language: document.getElementById('langSelect').value,
+        font: document.getElementById('fontSelect').value,
+        brief: document.getElementById('briefInput').value,
+      };
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).then(r => r.json());
+      if (!res.ok) return alert('Gagal menyimpan prompt: ' + res.error);
+      document.getElementById('modalPromptPath').textContent = res.promptPath;
+      document.getElementById('modalPromptContent').textContent = res.promptTxt;
+      document.getElementById('promptModal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('promptModal').classList.remove('open');
+    }
+
+    function copyPromptTxt() {
+      const txt = document.getElementById('modalPromptContent').textContent;
+      navigator.clipboard.writeText(txt);
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✓ Tersalin!';
+      setTimeout(() => { btn.textContent = 'Copy prompt'; }, 1800);
+    }
+
+    function createNewProject() {
+      const name = prompt('Masukkan nama project baru (contoh: promo-karaya-2):', 'promo-karaya-2');
+      if (!name) return;
+      document.getElementById('projectInput').value = name;
+      state.assets = [];
+      renderAssetChips();
+      syncProjectName();
+    }
+
+    function scrollToSec(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    renderCategories();
+    renderStyles();
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "remotion-motion-kit",
+  "version": "1.0.0",
+  "description": "Programmatic Motion Graphics Studio & Prep Panel (Remotion + AI Workflow)",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "prep": "node scripts/prep-server.mjs",
+    "studio": "node scripts/start-all.mjs",
+    "build": "remotion bundle",
+    "render": "remotion render",
+    "typecheck": "tsc --noEmit",
+    "verify:stills": "node scripts/verify-stills.mjs",
+    "sfx": "python3 scripts/generate-sfx.py",
+    "vo": "python3 scripts/generate-vo.py",
+    "transcribe": "python3 scripts/transcribe-audio.py"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.286",
+    "@remotion/media-utils": "4.0.286",
+    "@remotion/player": "4.0.286",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.286"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}

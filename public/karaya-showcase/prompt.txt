@@ -1,0 +1,30 @@
+PROMPT • REMOTION VIDEO • karaya-showcase
+────────────────────────────────────────────────────────────
+
+▌ TUGAS
+Buat video baru "KarayaShowcase" di repo Remotion ini dari bahan yang sudah disiapkan di public/karaya-showcase/.
+Semua proses (baca transkrip, susun adegan, coding komponen React, cek still frame) dikerjakan oleh kamu (Claude / AI Agent) mengikuti aturan di CLAUDE.md.
+
+▌ SPESIFIKASI
+• Composition id : KarayaShowcase
+• Format         : 9:16 • 1080×1920 • 30 fps
+• File kode      : src/karaya-showcase/KarayaShowcaseVideo.tsx
+• Folder bahan   : public/karaya-showcase/
+• Bahasa         : Indonesia
+• Font           : Plus Jakarta Sans
+• Style visual   : L01 — Claude Dark UI (tutorial · faux-ui · spark)
+
+▌ BAHAN
+• Sumber utama   : Voice-over
+• Voice-over     : public/karaya-showcase/audio.wav
+• Word Timestamp : public/karaya-showcase/data.json & public/karaya-showcase/transcript.txt
+• Backsound      : public/sfx/music-loop.wav • volume 0.15
+• Aset pendukung : 0 file di public/karaya-showcase/assets/
+  - (tidak ada file aset tambahan, gunakan komponen Faux-UI React)
+• Brief          : public/karaya-showcase/concept.md
+
+▌ INSTRUKSI EKSEKUSI
+1. Baca public/karaya-showcase/transcript.txt dan public/karaya-showcase/concept.md.
+2. Buat komponen video di src/karaya-showcase/KarayaShowcaseVideo.tsx dan daftarkan Composition "KarayaShowcase" di src/Root.tsx.
+3. Gunakan komponen reusable di src/components/ (BackgroundCanvas, TopHudBar, SceneHeader, WindowCard, PromptInputCard, KaraokeSubtitle, DiagonalStripeTransition) dan pasang efek suara dari public/sfx/.
+4. Jalankan `npx tsc --noEmit` dan `node scripts/verify-stills.mjs KarayaShowcase` untuk mengecek still frame kunci sebelum melapor selesai.
