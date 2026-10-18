@@ -295,15 +295,26 @@ const server = http.createServer(async (req, res) => {
         res.writeHead(404);
         return res.end('Project folder not found');
       }
-      const tarPath = path.join('/tmp', `${slug}-remotion-bundle.tar.gz`);
-      const itemsToPack = [`public/${slug}`, 'CLAUDE.md'];
-      if (fs.existsSync(path.join(rootDir, '.agents'))) {
-        itemsToPack.push('.agents');
-      }
+      const tarPath = path.join('/tmp', `${slug}-remotion-kit.tar.gz`);
+      const candidates = [
+        'package.json',
+        'package-lock.json',
+        'tsconfig.json',
+        'remotion.config.ts',
+        'CLAUDE.md',
+        'README.md',
+        '.gitignore',
+        '.agents',
+        'src',
+        'scripts',
+        'public/sfx',
+        `public/${slug}`,
+      ];
+      const itemsToPack = candidates.filter((item) => fs.existsSync(path.join(rootDir, item)));
       execFileSync('tar', ['-czf', tarPath, ...itemsToPack], { cwd: rootDir });
       res.writeHead(200, {
         'Content-Type': 'application/gzip',
-        'Content-Disposition': `attachment; filename="${slug}-remotion-bundle.tar.gz"`,
+        'Content-Disposition': `attachment; filename="${slug}-remotion-kit.tar.gz"`,
       });
       return fs.createReadStream(tarPath).pipe(res);
     }
