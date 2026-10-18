@@ -295,7 +295,11 @@ const server = http.createServer(async (req, res) => {
         res.writeHead(404);
         return res.end('Project folder not found');
       }
-      const tarPath = path.join('/tmp', `${slug}-remotion-kit.tar.gz`);
+      const bundleName = `${slug}-remotion-kit`;
+      const stageBase = fs.mkdtempSync(path.join('/tmp', 'remotion-bundle-'));
+      const stageDir = path.join(stageBase, bundleName);
+      fs.mkdirSync(stageDir, { recursive: true });
+      const tarPath = path.join(stageBase, `${bundleName}.tar.gz`);
       const candidates = [
         'package.json',
         'package-lock.json',
@@ -305,18 +309,30 @@ const server = http.createServer(async (req, res) => {
         'README.md',
         '.gitignore',
         '.agents',
+        'panel',
         'src',
         'scripts',
         'public/sfx',
         `public/${slug}`,
       ];
-      const itemsToPack = candidates.filter((item) => fs.existsSync(path.join(rootDir, item)));
-      execFileSync('tar', ['-czf', tarPath, ...itemsToPack], { cwd: rootDir });
+      for (const item of candidates) {
+        const srcPath = path.join(rootDir, item);
+        if (fs.existsSync(srcPath)) {
+          const destPath = path.join(stageDir, item);
+          fs.mkdirSync(path.dirname(destPath), { recursive: true });
+          fs.cpSync(srcPath, destPath, { recursive: true });
+        }
+      }
+      execFileSync('tar', ['-czf', tarPath, bundleName], { cwd: stageBase });
       res.writeHead(200, {
         'Content-Type': 'application/gzip',
-        'Content-Disposition': `attachment; filename="${slug}-remotion-kit.tar.gz"`,
+        'Content-Disposition': `attachment; filename="${bundleName}.tar.gz"`,
       });
-      return fs.createReadStream(tarPath).pipe(res);
+      const stream = fs.createReadStream(tarPath);
+      stream.on('close', () => {
+        fs.rmSync(stageBase, { recursive: true, force: true });
+      });
+      return stream.pipe(res);
     }
 
     if (req.method === 'POST' && url.pathname === '/api/submit') {
