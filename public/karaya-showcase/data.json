@@ -1,1275 +1,1275 @@
 {
   "project": "karaya-showcase",
   "voice": "id-ID-ArdiNeural",
-  "duration": 41.208,
+  "duration": 41.51,
   "fps": 30,
-  "durationInFrames": 1251,
+  "durationInFrames": 1260,
   "text": "Sekarang bikin video motion graphic sekeren ini nggak perlu buka After Effects lagi. Cukup pakai Remotion dan Antigravity. Langkah pertama, buka Prep Panel lokal yang udah disiapin. Pilih satu dari dua puluh lima style animasi, drop voice over dan gambar pendukung, lalu klik Submit. Langkah kedua, kirim instruksi prompt ke Antigravity. Dalam hitungan detik, AI bakal nulis kode komponen React lengkap dengan animasi spring dan subtitle karaoke otomatis. Langkah terakhir, cek preview di Remotion Studio lalu klik Render jadi file MP4. Siap upload ke Reels, TikTok, dan Shorts! Buat yang mau link Remotion-nya, langsung comment MAU di bawah, nanti aku kirim link-nya via DM!",
-  "spokenText": "Sekarang bikin video motion grafik sekeren ini nggak perlu buka after efeks lagi. Cukup pakai rimousyen dan Antigravity. Langkah pertama, buka Prep Panel lokal yang udah disiapin. Pilih satu dari dua puluh lima stail animasi, drop vois over dan gambar pendukung, lalu klik Submit. Langkah kedua, kirim instruksi prompt ke Antigravity. Dalam hitungan detik, e-ai bakal nulis kode komponen riek lengkap dengan animasi spring dan sab-taitel karaoke otomatis. Langkah terakhir, cek privyu di rimousyen Studio lalu klik Render jadi file MP4. Siap upload ke rils, TikTok, dan syorts! Buat yang mau ling rimousyennya, langsung komen MAU di bawah, nanti aku kirim lingnya via di-em!",
+  "spokenText": "Sekarang bikin video mosyen grafik sekeren ini nggak perlu buka after efeks lagi. Cukup pakai rimousyen dan Antigravity. Langkah pertama, buka Prep Panel lokal yang udah disiapin. Pilih satu dari dua puluh lima stail animasi, drop vois over dan gambar pendukung, lalu klik Submit. Langkah kedua, kirim instruksi promp ke Antigravity. Dalam hitungan detik, e-ai bakal nulis kode komponen riek lengkap dengan animasi spring dan sab-taitel karaoke otomatis. Langkah terakhir, cek privyu di rimousyen Studio lalu klik render jadi fail MP4. Siap aplod ke Reels, TikTok, dan syorts! Buat yang mau ling Remotion-nya, langsung komen MAU di bawah, nanti aku kirim lingnya via di-em!",
   "words": [
     {
       "word": "Sekarang",
       "start": 0.1,
-      "end": 0.61
+      "end": 0.602
     },
     {
       "word": "bikin",
-      "start": 0.61,
-      "end": 0.929
+      "start": 0.602,
+      "end": 0.915
     },
     {
       "word": "video",
-      "start": 0.929,
-      "end": 1.248
+      "start": 0.915,
+      "end": 1.228
     },
     {
       "word": "motion",
-      "start": 1.248,
-      "end": 1.63
+      "start": 1.228,
+      "end": 1.604
     },
     {
       "word": "graphic",
-      "start": 1.63,
-      "end": 2.012
+      "start": 1.604,
+      "end": 1.98
     },
     {
       "word": "sekeren",
-      "start": 2.012,
-      "end": 2.458
+      "start": 1.98,
+      "end": 2.419
     },
     {
       "word": "ini",
-      "start": 2.458,
-      "end": 2.649
+      "start": 2.419,
+      "end": 2.607
     },
     {
       "word": "nggak",
-      "start": 2.649,
-      "end": 2.968
+      "start": 2.607,
+      "end": 2.92
     },
     {
       "word": "perlu",
-      "start": 2.968,
-      "end": 3.287
+      "start": 2.92,
+      "end": 3.233
     },
     {
       "word": "buka",
-      "start": 3.287,
-      "end": 3.542
+      "start": 3.233,
+      "end": 3.484
     },
     {
       "word": "After",
-      "start": 3.542,
-      "end": 3.861
+      "start": 3.484,
+      "end": 3.797
     },
     {
       "word": "Effects",
-      "start": 3.861,
-      "end": 4.18
+      "start": 3.797,
+      "end": 4.11
     },
     {
       "word": "lagi.",
-      "start": 4.18,
-      "end": 4.496
+      "start": 4.11,
+      "end": 4.426
     },
     {
       "word": "Cukup",
-      "start": 4.446,
-      "end": 4.851
+      "start": 4.376,
+      "end": 4.781
     },
     {
       "word": "pakai",
-      "start": 4.851,
-      "end": 5.256
+      "start": 4.781,
+      "end": 5.186
     },
     {
       "word": "Remotion",
-      "start": 5.256,
-      "end": 5.985
+      "start": 5.186,
+      "end": 5.915
     },
     {
       "word": "dan",
-      "start": 5.985,
-      "end": 6.228
+      "start": 5.915,
+      "end": 6.158
     },
     {
       "word": "Antigravity.",
-      "start": 6.228,
-      "end": 7.2
+      "start": 6.158,
+      "end": 7.131
     },
     {
       "word": "Langkah",
-      "start": 7.2,
-      "end": 7.727
+      "start": 7.131,
+      "end": 7.658
     },
     {
       "word": "pertama,",
-      "start": 7.727,
-      "end": 8.329
+      "start": 7.658,
+      "end": 8.26
     },
     {
       "word": "buka",
-      "start": 8.329,
-      "end": 8.63
+      "start": 8.26,
+      "end": 8.561
     },
     {
       "word": "Prep",
-      "start": 8.63,
-      "end": 8.931
+      "start": 8.561,
+      "end": 8.862
     },
     {
       "word": "Panel",
-      "start": 8.931,
-      "end": 9.307
+      "start": 8.862,
+      "end": 9.238
     },
     {
       "word": "lokal",
-      "start": 9.307,
-      "end": 9.683
+      "start": 9.238,
+      "end": 9.614
     },
     {
       "word": "yang",
-      "start": 9.683,
-      "end": 9.984
+      "start": 9.614,
+      "end": 9.915
     },
     {
       "word": "udah",
-      "start": 9.984,
-      "end": 10.285
+      "start": 9.915,
+      "end": 10.216
     },
     {
       "word": "disiapin.",
-      "start": 10.285,
-      "end": 10.962
+      "start": 10.216,
+      "end": 10.893
     },
     {
       "word": "Pilih",
-      "start": 10.962,
-      "end": 11.318
+      "start": 10.893,
+      "end": 11.249
     },
     {
       "word": "satu",
-      "start": 11.318,
-      "end": 11.603
+      "start": 11.249,
+      "end": 11.534
     },
     {
       "word": "dari",
-      "start": 11.603,
-      "end": 11.888
+      "start": 11.534,
+      "end": 11.819
     },
     {
       "word": "dua",
-      "start": 11.888,
-      "end": 12.102
+      "start": 11.819,
+      "end": 12.033
     },
     {
       "word": "puluh",
-      "start": 12.102,
-      "end": 12.458
+      "start": 12.033,
+      "end": 12.389
     },
     {
       "word": "lima",
-      "start": 12.458,
-      "end": 12.743
+      "start": 12.389,
+      "end": 12.674
     },
     {
       "word": "style",
-      "start": 12.743,
-      "end": 13.099
+      "start": 12.674,
+      "end": 13.03
     },
     {
       "word": "animasi,",
-      "start": 13.099,
-      "end": 13.669
+      "start": 13.03,
+      "end": 13.6
     },
     {
       "word": "drop",
-      "start": 13.669,
-      "end": 13.954
+      "start": 13.6,
+      "end": 13.885
     },
     {
       "word": "voice",
-      "start": 13.954,
-      "end": 14.239
+      "start": 13.885,
+      "end": 14.17
     },
     {
       "word": "over",
-      "start": 14.239,
-      "end": 14.524
+      "start": 14.17,
+      "end": 14.455
     },
     {
       "word": "dan",
-      "start": 14.524,
-      "end": 14.738
+      "start": 14.455,
+      "end": 14.669
     },
     {
       "word": "gambar",
-      "start": 14.738,
-      "end": 15.165
+      "start": 14.669,
+      "end": 15.096
     },
     {
       "word": "pendukung,",
-      "start": 15.165,
-      "end": 15.877
+      "start": 15.096,
+      "end": 15.808
     },
     {
       "word": "lalu",
-      "start": 15.877,
-      "end": 16.162
+      "start": 15.808,
+      "end": 16.093
     },
     {
       "word": "klik",
-      "start": 16.162,
-      "end": 16.447
+      "start": 16.093,
+      "end": 16.378
     },
     {
       "word": "Submit.",
-      "start": 16.447,
-      "end": 16.944
+      "start": 16.378,
+      "end": 16.874
     },
     {
       "word": "Langkah",
-      "start": 16.944,
-      "end": 17.501
+      "start": 16.874,
+      "end": 17.445
     },
     {
       "word": "kedua,",
-      "start": 17.501,
-      "end": 17.978
+      "start": 17.445,
+      "end": 17.934
     },
     {
       "word": "kirim",
-      "start": 17.978,
-      "end": 18.376
+      "start": 17.934,
+      "end": 18.342
     },
     {
       "word": "instruksi",
-      "start": 18.376,
-      "end": 19.092
+      "start": 18.342,
+      "end": 19.076
     },
     {
       "word": "prompt",
-      "start": 19.092,
-      "end": 19.569
+      "start": 19.076,
+      "end": 19.484
     },
     {
       "word": "ke",
-      "start": 19.569,
-      "end": 19.728
+      "start": 19.484,
+      "end": 19.647
     },
     {
       "word": "Antigravity.",
-      "start": 19.728,
-      "end": 20.684
+      "start": 19.647,
+      "end": 20.626
     },
     {
       "word": "Dalam",
-      "start": 20.684,
-      "end": 20.997
+      "start": 20.626,
+      "end": 20.939
     },
     {
       "word": "hitungan",
-      "start": 20.997,
-      "end": 21.498
+      "start": 20.939,
+      "end": 21.44
     },
     {
       "word": "detik,",
-      "start": 21.498,
-      "end": 21.874
+      "start": 21.44,
+      "end": 21.816
     },
     {
       "word": "AI",
-      "start": 21.874,
-      "end": 22.125
+      "start": 21.816,
+      "end": 22.067
     },
     {
       "word": "bakal",
-      "start": 22.125,
-      "end": 22.438
+      "start": 22.067,
+      "end": 22.38
     },
     {
       "word": "nulis",
-      "start": 22.438,
-      "end": 22.751
+      "start": 22.38,
+      "end": 22.693
     },
     {
       "word": "kode",
-      "start": 22.751,
-      "end": 23.002
+      "start": 22.693,
+      "end": 22.944
     },
     {
       "word": "komponen",
-      "start": 23.002,
-      "end": 23.503
+      "start": 22.944,
+      "end": 23.445
     },
     {
       "word": "React",
-      "start": 23.503,
-      "end": 23.754
+      "start": 23.445,
+      "end": 23.696
     },
     {
       "word": "lengkap",
-      "start": 23.754,
-      "end": 24.193
+      "start": 23.696,
+      "end": 24.135
     },
     {
       "word": "dengan",
-      "start": 24.193,
-      "end": 24.569
+      "start": 24.135,
+      "end": 24.511
     },
     {
       "word": "animasi",
-      "start": 24.569,
-      "end": 25.008
+      "start": 24.511,
+      "end": 24.95
     },
     {
       "word": "spring",
-      "start": 25.008,
-      "end": 25.384
+      "start": 24.95,
+      "end": 25.326
     },
     {
       "word": "dan",
-      "start": 25.384,
-      "end": 25.572
+      "start": 25.326,
+      "end": 25.514
     },
     {
       "word": "subtitle",
-      "start": 25.572,
-      "end": 26.198
+      "start": 25.514,
+      "end": 26.14
     },
     {
       "word": "karaoke",
-      "start": 26.198,
-      "end": 26.637
+      "start": 26.14,
+      "end": 26.579
     },
     {
       "word": "otomatis.",
-      "start": 26.637,
-      "end": 27.199
+      "start": 26.579,
+      "end": 27.141
     },
     {
       "word": "Langkah",
-      "start": 27.199,
-      "end": 27.727
+      "start": 27.141,
+      "end": 27.676
     },
     {
       "word": "terakhir,",
-      "start": 27.727,
-      "end": 28.406
+      "start": 27.676,
+      "end": 28.364
     },
     {
       "word": "cek",
-      "start": 28.406,
-      "end": 28.632
+      "start": 28.364,
+      "end": 28.593
     },
     {
       "word": "preview",
-      "start": 28.632,
-      "end": 29.085
+      "start": 28.593,
+      "end": 29.052
     },
     {
       "word": "di",
-      "start": 29.085,
-      "end": 29.236
+      "start": 29.052,
+      "end": 29.205
     },
     {
       "word": "Remotion",
-      "start": 29.236,
-      "end": 29.915
+      "start": 29.205,
+      "end": 29.893
     },
     {
       "word": "Studio",
-      "start": 29.915,
-      "end": 30.368
+      "start": 29.893,
+      "end": 30.352
     },
     {
       "word": "lalu",
-      "start": 30.368,
-      "end": 30.67
+      "start": 30.352,
+      "end": 30.658
     },
     {
       "word": "klik",
-      "start": 30.67,
-      "end": 30.972
+      "start": 30.658,
+      "end": 30.964
     },
     {
       "word": "Render",
-      "start": 30.972,
-      "end": 31.425
+      "start": 30.964,
+      "end": 31.423
     },
     {
       "word": "jadi",
-      "start": 31.425,
-      "end": 31.727
+      "start": 31.423,
+      "end": 31.729
     },
     {
       "word": "file",
-      "start": 31.727,
-      "end": 32.029
+      "start": 31.729,
+      "end": 32.035
     },
     {
       "word": "MP4.",
-      "start": 32.029,
-      "end": 32.328
+      "start": 32.035,
+      "end": 32.339
     },
     {
       "word": "Siap",
-      "start": 32.328,
-      "end": 32.73
+      "start": 32.339,
+      "end": 32.738
     },
     {
       "word": "upload",
-      "start": 32.73,
-      "end": 33.332
+      "start": 32.738,
+      "end": 33.237
     },
     {
       "word": "ke",
-      "start": 33.332,
-      "end": 33.533
+      "start": 33.237,
+      "end": 33.437
     },
     {
       "word": "Reels,",
-      "start": 33.533,
-      "end": 34.035
+      "start": 33.437,
+      "end": 34.036
     },
     {
       "word": "TikTok,",
-      "start": 34.035,
-      "end": 34.738
+      "start": 34.036,
+      "end": 34.734
     },
     {
       "word": "dan",
-      "start": 34.738,
-      "end": 35.039
+      "start": 34.734,
+      "end": 35.033
     },
     {
       "word": "Shorts!",
-      "start": 35.039,
-      "end": 35.742
+      "start": 35.033,
+      "end": 35.731
     },
     {
       "word": "Buat",
-      "start": 35.742,
-      "end": 36.011
+      "start": 35.731,
+      "end": 35.997
     },
     {
       "word": "yang",
-      "start": 36.011,
-      "end": 36.28
+      "start": 35.997,
+      "end": 36.263
     },
     {
       "word": "mau",
-      "start": 36.28,
-      "end": 36.481
+      "start": 36.263,
+      "end": 36.463
     },
     {
       "word": "link",
-      "start": 36.481,
-      "end": 36.75
+      "start": 36.463,
+      "end": 36.729
     },
     {
       "word": "Remotion-nya,",
-      "start": 36.75,
-      "end": 37.623
+      "start": 36.729,
+      "end": 37.595
     },
     {
       "word": "langsung",
-      "start": 37.623,
-      "end": 38.16
+      "start": 37.595,
+      "end": 38.128
     },
     {
       "word": "comment",
-      "start": 38.16,
-      "end": 38.496
+      "start": 38.128,
+      "end": 38.461
     },
     {
       "word": "MAU",
-      "start": 38.496,
-      "end": 38.697
+      "start": 38.461,
+      "end": 38.661
     },
     {
       "word": "di",
-      "start": 38.697,
-      "end": 38.831
+      "start": 38.661,
+      "end": 38.794
     },
     {
       "word": "bawah,",
-      "start": 38.831,
-      "end": 39.234
+      "start": 38.794,
+      "end": 39.193
     },
     {
       "word": "nanti",
-      "start": 39.234,
-      "end": 39.57
+      "start": 39.193,
+      "end": 39.526
     },
     {
       "word": "aku",
-      "start": 39.57,
-      "end": 39.771
+      "start": 39.526,
+      "end": 39.726
     },
     {
       "word": "kirim",
-      "start": 39.771,
-      "end": 40.107
+      "start": 39.726,
+      "end": 40.059
     },
     {
       "word": "link-nya",
-      "start": 40.107,
-      "end": 40.577
+      "start": 40.059,
+      "end": 40.525
     },
     {
       "word": "via",
-      "start": 40.577,
-      "end": 40.778
+      "start": 40.525,
+      "end": 40.725
     },
     {
       "word": "DM!",
-      "start": 40.778,
-      "end": 41.182
+      "start": 40.725,
+      "end": 41.124
     }
   ],
   "phrases": [
     {
       "text": "Sekarang bikin video",
       "start": 0.1,
-      "end": 1.248,
+      "end": 1.228,
       "words": [
         {
           "word": "Sekarang",
           "start": 0.1,
-          "end": 0.61
+          "end": 0.602
         },
         {
           "word": "bikin",
-          "start": 0.61,
-          "end": 0.929
+          "start": 0.602,
+          "end": 0.915
         },
         {
           "word": "video",
-          "start": 0.929,
-          "end": 1.248
+          "start": 0.915,
+          "end": 1.228
         }
       ]
     },
     {
       "text": "motion graphic sekeren",
-      "start": 1.248,
-      "end": 2.458,
+      "start": 1.228,
+      "end": 2.419,
       "words": [
         {
           "word": "motion",
-          "start": 1.248,
-          "end": 1.63
+          "start": 1.228,
+          "end": 1.604
         },
         {
           "word": "graphic",
-          "start": 1.63,
-          "end": 2.012
+          "start": 1.604,
+          "end": 1.98
         },
         {
           "word": "sekeren",
-          "start": 2.012,
-          "end": 2.458
+          "start": 1.98,
+          "end": 2.419
         }
       ]
     },
     {
       "text": "ini nggak perlu buka",
-      "start": 2.458,
-      "end": 3.542,
+      "start": 2.419,
+      "end": 3.484,
       "words": [
         {
           "word": "ini",
-          "start": 2.458,
-          "end": 2.649
+          "start": 2.419,
+          "end": 2.607
         },
         {
           "word": "nggak",
-          "start": 2.649,
-          "end": 2.968
+          "start": 2.607,
+          "end": 2.92
         },
         {
           "word": "perlu",
-          "start": 2.968,
-          "end": 3.287
+          "start": 2.92,
+          "end": 3.233
         },
         {
           "word": "buka",
-          "start": 3.287,
-          "end": 3.542
+          "start": 3.233,
+          "end": 3.484
         }
       ]
     },
     {
       "text": "After Effects lagi.",
-      "start": 3.542,
-      "end": 4.496,
+      "start": 3.484,
+      "end": 4.426,
       "words": [
         {
           "word": "After",
-          "start": 3.542,
-          "end": 3.861
+          "start": 3.484,
+          "end": 3.797
         },
         {
           "word": "Effects",
-          "start": 3.861,
-          "end": 4.18
+          "start": 3.797,
+          "end": 4.11
         },
         {
           "word": "lagi.",
-          "start": 4.18,
-          "end": 4.496
+          "start": 4.11,
+          "end": 4.426
         }
       ]
     },
     {
       "text": "Cukup pakai Remotion dan",
-      "start": 4.446,
-      "end": 6.228,
+      "start": 4.376,
+      "end": 6.158,
       "words": [
         {
           "word": "Cukup",
-          "start": 4.446,
-          "end": 4.851
+          "start": 4.376,
+          "end": 4.781
         },
         {
           "word": "pakai",
-          "start": 4.851,
-          "end": 5.256
+          "start": 4.781,
+          "end": 5.186
         },
         {
           "word": "Remotion",
-          "start": 5.256,
-          "end": 5.985
+          "start": 5.186,
+          "end": 5.915
         },
         {
           "word": "dan",
-          "start": 5.985,
-          "end": 6.228
+          "start": 5.915,
+          "end": 6.158
         }
       ]
     },
     {
       "text": "Antigravity. Langkah",
-      "start": 6.228,
-      "end": 7.727,
+      "start": 6.158,
+      "end": 7.658,
       "words": [
         {
           "word": "Antigravity.",
-          "start": 6.228,
-          "end": 7.2
+          "start": 6.158,
+          "end": 7.131
         },
         {
           "word": "Langkah",
-          "start": 7.2,
-          "end": 7.727
+          "start": 7.131,
+          "end": 7.658
         }
       ]
     },
     {
       "text": "pertama, buka Prep Panel",
-      "start": 7.727,
-      "end": 9.307,
+      "start": 7.658,
+      "end": 9.238,
       "words": [
         {
           "word": "pertama,",
-          "start": 7.727,
-          "end": 8.329
+          "start": 7.658,
+          "end": 8.26
         },
         {
           "word": "buka",
-          "start": 8.329,
-          "end": 8.63
+          "start": 8.26,
+          "end": 8.561
         },
         {
           "word": "Prep",
-          "start": 8.63,
-          "end": 8.931
+          "start": 8.561,
+          "end": 8.862
         },
         {
           "word": "Panel",
-          "start": 8.931,
-          "end": 9.307
+          "start": 8.862,
+          "end": 9.238
         }
       ]
     },
     {
       "text": "lokal yang udah disiapin.",
-      "start": 9.307,
-      "end": 10.962,
+      "start": 9.238,
+      "end": 10.893,
       "words": [
         {
           "word": "lokal",
-          "start": 9.307,
-          "end": 9.683
+          "start": 9.238,
+          "end": 9.614
         },
         {
           "word": "yang",
-          "start": 9.683,
-          "end": 9.984
+          "start": 9.614,
+          "end": 9.915
         },
         {
           "word": "udah",
-          "start": 9.984,
-          "end": 10.285
+          "start": 9.915,
+          "end": 10.216
         },
         {
           "word": "disiapin.",
-          "start": 10.285,
-          "end": 10.962
+          "start": 10.216,
+          "end": 10.893
         }
       ]
     },
     {
       "text": "Pilih satu dari dua",
-      "start": 10.962,
-      "end": 12.102,
+      "start": 10.893,
+      "end": 12.033,
       "words": [
         {
           "word": "Pilih",
-          "start": 10.962,
-          "end": 11.318
+          "start": 10.893,
+          "end": 11.249
         },
         {
           "word": "satu",
-          "start": 11.318,
-          "end": 11.603
+          "start": 11.249,
+          "end": 11.534
         },
         {
           "word": "dari",
-          "start": 11.603,
-          "end": 11.888
+          "start": 11.534,
+          "end": 11.819
         },
         {
           "word": "dua",
-          "start": 11.888,
-          "end": 12.102
+          "start": 11.819,
+          "end": 12.033
         }
       ]
     },
     {
       "text": "puluh lima style animasi,",
-      "start": 12.102,
-      "end": 13.669,
+      "start": 12.033,
+      "end": 13.6,
       "words": [
         {
           "word": "puluh",
-          "start": 12.102,
-          "end": 12.458
+          "start": 12.033,
+          "end": 12.389
         },
         {
           "word": "lima",
-          "start": 12.458,
-          "end": 12.743
+          "start": 12.389,
+          "end": 12.674
         },
         {
           "word": "style",
-          "start": 12.743,
-          "end": 13.099
+          "start": 12.674,
+          "end": 13.03
         },
         {
           "word": "animasi,",
-          "start": 13.099,
-          "end": 13.669
+          "start": 13.03,
+          "end": 13.6
         }
       ]
     },
     {
       "text": "drop voice over dan",
-      "start": 13.669,
-      "end": 14.738,
+      "start": 13.6,
+      "end": 14.669,
       "words": [
         {
           "word": "drop",
-          "start": 13.669,
-          "end": 13.954
+          "start": 13.6,
+          "end": 13.885
         },
         {
           "word": "voice",
-          "start": 13.954,
-          "end": 14.239
+          "start": 13.885,
+          "end": 14.17
         },
         {
           "word": "over",
-          "start": 14.239,
-          "end": 14.524
+          "start": 14.17,
+          "end": 14.455
         },
         {
           "word": "dan",
-          "start": 14.524,
-          "end": 14.738
+          "start": 14.455,
+          "end": 14.669
         }
       ]
     },
     {
       "text": "gambar pendukung,",
-      "start": 14.738,
-      "end": 15.877,
+      "start": 14.669,
+      "end": 15.808,
       "words": [
         {
           "word": "gambar",
-          "start": 14.738,
-          "end": 15.165
+          "start": 14.669,
+          "end": 15.096
         },
         {
           "word": "pendukung,",
-          "start": 15.165,
-          "end": 15.877
+          "start": 15.096,
+          "end": 15.808
         }
       ]
     },
     {
       "text": "lalu klik Submit.",
-      "start": 15.877,
-      "end": 16.944,
+      "start": 15.808,
+      "end": 16.874,
       "words": [
         {
           "word": "lalu",
-          "start": 15.877,
-          "end": 16.162
+          "start": 15.808,
+          "end": 16.093
         },
         {
           "word": "klik",
-          "start": 16.162,
-          "end": 16.447
+          "start": 16.093,
+          "end": 16.378
         },
         {
           "word": "Submit.",
-          "start": 16.447,
-          "end": 16.944
+          "start": 16.378,
+          "end": 16.874
         }
       ]
     },
     {
       "text": "Langkah kedua,",
-      "start": 16.944,
-      "end": 17.978,
+      "start": 16.874,
+      "end": 17.934,
       "words": [
         {
           "word": "Langkah",
-          "start": 16.944,
-          "end": 17.501
+          "start": 16.874,
+          "end": 17.445
         },
         {
           "word": "kedua,",
-          "start": 17.501,
-          "end": 17.978
+          "start": 17.445,
+          "end": 17.934
         }
       ]
     },
     {
       "text": "kirim instruksi prompt ke",
-      "start": 17.978,
-      "end": 19.728,
+      "start": 17.934,
+      "end": 19.647,
       "words": [
         {
           "word": "kirim",
-          "start": 17.978,
-          "end": 18.376
+          "start": 17.934,
+          "end": 18.342
         },
         {
           "word": "instruksi",
-          "start": 18.376,
-          "end": 19.092
+          "start": 18.342,
+          "end": 19.076
         },
         {
           "word": "prompt",
-          "start": 19.092,
-          "end": 19.569
+          "start": 19.076,
+          "end": 19.484
         },
         {
           "word": "ke",
-          "start": 19.569,
-          "end": 19.728
+          "start": 19.484,
+          "end": 19.647
         }
       ]
     },
     {
       "text": "Antigravity. Dalam",
-      "start": 19.728,
-      "end": 20.997,
+      "start": 19.647,
+      "end": 20.939,
       "words": [
         {
           "word": "Antigravity.",
-          "start": 19.728,
-          "end": 20.684
+          "start": 19.647,
+          "end": 20.626
         },
         {
           "word": "Dalam",
-          "start": 20.684,
-          "end": 20.997
+          "start": 20.626,
+          "end": 20.939
         }
       ]
     },
     {
       "text": "hitungan detik,",
-      "start": 20.997,
-      "end": 21.874,
+      "start": 20.939,
+      "end": 21.816,
       "words": [
         {
           "word": "hitungan",
-          "start": 20.997,
-          "end": 21.498
+          "start": 20.939,
+          "end": 21.44
         },
         {
           "word": "detik,",
-          "start": 21.498,
-          "end": 21.874
+          "start": 21.44,
+          "end": 21.816
         }
       ]
     },
     {
       "text": "AI bakal nulis kode",
-      "start": 21.874,
-      "end": 23.002,
+      "start": 21.816,
+      "end": 22.944,
       "words": [
         {
           "word": "AI",
-          "start": 21.874,
-          "end": 22.125
+          "start": 21.816,
+          "end": 22.067
         },
         {
           "word": "bakal",
-          "start": 22.125,
-          "end": 22.438
+          "start": 22.067,
+          "end": 22.38
         },
         {
           "word": "nulis",
-          "start": 22.438,
-          "end": 22.751
+          "start": 22.38,
+          "end": 22.693
         },
         {
           "word": "kode",
-          "start": 22.751,
-          "end": 23.002
+          "start": 22.693,
+          "end": 22.944
         }
       ]
     },
     {
       "text": "komponen React lengkap",
-      "start": 23.002,
-      "end": 24.193,
+      "start": 22.944,
+      "end": 24.135,
       "words": [
         {
           "word": "komponen",
-          "start": 23.002,
-          "end": 23.503
+          "start": 22.944,
+          "end": 23.445
         },
         {
           "word": "React",
-          "start": 23.503,
-          "end": 23.754
+          "start": 23.445,
+          "end": 23.696
         },
         {
           "word": "lengkap",
-          "start": 23.754,
-          "end": 24.193
+          "start": 23.696,
+          "end": 24.135
         }
       ]
     },
     {
       "text": "dengan animasi spring dan",
-      "start": 24.193,
-      "end": 25.572,
+      "start": 24.135,
+      "end": 25.514,
       "words": [
         {
           "word": "dengan",
-          "start": 24.193,
-          "end": 24.569
+          "start": 24.135,
+          "end": 24.511
         },
         {
           "word": "animasi",
-          "start": 24.569,
-          "end": 25.008
+          "start": 24.511,
+          "end": 24.95
         },
         {
           "word": "spring",
-          "start": 25.008,
-          "end": 25.384
+          "start": 24.95,
+          "end": 25.326
         },
         {
           "word": "dan",
-          "start": 25.384,
-          "end": 25.572
+          "start": 25.326,
+          "end": 25.514
         }
       ]
     },
     {
       "text": "subtitle karaoke",
-      "start": 25.572,
-      "end": 26.637,
+      "start": 25.514,
+      "end": 26.579,
       "words": [
         {
           "word": "subtitle",
-          "start": 25.572,
-          "end": 26.198
+          "start": 25.514,
+          "end": 26.14
         },
         {
           "word": "karaoke",
-          "start": 26.198,
-          "end": 26.637
+          "start": 26.14,
+          "end": 26.579
         }
       ]
     },
     {
       "text": "otomatis. Langkah",
-      "start": 26.637,
-      "end": 27.727,
+      "start": 26.579,
+      "end": 27.676,
       "words": [
         {
           "word": "otomatis.",
-          "start": 26.637,
-          "end": 27.199
+          "start": 26.579,
+          "end": 27.141
         },
         {
           "word": "Langkah",
-          "start": 27.199,
-          "end": 27.727
+          "start": 27.141,
+          "end": 27.676
         }
       ]
     },
     {
       "text": "terakhir, cek preview di",
-      "start": 27.727,
-      "end": 29.236,
+      "start": 27.676,
+      "end": 29.205,
       "words": [
         {
           "word": "terakhir,",
-          "start": 27.727,
-          "end": 28.406
+          "start": 27.676,
+          "end": 28.364
         },
         {
           "word": "cek",
-          "start": 28.406,
-          "end": 28.632
+          "start": 28.364,
+          "end": 28.593
         },
         {
           "word": "preview",
-          "start": 28.632,
-          "end": 29.085
+          "start": 28.593,
+          "end": 29.052
         },
         {
           "word": "di",
-          "start": 29.085,
-          "end": 29.236
+          "start": 29.052,
+          "end": 29.205
         }
       ]
     },
     {
       "text": "Remotion Studio lalu klik",
-      "start": 29.236,
-      "end": 30.972,
+      "start": 29.205,
+      "end": 30.964,
       "words": [
         {
           "word": "Remotion",
-          "start": 29.236,
-          "end": 29.915
+          "start": 29.205,
+          "end": 29.893
         },
         {
           "word": "Studio",
-          "start": 29.915,
-          "end": 30.368
+          "start": 29.893,
+          "end": 30.352
         },
         {
           "word": "lalu",
-          "start": 30.368,
-          "end": 30.67
+          "start": 30.352,
+          "end": 30.658
         },
         {
           "word": "klik",
-          "start": 30.67,
-          "end": 30.972
+          "start": 30.658,
+          "end": 30.964
         }
       ]
     },
     {
       "text": "Render jadi file MP4.",
-      "start": 30.972,
-      "end": 32.328,
+      "start": 30.964,
+      "end": 32.339,
       "words": [
         {
           "word": "Render",
-          "start": 30.972,
-          "end": 31.425
+          "start": 30.964,
+          "end": 31.423
         },
         {
           "word": "jadi",
-          "start": 31.425,
-          "end": 31.727
+          "start": 31.423,
+          "end": 31.729
         },
         {
           "word": "file",
-          "start": 31.727,
-          "end": 32.029
+          "start": 31.729,
+          "end": 32.035
         },
         {
           "word": "MP4.",
-          "start": 32.029,
-          "end": 32.328
+          "start": 32.035,
+          "end": 32.339
         }
       ]
     },
     {
       "text": "Siap upload ke Reels,",
-      "start": 32.328,
-      "end": 34.035,
+      "start": 32.339,
+      "end": 34.036,
       "words": [
         {
           "word": "Siap",
-          "start": 32.328,
-          "end": 32.73
+          "start": 32.339,
+          "end": 32.738
         },
         {
           "word": "upload",
-          "start": 32.73,
-          "end": 33.332
+          "start": 32.738,
+          "end": 33.237
         },
         {
           "word": "ke",
-          "start": 33.332,
-          "end": 33.533
+          "start": 33.237,
+          "end": 33.437
         },
         {
           "word": "Reels,",
-          "start": 33.533,
-          "end": 34.035
+          "start": 33.437,
+          "end": 34.036
         }
       ]
     },
     {
       "text": "TikTok, dan Shorts!",
-      "start": 34.035,
-      "end": 35.742,
+      "start": 34.036,
+      "end": 35.731,
       "words": [
         {
           "word": "TikTok,",
-          "start": 34.035,
-          "end": 34.738
+          "start": 34.036,
+          "end": 34.734
         },
         {
           "word": "dan",
-          "start": 34.738,
-          "end": 35.039
+          "start": 34.734,
+          "end": 35.033
         },
         {
           "word": "Shorts!",
-          "start": 35.039,
-          "end": 35.742
+          "start": 35.033,
+          "end": 35.731
         }
       ]
     },
     {
       "text": "Buat yang mau link",
-      "start": 35.742,
-      "end": 36.75,
+      "start": 35.731,
+      "end": 36.729,
       "words": [
         {
           "word": "Buat",
-          "start": 35.742,
-          "end": 36.011
+          "start": 35.731,
+          "end": 35.997
         },
         {
           "word": "yang",
-          "start": 36.011,
-          "end": 36.28
+          "start": 35.997,
+          "end": 36.263
         },
         {
           "word": "mau",
-          "start": 36.28,
-          "end": 36.481
+          "start": 36.263,
+          "end": 36.463
         },
         {
           "word": "link",
-          "start": 36.481,
-          "end": 36.75
+          "start": 36.463,
+          "end": 36.729
         }
       ]
     },
     {
       "text": "Remotion-nya, langsung",
-      "start": 36.75,
-      "end": 38.16,
+      "start": 36.729,
+      "end": 38.128,
       "words": [
         {
           "word": "Remotion-nya,",
-          "start": 36.75,
-          "end": 37.623
+          "start": 36.729,
+          "end": 37.595
         },
         {
           "word": "langsung",
-          "start": 37.623,
-          "end": 38.16
+          "start": 37.595,
+          "end": 38.128
         }
       ]
     },
     {
       "text": "comment MAU di bawah,",
-      "start": 38.16,
-      "end": 39.234,
+      "start": 38.128,
+      "end": 39.193,
       "words": [
         {
           "word": "comment",
-          "start": 38.16,
-          "end": 38.496
+          "start": 38.128,
+          "end": 38.461
         },
         {
           "word": "MAU",
-          "start": 38.496,
-          "end": 38.697
+          "start": 38.461,
+          "end": 38.661
         },
         {
           "word": "di",
-          "start": 38.697,
-          "end": 38.831
+          "start": 38.661,
+          "end": 38.794
         },
         {
           "word": "bawah,",
-          "start": 38.831,
-          "end": 39.234
+          "start": 38.794,
+          "end": 39.193
         }
       ]
     },
     {
       "text": "nanti aku kirim link-nya",
-      "start": 39.234,
-      "end": 40.577,
+      "start": 39.193,
+      "end": 40.525,
       "words": [
         {
           "word": "nanti",
-          "start": 39.234,
-          "end": 39.57
+          "start": 39.193,
+          "end": 39.526
         },
         {
           "word": "aku",
-          "start": 39.57,
-          "end": 39.771
+          "start": 39.526,
+          "end": 39.726
         },
         {
           "word": "kirim",
-          "start": 39.771,
-          "end": 40.107
+          "start": 39.726,
+          "end": 40.059
         },
         {
           "word": "link-nya",
-          "start": 40.107,
-          "end": 40.577
+          "start": 40.059,
+          "end": 40.525
         }
       ]
     },
     {
       "text": "via DM!",
-      "start": 40.577,
-      "end": 41.182,
+      "start": 40.525,
+      "end": 41.124,
       "words": [
         {
           "word": "via",
-          "start": 40.577,
-          "end": 40.778
+          "start": 40.525,
+          "end": 40.725
         },
         {
           "word": "DM!",
-          "start": 40.778,
-          "end": 41.182
+          "start": 40.725,
+          "end": 41.124
         }
       ]
     }

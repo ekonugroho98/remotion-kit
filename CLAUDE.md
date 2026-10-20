@@ -94,8 +94,27 @@ Sesuaikan tata letak panggung tengah (Layer 3) dengan style yang dipilih di `con
 
 ---
 
-## 5. Checklist Verifikasi Wajib Sebelum Selesai
+## 5. Aturan Wajib Anti-Slop Video (`V-01`..`V-08`) & Anti-Slop Voice (`VO-01`..`VO-06`)
+
+Sebelum menulis naskah VO atau kode komponen Remotion, terapkan filter **Anti-Slop Video** (`.agents/skills/antislop-video/SKILL.md`) dan **Anti-Slop Voice** (`.agents/skills/antislop-voice/SKILL.md`):
+
+### A. Anti-Slop Video (Motion Graphics & Layout)
+- **V-01 (Single Focal Motion):** Jangan menggerakkan semua elemen bersamaan. Gunakan *staggered spring entrance* (`F00–F08` headline, `F06–F16` kartu utama); setelah masuk, elemen pendukung diam dan hanya 1 elemen fokus (kata kunci aktif atau kursor) yang bergerak.
+- **V-02 (Strict Glow Dose Cap):** Dilarang memberi glow pada semua border kartu dan background. *Soft multi-layer neon bloom* hanya boleh dipasang pada **1–2 kata kunci utama di headline**; kartu tetap memakai border struktural tipis `1px` (`#2D2C2A`).
+- **V-03 (Real Assets Only & Zero Emoji Slop):** Dilarang membuat bar *skeleton* abu-abu kosong, statistik karangan (`10K+ Users`), atau menaruh emoji dekoratif (`🚀`, `🔥`, `✅`) di judul. Wajib merender aset asli dari `public/<slug>/assets/` via `<Img src={staticFile(...)} />`.
+- **V-04 (Audio-Driven Cut):** Dilarang membagi durasi `<Sequence>` rata tanpa melihat transkrip. Semua perpindahan scene wajib mengikuti batas frame kalimat (`F0000`) di `public/<slug>/transcript.txt`.
+- **V-05 (1-Line Safe-Zone Subtitle):** `<KaraokeSubtitle />` wajib tetap **1 baris horizontal** (maksimal 4 kata / 25 karakter) di zona aman `bottom: 185px` (`Y: 1620px–1820px`) agar tidak bertabrakan dengan tombol UI Reels/TikTok/Shorts.
+
+### B. Anti-Slop Voice AI (Naskah Tutur, G2P & Broadcast Audio)
+- **VO-01 (Bahasa Tutur 1 Napas):** Naskah VO wajib menggunakan kalimat lisan pendek (**8–12 kata per tarikan napas**), tanpa *em-dash* (`—`), dan tanpa struktur terjemahan kaku (*"Di era digital saat ini..."*, *"Bukan hanya X, tapi juga Y"*).
+- **VO-02 (Smart Indonesian G2P Phonetic Mapping):** Saat menjalankan `scripts/generate-vo.py`, mata uang (`Rp9rb`, `Rp25.000`), dimensi (`1080x1920`, `9:16`), persentase, dan istilah Inggris (`Remotion` $\rightarrow$ `rimousyen`, `AI` $\rightarrow$ `e-ai`, `Claude` $\rightarrow$ `klod`, `DM` $\rightarrow$ `di-em`, `VPS` $\rightarrow$ `vi-pi-es`, `UI/UX` $\rightarrow$ `yu-ai/yu-eks`) otomatis dikonversi ke ejaan fonetik Indonesia untuk TTS sementara teks subtitle di `data.json` tetap memakai ejaan asli yang bersih.
+- **VO-04 & VO-05 (FFmpeg Warm Broadcast Chain):** `generate-vo.py` otomatis memfilter output TTS dengan `highpass=80Hz`, `chest warmth +2dB @ 200Hz`, `de-harsh vocoder -2.5dB @ 3600Hz`, kompresor studio, normalisasi `-16 LUFS`, dan *tail pad* `0.35s` agar kata terakhir tidak pernah terpotong.
+- **VO-06 (Acoustic Bed):** Selalu sertakan `public/sfx/music-loop.wav` pada `volume={0.12}`–`0.15` di bawah VO agar jeda antarkata tidak terdengar hampa.
+
+---
+
+## 6. Checklist Verifikasi Wajib Sebelum Selesai (Delivery Gate)
 
 1. Jalankan `npx tsc --noEmit` — harus **0 error**.
 2. Jalankan `node scripts/verify-stills.mjs <CompId>` untuk merender gambar *still frame* dari setiap adegan.
-3. Periksa gambar-gambar di `out/stills/<CompId>/` secara visual: pastikan tidak ada teks yang bertumpukan, tidak ada gambar aset yang gepeng/pecah, dan subtitle bawah tetap 1 baris rapi.
+3. Periksa gambar-gambar di `out/stills/<CompId>/` secara visual: pastikan lulus **V-01 s/d V-08** (tidak ada teks bertumpukan, tidak ada gambar aset yang gepeng/pecah, glow hanya pada kata kunci headline, dan subtitle bawah tetap 1 baris rapi).

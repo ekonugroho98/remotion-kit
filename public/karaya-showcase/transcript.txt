@@ -1,37 +1,37 @@
-# Transcript — karaya-showcase (41.21s / 1251 frames @ 30fps)
+# Transcript — karaya-showcase (41.51s / 1260 frames @ 30fps)
 
 Sekarang bikin video motion graphic sekeren ini nggak perlu buka After Effects lagi. Cukup pakai Remotion dan Antigravity. Langkah pertama, buka Prep Panel lokal yang udah disiapin. Pilih satu dari dua puluh lima style animasi, drop voice over dan gambar pendukung, lalu klik Submit. Langkah kedua, kirim instruksi prompt ke Antigravity. Dalam hitungan detik, AI bakal nulis kode komponen React lengkap dengan animasi spring dan subtitle karaoke otomatis. Langkah terakhir, cek preview di Remotion Studio lalu klik Render jadi file MP4. Siap upload ke Reels, TikTok, dan Shorts! Buat yang mau link Remotion-nya, langsung comment MAU di bawah, nanti aku kirim link-nya via DM!
 
 ## Word-Level Timestamps
-[00.10s - 01.25s | F0003-F0037] Sekarang bikin video
-[01.25s - 02.46s | F0037-F0074] motion graphic sekeren
-[02.46s - 03.54s | F0074-F0106] ini nggak perlu buka
-[03.54s - 04.50s | F0106-F0135] After Effects lagi.
-[04.45s - 06.23s | F0133-F0187] Cukup pakai Remotion dan
-[06.23s - 07.73s | F0187-F0232] Antigravity. Langkah
-[07.73s - 09.31s | F0232-F0279] pertama, buka Prep Panel
-[09.31s - 10.96s | F0279-F0329] lokal yang udah disiapin.
-[10.96s - 12.10s | F0329-F0363] Pilih satu dari dua
-[12.10s - 13.67s | F0363-F0410] puluh lima style animasi,
-[13.67s - 14.74s | F0410-F0442] drop voice over dan
-[14.74s - 15.88s | F0442-F0476] gambar pendukung,
-[15.88s - 16.94s | F0476-F0508] lalu klik Submit.
-[16.94s - 17.98s | F0508-F0539] Langkah kedua,
-[17.98s - 19.73s | F0539-F0592] kirim instruksi prompt ke
-[19.73s - 21.00s | F0592-F0630] Antigravity. Dalam
-[21.00s - 21.87s | F0630-F0656] hitungan detik,
-[21.87s - 23.00s | F0656-F0690] AI bakal nulis kode
-[23.00s - 24.19s | F0690-F0726] komponen React lengkap
-[24.19s - 25.57s | F0726-F0767] dengan animasi spring dan
-[25.57s - 26.64s | F0767-F0799] subtitle karaoke
-[26.64s - 27.73s | F0799-F0832] otomatis. Langkah
-[27.73s - 29.24s | F0832-F0877] terakhir, cek preview di
-[29.24s - 30.97s | F0877-F0929] Remotion Studio lalu klik
-[30.97s - 32.33s | F0929-F0970] Render jadi file MP4.
-[32.33s - 34.03s | F0970-F1021] Siap upload ke Reels,
-[34.03s - 35.74s | F1021-F1072] TikTok, dan Shorts!
-[35.74s - 36.75s | F1072-F1102] Buat yang mau link
-[36.75s - 38.16s | F1102-F1145] Remotion-nya, langsung
-[38.16s - 39.23s | F1145-F1177] comment MAU di bawah,
-[39.23s - 40.58s | F1177-F1217] nanti aku kirim link-nya
-[40.58s - 41.18s | F1217-F1235] via DM!
+[00.10s - 01.23s | F0003-F0037] Sekarang bikin video
+[01.23s - 02.42s | F0037-F0073] motion graphic sekeren
+[02.42s - 03.48s | F0073-F0105] ini nggak perlu buka
+[03.48s - 04.43s | F0105-F0133] After Effects lagi.
+[04.38s - 06.16s | F0131-F0185] Cukup pakai Remotion dan
+[06.16s - 07.66s | F0185-F0230] Antigravity. Langkah
+[07.66s - 09.24s | F0230-F0277] pertama, buka Prep Panel
+[09.24s - 10.89s | F0277-F0327] lokal yang udah disiapin.
+[10.89s - 12.03s | F0327-F0361] Pilih satu dari dua
+[12.03s - 13.60s | F0361-F0408] puluh lima style animasi,
+[13.60s - 14.67s | F0408-F0440] drop voice over dan
+[14.67s - 15.81s | F0440-F0474] gambar pendukung,
+[15.81s - 16.87s | F0474-F0506] lalu klik Submit.
+[16.87s - 17.93s | F0506-F0538] Langkah kedua,
+[17.93s - 19.65s | F0538-F0589] kirim instruksi prompt ke
+[19.65s - 20.94s | F0589-F0628] Antigravity. Dalam
+[20.94s - 21.82s | F0628-F0654] hitungan detik,
+[21.82s - 22.94s | F0654-F0688] AI bakal nulis kode
+[22.94s - 24.14s | F0688-F0724] komponen React lengkap
+[24.14s - 25.51s | F0724-F0765] dengan animasi spring dan
+[25.51s - 26.58s | F0765-F0797] subtitle karaoke
+[26.58s - 27.68s | F0797-F0830] otomatis. Langkah
+[27.68s - 29.20s | F0830-F0876] terakhir, cek preview di
+[29.20s - 30.96s | F0876-F0929] Remotion Studio lalu klik
+[30.96s - 32.34s | F0929-F0970] Render jadi file MP4.
+[32.34s - 34.04s | F0970-F1021] Siap upload ke Reels,
+[34.04s - 35.73s | F1021-F1072] TikTok, dan Shorts!
+[35.73s - 36.73s | F1072-F1102] Buat yang mau link
+[36.73s - 38.13s | F1102-F1144] Remotion-nya, langsung
+[38.13s - 39.19s | F1144-F1176] comment MAU di bawah,
+[39.19s - 40.52s | F1176-F1216] nanti aku kirim link-nya
+[40.52s - 41.12s | F1216-F1234] via DM!
