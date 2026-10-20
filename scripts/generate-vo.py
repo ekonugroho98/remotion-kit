@@ -248,9 +248,9 @@ def clean_script_hygiene(text: str) -> str:
 
 
 def _convert_token_to_phonetic(token: str) -> str:
-    # Preserve leading/trailing punctuation
-    m = re.match(r"^([^A-Za-z0-9%]*)([A-Za-z0-9.,:/×%-]+)([^A-Za-z0-9%]*)$", token)
-    if not m:
+    # Preserve leading/trailing punctuation (strip trailing .,!?:; into suffix)
+    m = re.match(r"^([^A-Za-z0-9%]*)(.*?)([^A-Za-z0-9%]*)$", token)
+    if not m or not m.group(2):
         return token
     prefix, core, suffix = m.group(1), m.group(2), m.group(3)
     low = core.lower()
