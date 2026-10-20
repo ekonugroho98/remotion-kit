@@ -426,7 +426,15 @@ def resolve_edge_tts_cmd() -> list[str]:
     edge_bin = shutil.which("edge-tts")
     if edge_bin:
         return [edge_bin]
-    for candidate in ["/usr/local/bin/edge-tts", "/usr/bin/edge-tts", os.path.expanduser("~/.local/bin/edge-tts")]:
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    for candidate in [
+        os.path.join(root_dir, ".venv", "bin", "edge-tts"),
+        "/opt/remotion-kit/.venv/bin/edge-tts",
+        "/usr/local/bin/edge-tts",
+        "/usr/bin/edge-tts",
+        "/home/office/.local/bin/edge-tts",
+        os.path.expanduser("~/.local/bin/edge-tts"),
+    ]:
         if os.path.exists(candidate):
             return [candidate]
     try:
