@@ -82,16 +82,36 @@ function toPascalCase(slug) {
 }
 
 const STYLE_RECIPES = {
-  L01: 'Gunakan kanvas gelap #0F0F0E dengan dot-matrix halus & radial spotlight glow. Kartu Faux-UI gelap (#171716, border #2D2C2A) dengan aksen coral (#E87B58) dan sage green (#8AC98A), kursor klik interaktif, dan window 3D tilt.',
-  L02: 'KINETIC TYPOGRAPHY: Tonjolkan tipografi raksasa yang bergerak enerjik mengikuti ketukan kata di data.json (spring cepat stiffness: 220, damping: 12). Kata kunci utama diberi soft multi-layer neon bloom dan badge miring (skewX(-8deg)), dipadukan kartu visual yang punchy dan dinamis.',
-  L03: 'ISOMETRIC 3D: Gunakan WindowCard dengan tilt3D aktif (perspective(1100px) rotateX(8deg) rotateY(-10deg)), bayangan berlapis dalam, dan FloatingSticker yang melayang di sekitar kartu utama.',
-  L04: 'PAPER EDITORIAL: Gunakan BackgroundCanvas dengan theme="light" (#F4F1EA), kartu putih bersih dengan border kontras, dan aksen hangat terakota.',
-  L05: 'NEON CYBERPUNK: Gunakan kanvas gelap pekat dengan kombinasi aksen purple (#B58DED) dan blue (#7CA6D8), pendaran neon ganda pada judul dan kartu.',
+  L01: 'ANTIGRAVITY DARK UI (archetype: faux-ui, mode: dark): Kanvas #0F0F0E dot-matrix dengan spotlight coral #E07A5F & sage green #56C288. Gunakan <BackgroundCanvas styleId="L01" />, <WindowCard /> gelap (#181816), chip parameter miring skewX(-8deg), dan <AnimatedCursor />.',
+  L02: 'KINETIC TYPOGRAPHY (archetype: kinetic-type, mode: dark): Kanvas karbon #0B0B0C dengan aksen kuning #FACC15 (kontras 12.8:1). Gunakan spring cepat (stiffness: 220, damping: 12), blok kata raksasa bertumpuk di <TemplateStage preset={getStylePreset("L02")} />, dan badge miring skewX(-8deg).',
+  L03: 'ISOMETRIC 3D (archetype: isometric-3d, mode: light): Kanvas terang #EEF2FF, kartu #FFFFFF, teks indigo #1E1B4B, dan aksen #4338CA. Aktifkan perspektif 3D berlapis (perspective(1200px) rotateX(8deg) rotateY(-7deg)) untuk memvisualisasikan layer sistem.',
+  L04: 'DOODLE / HAND-DRAWN (archetype: handcrafted-board, mode: light): Kanvas kertas krem #FFFBEB, kartu #FFFFFF ber-border tinta #1C1917 (2.5px) dengan hard offset shadow dan aksen amber #B45309 serta pita perekat di bagian atas kartu.',
+  L05: 'COMIC / POP ART (archetype: pop-brutalist, mode: light): Kanvas kuning pop #FEF08A dengan pola halftone dots, kartu putih ber-border hitam tebal 3.5px (#18181B), bayangan blok keras (10px 10px 0px #18181B), dan aksen crimson #BE123C.',
+  L06: '3D / CGI MOTION (archetype: isometric-3d, mode: dark): Kanvas deep-space #0D0B26 dengan cincin konsentris halus (pattern: rings), kartu #17143A ber-rim violet #C084FC & cyan #38BDF8, serta kemiringan 3D perspektif penuh.',
+  L07: 'SWISS / EDITORIAL (archetype: editorial-grid, mode: light): Kanvas kertas arsip #F4F1EA, garis bantu struktural 1.5px #141413 (pattern: editorial-lines), sudut tajam (radius 6px), penomoran indeks 01/02/03, dan aksen merah vermilion #B83B22.',
+  L08: 'GLITCH / DIGITAL (archetype: cyber-digital, mode: dark): Kanvas hitam #09090B (pattern: diagonal) dengan aksen cyan #22D3EE dan crimson #F43F5E. Tampilkan panel telemetri monospace, bar spektrum frekuensi, dan indikator status sistem.',
+  L09: 'MEMPHIS GEOMETRIC (archetype: pop-brutalist, mode: light): Kanvas peach terang #FFF7ED (pattern: cross), kartu putih ber-border hitam 3px (#18181B), bayangan blok tegas, dan aksen magenta #BE185D serta indigo #4338CA.',
+  L10: 'INFOGRAPHIC DATA (archetype: data-product, mode: dark): Kanvas navy #0B1120 dengan grid presisi, kartu #15203B, aksen sky-blue #38BDF8 & emerald #34D399. Tampilkan grafik bar horizontal teranimasi dengan persentase tabular jelas.',
+  L11: 'PAPER CUTOUT (archetype: handcrafted-board, mode: light): Kanvas kertas kerajinan #F2ECE1 dengan kartu berlapis #FFFDF9, teks #1C1917, aksen hijau hutan #166534 (kontras WCAG AA 6.08:1), dan rotasi halus tiap kartu.',
+  L12: '2D CHARACTER / DIALOG (archetype: data-product, mode: light): Kanvas mint lembut #ECFDF5 dengan teks zamrud pekat #064E3B (9.2:1) dan aksen terakota #C2410C. Susun kartu tanya-jawab edukatif bersudut membulat 26px.',
+  L13: 'LIQUID MOTION (archetype: cyber-digital, mode: dark): Kanvas velvet gelap #0E0720 (pattern: rings) dengan kartu #1A1036 bersudut 28px, aksen lavender #D8B4FE (11.1:1), dan gelombang bar frekuensi yang bergerak organik.',
+  L14: 'FLAT DESIGN CLEAN (archetype: faux-ui, mode: light): Kanvas biru es terang #F0F9FF, kartu putih #FFFFFF bersih, teks biru tua #0C4A6E, dan aksen #0369A1 dengan fokus penuh pada keterbacaan.',
+  L15: 'CORPORATE GROWTH (archetype: data-product, mode: light): Kanvas bersih #F8FAFC (pattern: editorial-lines), kartu putih #FFFFFF dengan teks slate gelap #0F172A (17:1) dan aksen royal blue #1D4ED8 untuk laporan metrik B2B/SaaS.',
+  L16: 'RETRO / VINTAGE (archetype: editorial-grid, mode: light): Kanvas perkamen hangat #F5E6C8, kartu #FFF9ED ber-border espresso #271609 (2px) dengan hard shadow, aksen rust #9A3412, dan tata letak indeks arsip klasik.',
+  L17: 'CYBERPUNK NEON (archetype: cyber-digital, mode: dark): Kanvas malam #12071F dengan kartu #1E0E33, aksen electric cyan #38BDF8 & neon pink #F472B6, visualizer spektrum, dan pendaran glow terkontrol pada kata kunci utama.',
+  L18: 'ABSTRACT PARTICLES (archetype: cyber-digital, mode: dark): Kanvas obsidian #0A0A0E dengan dot-matrix rapat, kartu #15151E, dan aksen rose-pink #F472B6 bersama visualizer spektrum audio broadcast.',
+  L19: 'KINETIC COLLAGE (archetype: kinetic-type, mode: light): Kanvas kertas zine #EFECE6 dengan pola garis diagonal, kartu potongan tajam ber-border hitam 2.5px (#18181B), hard shadow, dan aksen merah cetak #B91C1C.',
+  L20: 'UI/UX APP PROMO (archetype: data-product, mode: light): Kanvas terang #F8FAFC, kartu mockup produk #FFFFFF dengan aksen deep violet #6D28D9 (7.1:1) dan progress bar metrik adopsi fitur.',
+  L21: 'CLAYMATION 3D (archetype: isometric-3d, mode: light): Kanvas kuning mentega hangat #FEF3C7, kartu #FFFBEB bersudut ekstra membulat 30px, teks cokelat tua #291809, dan aksen terakota #C2410C dengan perspektif 3D.',
+  L22: 'STOP MOTION (archetype: handcrafted-board, mode: dark): Kanvas papan kayu gelap #261B12 (pattern: cross), kartu #38281C dengan aksen sticky-note kuning #FDE047 (10.7:1), dan kuantisasi frame steppedFrames=2 (sensasi 12fps stop-motion).',
+  L23: 'PARALLAX 2.5D (archetype: isometric-3d, mode: dark): Kanvas midnight #0B1120 dengan kartu #172136 dan aksen sky-ice #7DD3FC. Gunakan susunan layer 3D bertingkat dengan kecepatan paralaks berbeda.',
+  L24: 'CINEMATIC TRAILER (archetype: kinetic-type, mode: dark): Kanvas deep cinema teal #081014 (pattern: editorial-lines) dengan kartu #111E26 dan aksen warm gold #FDE047 (12.8:1). Gunakan spring lambat-berwibawa (stiffness: 130, damping: 17).',
+  L25: 'MIXED MEDIA (archetype: editorial-grid, mode: light): Kanvas kertas hangat #F3EDE2 (pattern: cross) dipadukan kartu putih ber-border hitam 2px (#18181B), hard shadow, dan aksen crimson #BE123C serta indigo #4338CA.',
 };
 
 function getStyleRecipe(styleId, styleName) {
   if (STYLE_RECIPES[styleId]) return STYLE_RECIPES[styleId];
-  return `Terapkan karakter visual "${styleName || styleId}" secara konsisten pada pemilihan warna aksen, ritme spring animation, dan tata letak kartu di panggung utama (Y: 540px–1460px).`;
+  return `Terapkan preset visual "${styleName || styleId}" dari src/components/stylePresets.ts (getStylePreset("${styleId || 'L01'}")) secara konsisten pada kanvas, tipografi, dan panggung utama (Y: 540px–1460px).`;
 }
 
 function buildPromptTxt(payload) {
@@ -106,10 +126,10 @@ function buildPromptTxt(payload) {
   const assetLines =
     assets.length > 0
       ? assets.map((a) => `  - ${a} -> gunakan <Img src={staticFile('${slug}/assets/${a}')} />`).join('\n')
-      : '  - (tidak ada file aset gambar, gunakan komponen Faux-UI React murni)';
+      : '  - (tidak ada file aset gambar, gunakan komponen React & TemplateStage murni)';
 
   const styleId = payload.styleId || 'L01';
-  const styleName = payload.styleName || 'Minimalist / AGY Dark UI';
+  const styleName = payload.styleName || 'Antigravity Dark UI';
   const styleInfo =
     payload.styleMode === 'reference'
       ? `Clone style dari video referensi: public/${slug}/reference.mp4 (${payload.referenceNotes || 'warna, tipografi, ritme'})`
@@ -140,8 +160,9 @@ Semua proses (baca transkrip, susun adegan, coding komponen React, cek still fra
 • Font           : ${payload.font || 'Plus Jakarta Sans (default)'}
 • Style visual   : ${styleInfo}
 
-▌ RESEP GAYA VISUAL (${styleId})
+▌ RESEP GAYA VISUAL & PRESET KODE (${styleId})
 • ${styleRecipe}
+• Preset lengkap tersedia di \`src/components/stylePresets.ts\` (\`getStylePreset('${styleId}')\`) dan panggung siap pakai di \`src/templates/TemplateStage.tsx\` (\`<TemplateStage preset={getStylePreset('${styleId}')} items={[...]} />\`).
 
 ▌ BAHAN
 • Sumber utama   : ${sourceLine}
@@ -155,11 +176,11 @@ ${assetLines}
 ▌ ATURAN TEKNIS REMOTION 4.x (WAJIB DIIKUTI AGENT)
 1. Import resmi dari 'remotion': AbsoluteFill, Sequence, Audio, Img, staticFile, useCurrentFrame, useVideoConfig, spring, interpolate.
 2. WAJIB tampilkan semua file di public/${slug}/assets/ menggunakan <Img src={staticFile('${slug}/assets/<nama-file>')} /> (DILARANG memakai tag <img> HTML biasa agar tidak flicker saat render).
-3. Susun 4-Layer Kanvas (1080×1920):
-   - Layer 1: <BackgroundCanvas accent="..." /> (ganti warna aksen tiap ganti bab/langkah).
-   - Layer 2: <TopHudBar leftLabel="REMOTION × ANTIGRAVITY" steps={[...]} activeStep={...} />.
-   - Layer 3: <SceneHeader /> (soft neon bloom tanpa kotak kaku) + Panggung Tengah (WindowCard, PromptInputCard dengan chip miring skewX(-8deg), AnimatedCursor, dan showcase aset gambar).
-   - Layer 4: <KaraokeSubtitle phrases={data.phrases} /> (1 baris, maks 4 kata) + <DiagonalStripeTransition /> + SFX dari public/sfx/.
+3. Susun 4-Layer Kanvas (1080×1920) dengan meneruskan \`styleId="${styleId}"\`:
+   - Layer 1: \`<BackgroundCanvas styleId="${styleId}" />\`.
+   - Layer 2: \`<TopHudBar styleId="${styleId}" leftLabel="REMOTION × ANTIGRAVITY" steps={[...]} activeStepIndex={...} />\`.
+   - Layer 3: \`<SceneHeader styleId="${styleId}" ... />\` + Panggung Tengah (\`<TemplateStage preset={getStylePreset('${styleId}')} items={[...]} />\`, \`WindowCard\`, \`PromptInputCard\`, \`AnimatedCursor\`, atau showcase aset gambar).
+   - Layer 4: \`<KaraokeSubtitle styleId="${styleId}" phrases={data.phrases} />\` (1 baris, maks 4 kata) + \`<DiagonalStripeTransition />\` + SFX dari \`public/sfx/\`.
 4. Semua animasi wajib deterministik dari useCurrentFrame() + spring() / interpolate(..., { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }). Dilarang memakai CSS transition/@keyframes.
 
 ▌ INSTRUKSI EKSEKUSI
@@ -313,6 +334,7 @@ const server = http.createServer(async (req, res) => {
         'src',
         'scripts',
         'public/sfx',
+        'public/karaya-showcase',
         `public/${slug}`,
       ];
       for (const item of candidates) {

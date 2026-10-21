@@ -1,6 +1,7 @@
 import React from 'react';
 import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { ACCENT_COLORS, AccentTheme } from './BackgroundCanvas';
+import { getStylePreset, StyleId } from './stylePresets';
 
 export const ClaudeSparkIcon: React.FC<{
   size?: number;
@@ -46,6 +47,7 @@ export interface TopHudBarProps {
   showFrameCounter?: boolean;
   accent?: AccentTheme;
   mode?: 'dark' | 'light';
+  styleId?: StyleId;
   steps?: string[];
   activeStepIndex?: number;
 }
@@ -55,19 +57,45 @@ export const TopHudBar: React.FC<TopHudBarProps> = ({
   rightLabel = 'KARAYA STUDIO',
   showFrameCounter = false,
   accent = 'coral',
-  mode = 'dark',
+  mode,
+  styleId,
   steps,
   activeStepIndex = 0,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const enter = spring({ frame, fps, config: { damping: 16, stiffness: 140 } });
-  const palette = ACCENT_COLORS[accent];
-  const isDark = mode === 'dark';
+  const preset = styleId ? getStylePreset(styleId) : undefined;
+  const qFrame = preset?.steppedFrames
+    ? Math.floor(frame / preset.steppedFrames) * preset.steppedFrames
+    : frame;
 
-  const pillBg = isDark ? 'rgba(28, 28, 26, 0.88)' : 'rgba(255, 255, 255, 0.92)';
-  const pillBorder = isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(24, 24, 22, 0.12)';
-  const textColor = isDark ? '#F5F4F0' : '#181816';
+  const enter = spring({
+    frame: qFrame,
+    fps,
+    config: preset ? preset.springConfig : { damping: 16, stiffness: 140 },
+  });
+
+  const resolvedMode = mode ?? preset?.mode ?? 'dark';
+  const isDark = resolvedMode === 'dark';
+  const accentHex = preset ? preset.accentHex : ACCENT_COLORS[accent].hex;
+
+  const pillBg = preset
+    ? preset.cardBg
+    : isDark
+    ? 'rgba(28, 28, 26, 0.92)'
+    : 'rgba(255, 255, 255, 0.95)';
+  const pillBorder = preset
+    ? preset.cardBorder
+    : isDark
+    ? 'rgba(255, 255, 255, 0.14)'
+    : 'rgba(24, 24, 22, 0.16)';
+  const textColor = preset ? preset.textPrimary : isDark ? '#F5F4F0' : '#181816';
+  const radius = preset && preset.cardRadius <= 12 ? 10 : 999;
+  const shadow = preset?.hardShadow
+    ? `4px 4px 0px ${preset.textPrimary}`
+    : isDark
+    ? '0 8px 24px rgba(0,0,0,0.28)'
+    : '0 6px 20px rgba(0,0,0,0.08)';
 
   return (
     <div
@@ -96,13 +124,13 @@ export const TopHudBar: React.FC<TopHudBarProps> = ({
             alignItems: 'center',
             gap: 12,
             padding: '12px 24px',
-            borderRadius: 999,
+            borderRadius: radius,
             backgroundColor: pillBg,
-            border: `1.5px solid ${pillBorder}`,
-            boxShadow: '0 8px 24px rgba(0,0,0,0.22)',
+            border: `${preset?.borderWidth || 1.5}px solid ${pillBorder}`,
+            boxShadow: shadow,
           }}
         >
-          <ClaudeSparkIcon size={22} color={palette.hex} />
+          <ClaudeSparkIcon size={22} color={accentHex} spin={!preset?.steppedFrames} />
           <span
             style={{
               color: textColor,
@@ -123,13 +151,15 @@ export const TopHudBar: React.FC<TopHudBarProps> = ({
             alignItems: 'center',
             gap: 10,
             padding: '12px 24px',
-            borderRadius: 999,
+            borderRadius: radius,
             backgroundColor: pillBg,
-            border: `1.5px solid ${palette.hex}55`,
-            boxShadow: '0 8px 24px rgba(0,0,0,0.22)',
+            border: `${preset?.borderWidth || 1.5}px solid ${
+              preset?.hardShadow ? preset.textPrimary : `${accentHex}66`
+            }`,
+            boxShadow: shadow,
           }}
         >
-          <ClaudeSparkIcon size={20} color={palette.hex} />
+          <ClaudeSparkIcon size={20} color={accentHex} spin={!preset?.steppedFrames} />
           <span
             style={{
               color: textColor,
@@ -139,12 +169,12 @@ export const TopHudBar: React.FC<TopHudBarProps> = ({
               fontFamily: showFrameCounter ? "'JetBrains Mono', monospace" : 'inherit',
             }}
           >
-            {showFrameCounter ? `FRAME ${String(frame).padStart(4, '0')}` : rightLabel}
+            {showFrameCounter ? `FRAME ${String(qFrame).padStart(4, '0')}` : rightLabel}
           </span>
         </div>
       </div>
 
-      {/* Optional 5-Step Progress Bar (Gaya @galihry.id Behind The Scenes) */}
+      {/* Optional Step Progress Bar */}
       {steps && steps.length > 0 && (
         <div
           style={{
@@ -164,12 +194,12 @@ export const TopHudBar: React.FC<TopHudBarProps> = ({
                     height: 6,
                     borderRadius: 99,
                     backgroundColor: isActive
-                      ? palette.hex
+                      ? accentHex
                       : isDone
-                      ? `${palette.hex}88`
+                      ? `${accentHex}88`
                       : isDark
-                      ? 'rgba(255,255,255,0.12)'
-                      : 'rgba(0,0,0,0.12)',
+                      ? 'rgba(255,255,255,0.14)'
+                      : 'rgba(0,0,0,0.14)',
                   }}
                 />
                 <span
@@ -178,14 +208,14 @@ export const TopHudBar: React.FC<TopHudBarProps> = ({
                     fontWeight: 800,
                     letterSpacing: '0.06em',
                     color: isActive
-                      ? palette.hex
+                      ? accentHex
                       : isDone
                       ? isDark
                         ? 'rgba(255,255,255,0.75)'
-                        : 'rgba(0,0,0,0.7)'
+                        : 'rgba(0,0,0,0.75)'
                       : isDark
-                      ? 'rgba(255,255,255,0.35)'
-                      : 'rgba(0,0,0,0.35)',
+                      ? 'rgba(255,255,255,0.42)'
+                      : 'rgba(0,0,0,0.45)',
                     textTransform: 'uppercase',
                   }}
                 >

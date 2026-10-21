@@ -41,13 +41,19 @@ Agent akan:
 ---
 
 ### 4. Render Video ke File `.mp4`
+Di sidebar kiri **Remotion Studio (`http://localhost:3000`)**, sudah tersedia:
+- `KarayaShowcase` — Video showcase multi-scene lengkap dengan Voice-Over & Karaoke.
+- `All25StylesReel` — Reel master yang menampilkan seluruh 25 style (`L01` s/d `L25`) secara berurutan.
+- Folder `Templates-L01-L25` — **25 Komposisi Template Individual** (`L01-AntigravityDarkUI`, `L02-KineticTypography`, ..., `L25-MixedMedia`) yang bisa langsung diklik, dikustomisasi teks/prop-nya di Studio, dan di-render jadi MP4.
+
 Setelah preview di `http://localhost:3000` sesuai keinginan:
 ```bash
 npx remotion render <NamaComposition> out/<nama-file>.mp4
 ```
-Contoh untuk video showcase bawaan:
+Contoh untuk video showcase bawaan atau salah satu dari 25 template:
 ```bash
 npx remotion render KarayaShowcase out/karaya-showcase.mp4
+npx remotion render L07-SwissEditorial out/swiss-editorial.mp4
 ```
 
 ---

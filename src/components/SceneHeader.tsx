@@ -1,6 +1,7 @@
 import React from 'react';
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { ACCENT_COLORS, AccentTheme } from './BackgroundCanvas';
+import { getStylePreset, StyleId } from './stylePresets';
 import { ClaudeSparkIcon } from './TopHudBar';
 
 export interface SceneHeaderProps {
@@ -18,6 +19,7 @@ export interface SceneHeaderProps {
   }>;
   accent?: AccentTheme;
   mode?: 'dark' | 'light';
+  styleId?: StyleId;
   typewriter?: boolean;
   align?: 'left' | 'center';
 }
@@ -28,22 +30,40 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
   titleLines,
   subtitleLines = [],
   accent = 'coral',
-  mode = 'dark',
+  mode,
+  styleId,
   typewriter = false,
   align = 'left',
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const palette = ACCENT_COLORS[accent];
-  const isDark = mode === 'dark';
+  const preset = styleId ? getStylePreset(styleId) : undefined;
+  const qFrame = preset?.steppedFrames
+    ? Math.floor(frame / preset.steppedFrames) * preset.steppedFrames
+    : frame;
+
+  const resolvedMode = mode ?? preset?.mode ?? 'dark';
+  const isDark = resolvedMode === 'dark';
+  const accentHex = preset ? preset.accentHex : ACCENT_COLORS[accent].hex;
+  const textColor = preset ? preset.textPrimary : isDark ? '#F5F4F0' : '#181816';
+  const mutedTextColor = preset
+    ? preset.textMuted
+    : isDark
+    ? 'rgba(245, 244, 240, 0.62)'
+    : 'rgba(24, 24, 22, 0.65)';
 
   const badgeSpring = spring({
-    frame,
+    frame: qFrame,
     fps,
-    config: { damping: 14, stiffness: 160 },
+    config: preset ? preset.springConfig : { damping: 14, stiffness: 160 },
   });
 
-  const textColor = isDark ? '#F5F4F0' : '#181816';
+  const badgeBg = preset
+    ? preset.cardBg
+    : isDark
+    ? 'rgba(24, 24, 22, 0.9)'
+    : 'rgba(255, 255, 255, 0.94)';
+  const badgeRadius = preset && preset.cardRadius <= 12 ? 8 : 999;
 
   return (
     <div
@@ -52,7 +72,7 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
         flexDirection: 'column',
         alignItems: align === 'center' ? 'center' : 'flex-start',
         textAlign: align,
-        gap: 22,
+        gap: 20,
         width: '100%',
         fontFamily: "'Plus Jakarta Sans', 'Noto Sans KR', 'Inter', sans-serif",
       }}
@@ -64,9 +84,12 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
           alignItems: 'center',
           gap: 12,
           padding: '10px 22px',
-          borderRadius: 999,
-          backgroundColor: 'rgba(24, 24, 22, 0.85)',
-          border: `1.5px solid ${palette.hex}66`,
+          borderRadius: badgeRadius,
+          backgroundColor: badgeBg,
+          border: `${preset?.borderWidth || 1.5}px solid ${
+            preset?.hardShadow ? preset.textPrimary : `${accentHex}77`
+          }`,
+          boxShadow: preset?.hardShadow ? `4px 4px 0px ${preset.textPrimary}` : 'none',
           transform: `scale(${badgeSpring}) translateY(${(1 - badgeSpring) * 18}px)`,
           opacity: badgeSpring,
         }}
@@ -76,9 +99,9 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
             style={{
               width: 30,
               height: 30,
-              borderRadius: '50%',
-              backgroundColor: palette.hex,
-              color: '#0F0F0E',
+              borderRadius: badgeRadius === 8 ? 6 : '50%',
+              backgroundColor: accentHex,
+              color: isDark ? '#0F0F0E' : '#FFFFFF',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -89,14 +112,14 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
             {stepNumber < 10 ? `0${stepNumber}` : stepNumber}
           </div>
         ) : (
-          <ClaudeSparkIcon size={20} color={palette.hex} />
+          <ClaudeSparkIcon size={20} color={accentHex} spin={!preset?.steppedFrames} />
         )}
         <span
           style={{
-            color: palette.hex,
+            color: accentHex,
             fontSize: 21,
             fontWeight: 800,
-            letterSpacing: '0.12em',
+            letterSpacing: '0.11em',
             textTransform: 'uppercase',
           }}
         >
@@ -116,15 +139,15 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
       >
         {titleLines.map((line, idx) => {
           const lineSpring = spring({
-            frame: Math.max(0, frame - (idx * 5 + 4)),
+            frame: Math.max(0, qFrame - (idx * 5 + 4)),
             fps,
-            config: { damping: 15, stiffness: 150 },
+            config: preset ? preset.springConfig : { damping: 15, stiffness: 150 },
           });
 
           const fullText = line.text;
           const visibleChars = typewriter
             ? Math.floor(
-                interpolate(frame - idx * 10, [0, 18], [0, fullText.length], {
+                interpolate(qFrame - idx * 10, [0, 18], [0, fullText.length], {
                   extrapolateLeft: 'clamp',
                   extrapolateRight: 'clamp',
                 })
@@ -143,7 +166,7 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
             <div
               key={idx}
               style={{
-                fontSize: 78,
+                fontSize: 76,
                 fontWeight: 900,
                 lineHeight: 1.05,
                 letterSpacing: '-0.025em',
@@ -171,8 +194,10 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
                   <span
                     key={pIdx}
                     style={{
-                      color: palette.hex,
-                      textShadow: `0 0 24px ${palette.hex}CC, 0 0 56px ${palette.hex}77`,
+                      color: accentHex,
+                      textShadow: isDark
+                        ? `0 0 22px ${accentHex}AA, 0 0 48px ${accentHex}55`
+                        : 'none',
                     }}
                   >
                     {trimmedPart}
@@ -184,7 +209,7 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
         })}
       </div>
 
-      {/* Optional Kinetic Subtitle Lines (Galihry CTA / Explainer style) */}
+      {/* Optional Subtitle Lines */}
       {subtitleLines.length > 0 && (
         <div
           style={{
@@ -192,14 +217,14 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
             flexDirection: 'column',
             alignItems: align === 'center' ? 'center' : 'flex-start',
             gap: 6,
-            marginTop: 6,
+            marginTop: 4,
           }}
         >
           {subtitleLines.map((sub, sIdx) => {
             const subSpring = spring({
-              frame: Math.max(0, frame - (14 + sIdx * 6)),
+              frame: Math.max(0, qFrame - (12 + sIdx * 6)),
               fps,
-              config: { damping: 15, stiffness: 150 },
+              config: preset ? preset.springConfig : { damping: 15, stiffness: 150 },
             });
             const words = sub.text.split(/\s+/);
             const boldSet = new Set((sub.boldWords || []).map((w) => w.toUpperCase()));
@@ -209,13 +234,12 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
                 style={{
                   display: 'flex',
                   flexWrap: 'wrap',
-                  gap: '0 12px',
-                  fontSize: 38,
-                  fontWeight: 800,
-                  lineHeight: 1.22,
-                  letterSpacing: '0.01em',
-                  textTransform: 'uppercase',
-                  transform: `translateY(${(1 - subSpring) * 20}px)`,
+                  gap: '0 10px',
+                  fontSize: 30,
+                  fontWeight: 700,
+                  lineHeight: 1.32,
+                  color: mutedTextColor,
+                  transform: `translateY(${(1 - subSpring) * 18}px)`,
                   opacity: subSpring,
                 }}
               >
@@ -226,7 +250,8 @@ export const SceneHeader: React.FC<SceneHeaderProps> = ({
                     <span
                       key={wIdx}
                       style={{
-                        color: isBold ? '#F5F4F0' : 'rgba(245, 244, 240, 0.52)',
+                        color: isBold ? textColor : mutedTextColor,
+                        fontWeight: isBold ? 800 : 600,
                       }}
                     >
                       {w}

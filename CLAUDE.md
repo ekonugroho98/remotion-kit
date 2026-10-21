@@ -81,16 +81,14 @@ Setiap adegan wajib disusun dalam 4 zona vertikal agar rapi dan tidak pernah ber
 
 ---
 
-## 4. Kamus Resep Gaya Visual (`L01` s/d `L25`)
+## 4. Kamus Resep Gaya Visual & 25 Template Komposisi (`L01` s/d `L25`)
 
-Sesuaikan tata letak panggung tengah (Layer 3) dengan style yang dipilih di `concept.md`:
+Seluruh **25 Style Preset (`L01` s/d `L25`)** sudah tersedia lengkap sebagai kode TypeScript siap pakai di:
+- **`src/components/stylePresets.ts`**: Definisi lengkap palet warna teruji WCAG AA (`bgBase`, `cardBg`, `textPrimary`, `accentHex`, `accentSecondaryHex`), pola kanvas (`dots`, `grid`, `diagonal`, `cross`, `rings`, `editorial-lines`), konfigurasi `springConfig`, dan `archetype` panggung untuk `L01` sampai `L25`.
+- **`src/templates/TemplateStage.tsx`**: 10 arketipe panggung visual siap pakai (`faux-ui`, `kinetic-type`, `isometric-3d`, `editorial-grid`, `handcrafted-board`, `pop-brutalist`, `cyber-digital`, `data-product`, `chat-story`, `app-mockup`) lengkap dengan `<StageFooterStrip />`.
+- **`src/templates/StyleTemplateVideo.tsx` & `src/Root.tsx`**: Ke-25 style terdaftar langsung di sidebar Remotion Studio di dalam folder `Templates-L01-L25` (`L01-AntigravityDarkUI` s/d `L25-MixedMedia`) serta komposisi master `All25StylesReel`.
 
-- **`L01 — Minimalist / AGY Dark UI`**: Kanvas `#0F0F0E`, aksen `#E87B58` (coral) & `#8AC98A` (sage green), kartu UI gelap `#171716` dengan border `#2D2C2A`, window 3D tilt, kursor interaktif.
-- **`L02 — Kinetic Typography`**: Fokus pada tipografi raksasa yang bergerak dinamis mengikuti ketukan kata VO (`spring` cepat `stiffness: 220, damping: 12`), kata kunci meledak/scale-up dengan *neon bloom* kuat, badge kata kunci miring (`skewX(-8deg)`), dipadukan kartu visual yang ringkas dan punchy.
-- **`L03 — Isometric 3D Cards`**: Semua kartu utama diberi transformasi perspektif 3D (`perspective(1100px) rotateX(8deg) rotateY(-10deg)`), bayangan berlapis dalam, dan stiker melayang di sekitarnya.
-- **`L04 — Paper / Editorial Light`**: Mode `theme="light"` (`#F4F1EA`), kartu putih gading `#FFFFFF` dengan border tegas `#1A1A18`, tipografi kontras hitam pekat & aksen terakota.
-- **`L05 — Neon Cyberpunk Glow`**: Kanvas hitam pekat `#09090D`, pendaran ganda ungu `#B58DED` & biru siber `#7CA6D8`, garis border bercahaya.
-- **`L06` s/d `L25`**: Ikuti karakter nama style di `concept.md` sambil tetap menjaga keterbacaan di layar vertikal HP dan struktur 4-layer di atas.
+Saat membuat komposisi video baru yang menggunakan style `Lxx`, teruskan `styleId="Lxx"` ke `<BackgroundCanvas styleId="Lxx" />`, `<TopHudBar styleId="Lxx" />`, `<SceneHeader styleId="Lxx" />`, dan `<KaraokeSubtitle styleId="Lxx" />`, serta gunakan `<TemplateStage preset={getStylePreset('Lxx')} items={[...]} />` untuk panggung tengahnya.
 
 ---
 
