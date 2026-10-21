@@ -1,0 +1,30 @@
+# Transcript — content-engine (32.82s / 1000 frames @ 30fps)
+
+Bikin video dari nol sampai terjadwal, sekarang cuma butuh sepuluh menit. Semuanya ada di satu folder project lengkap, dari panel web, template, sampai efek suara. Isinya empat bagian yang saling nyambung: brand kamu, otak AI, puluhan komponen, dan koneksi otomatis. Cara pakainya gampang, cukup ketik topik video, lalu naskah, suara, render, dan jadwal beres otomatis. Punya rekaman mentah? AI otomatis potong jeda diam, pasang animasi, dan subtitle karaoke siap upload!
+
+## Word-Level Timestamps
+[00.10s - 01.29s | F0003-F0039] Bikin video dari nol
+[01.29s - 02.41s | F0039-F0072] sampai terjadwal,
+[02.41s - 03.60s | F0072-F0108] sekarang cuma butuh
+[03.60s - 04.51s | F0108-F0135] sepuluh menit.
+[04.46s - 05.76s | F0134-F0173] Semuanya ada di satu
+[05.76s - 07.37s | F0173-F0221] folder project lengkap,
+[07.37s - 08.36s | F0221-F0251] dari panel web,
+[08.36s - 09.82s | F0251-F0295] template, sampai efek
+[09.82s - 11.13s | F0295-F0334] suara. Isinya empat
+[11.13s - 12.37s | F0334-F0371] bagian yang saling
+[12.37s - 13.84s | F0371-F0415] nyambung: brand kamu,
+[13.84s - 14.54s | F0415-F0436] otak AI,
+[14.54s - 15.78s | F0436-F0473] puluhan komponen,
+[15.78s - 17.25s | F0473-F0517] dan koneksi otomatis.
+[17.25s - 18.97s | F0517-F0569] Cara pakainya gampang,
+[18.97s - 20.79s | F0569-F0624] cukup ketik topik video,
+[20.79s - 21.74s | F0624-F0652] lalu naskah,
+[21.74s - 22.86s | F0652-F0686] suara, render,
+[22.86s - 24.07s | F0686-F0722] dan jadwal beres
+[24.07s - 26.07s | F0722-F0782] otomatis. Punya rekaman
+[26.07s - 27.73s | F0782-F0832] mentah? AI otomatis
+[27.73s - 28.92s | F0832-F0867] potong jeda diam,
+[28.92s - 30.03s | F0867-F0901] pasang animasi,
+[30.03s - 31.93s | F0901-F0958] dan subtitle karaoke siap
+[31.93s - 32.41s | F0958-F0972] upload!

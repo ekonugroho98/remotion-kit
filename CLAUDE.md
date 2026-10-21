@@ -90,6 +90,19 @@ Seluruh **25 Style Preset (`L01` s/d `L25`)** sudah tersedia lengkap sebagai kod
 
 Saat membuat komposisi video baru yang menggunakan style `Lxx`, teruskan `styleId="Lxx"` ke `<BackgroundCanvas styleId="Lxx" />`, `<TopHudBar styleId="Lxx" />`, `<SceneHeader styleId="Lxx" />`, dan `<KaraokeSubtitle styleId="Lxx" />`, serta gunakan `<TemplateStage preset={getStylePreset('Lxx')} items={[...]} />` untuk panggung tengahnya.
 
+### 4B. Komponen Micro-Interaction Shotcraft (`@jipraks` Style) & `audio-pack.json`
+Selain 25 preset `L01`–`L25`, repo ini dilengkapi pustaka komponen **Shotcraft Content Engine** di `src/library/ShotcraftComponents.tsx` (dicontohkan di komposisi `ContentEngineShowcase` — `src/content-engine/ContentEngineVideo.tsx`):
+- **`<ShotcraftCanvas glowColor="#B6F000" secondaryGlow="#3B82F6" />`**: Kanvas obsidian `#0A0B0A` ultra-bersih dengan ruang negatif $>60\%$ dan pendaran cahaya radial lembut.
+- **`<MinimalEyebrowHeader eyebrow="CONTENT ENGINE" titleLine1="..." titleLine2="..." accentText="..." />`**: Header minimalis tanpa kapsul HUD ramai, hanya titik menyala + label *eyebrow* kecil di atas judul.
+- **`<CircularTimerRing morphFrame={104} headlineAfterMorph="10 MENIT" />`**: Lingkaran *progress timer* SVG (`00:49` $\rightarrow$ `09:59`) yang berubah menjadi angka klaim besar saat mencapai `morphFrame`.
+- **`<FileTreeCard items={[...]} />`**: Kartu pohon folder project yang baris-barisnya menyala dari garis *dashed* redup tepat mengikuti kata Voice-Over.
+- **`<DashedConnectionGrid nodes={[...]} summaryFrame={...} />`**: Grid 2×2 dengan pola **Progressive Word-Synced Activation** — seluruh kartu tampil sebagai *ghost dashed outline* (`opacity: 0.25`) terlebih dahulu, lalu menyala satu per satu (`opacity: 1` + border berwarna) tepat pada frame kata VO yang menyebut bagian tersebut, diakhiri *pill* ringkasan `✓ 4 bagian udah nyambung otomatis`.
+- **`<PipelineCheckStepper promptText="..." stepFrames={[...]} />`**: Bubble ketikan prompt + 4 kotak tahapan (`Naskah`, `Suara`, `Render`, `Jadwal`) yang berubah menjadi centang hijau `✓` secara berurutan + jadwal sosmed (`TikTok / Instagram / YouTube terjadwal ✓`).
+- **`<BeforeAfterFootageCard editActivateFrame={...} />`**: Perbandingan visual rekaman `MENTAH` (dengan blok merah jeda diam di timeline bawah) vs `DIEDIT AI` (`100% OTOMATIS ✓`).
+- **`<KaraokeSubtitle variant="inverted-box" phrases={data.phrases} />`**: Subtitle karaoke tanpa kapsul luar, maksimal **2–3 kata** di layar, dengan kotak sorot solid putih/hijau sedikit miring (`rotate(-1.5deg)`) tepat pada kata yang sedang diucapkan.
+- **`audio-pack.json` & `public/sfx/`**: Manifest 9 efek suara studio (`pop.wav`, `switch.wav`, `tick.wav`, `chime.wav`, `click.wav`, `type.wav`, `whoosh.wav`, `success.wav`, `music-loop.wav`).
+- **`scripts/edit-footage.py`**: Skrip pemotong jeda diam (*FFmpeg silence detection & auto-cut*) untuk video rekaman bicara mentah (`raw-footage.mp4` $\rightarrow$ `footage-clean.mp4` + `cuts-report.json` + `data.json`).
+
 ---
 
 ## 5. Aturan Wajib Anti-Slop Video (`V-01`..`V-08`) & Anti-Slop Voice (`VO-01`..`VO-06`)

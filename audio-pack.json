@@ -1,0 +1,61 @@
+{
+  "name": "Karaya × Shotcraft Audio Pack",
+  "version": "2.0.0",
+  "sampleRate": 44100,
+  "sfx": {
+    "pop": {
+      "file": "sfx/pop.wav",
+      "duration": 0.085,
+      "recommendedVolume": 0.28,
+      "usage": "Bubble pop saat badge atau kartu muncul"
+    },
+    "switch": {
+      "file": "sfx/switch.wav",
+      "duration": 0.068,
+      "recommendedVolume": 0.3,
+      "usage": "Snap saat kartu dashed menyala mengikuti kata VO"
+    },
+    "tick": {
+      "file": "sfx/tick.wav",
+      "duration": 0.022,
+      "recommendedVolume": 0.22,
+      "usage": "Detak halus untuk timer melingkar atau counter angka"
+    },
+    "chime": {
+      "file": "sfx/chime.wav",
+      "duration": 0.42,
+      "recommendedVolume": 0.32,
+      "usage": "Dentingan verifikasi saat centang hijau (✓) menyala"
+    },
+    "click": {
+      "file": "sfx/click.wav",
+      "duration": 0.045,
+      "recommendedVolume": 0.35,
+      "usage": "Klik kursor mouse pada tombol UI"
+    },
+    "type": {
+      "file": "sfx/type.wav",
+      "duration": 0.032,
+      "recommendedVolume": 0.2,
+      "usage": "Ketikan tombol mekanik saat mengetik prompt"
+    },
+    "whoosh": {
+      "file": "sfx/whoosh.wav",
+      "duration": 0.26,
+      "recommendedVolume": 0.26,
+      "usage": "Transisi sapuan halus antar scene / bab"
+    },
+    "success": {
+      "file": "sfx/success.wav",
+      "duration": 0.65,
+      "recommendedVolume": 0.32,
+      "usage": "Kord berhasil di akhir pipeline atau CTA"
+    },
+    "music-loop": {
+      "file": "sfx/music-loop.wav",
+      "duration": 16.0,
+      "recommendedVolume": 0.14,
+      "usage": "Musik latar ambient synth 100 BPM (auto-ducking)"
+    }
+  }
+}

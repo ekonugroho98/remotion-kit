@@ -582,6 +582,7 @@
               <label>Sumber Utama</label>
               <div class="toggle-group">
                 <button class="toggle-btn active" id="srcVoBtn" onclick="setSource('vo')">Voice-over</button>
+                <button class="toggle-btn" id="srcFootageBtn" onclick="setSource('footage')">Edit Footage</button>
                 <button class="toggle-btn" id="srcClipBtn" onclick="setSource('clipper')">YouTube Clipper</button>
               </div>
             </div>
@@ -592,6 +593,18 @@
                 <button class="toggle-btn" id="fmt169Btn" onclick="setAspect('16:9')">▭ 16:9</button>
               </div>
               <div class="sub-hint" id="fmtHint">1080 × 1920 · Reels, TikTok, Shorts</div>
+            </div>
+          </div>
+
+          <!-- Raw Footage Auto-Editor Box -->
+          <div id="footageBox" style="display:none; margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+            <div class="dropzone" onclick="document.getElementById('rawFootageInput').click()">
+              <div>
+                <div style="font-weight:700; font-size:13.5px;" id="rawFootageFileName">🎥 Upload Video Rekaman Mentah (.mp4)</div>
+                <div class="sub-hint" id="rawFootageHint">AI otomatis memotong jeda diam (silence cut), mengekstrak audio.wav, dan membuat word-timestamp</div>
+              </div>
+              <span style="font-size:12px; font-weight:700; color:var(--green);">Auto-Cut Jeda Diam</span>
+              <input type="file" id="rawFootageInput" accept="video/*" style="display:none" onchange="uploadAndCutFootage(this)" />
             </div>
           </div>
 
@@ -650,6 +663,22 @@
           </div>
 
           <audio id="voPlayer" controls src="/public/karaya-showcase/audio.wav" style="width:100%; margin-top:12px; height:38px;"></audio>
+
+          <!-- 1-Click Auto-Script from Topic (@jipraks style) -->
+          <div style="margin-top:16px; padding:14px 16px; border-radius:10px; background:#FAF9F6; border:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <label style="margin:0; color:var(--text);">✨ Belum Punya Naskah? Cukup Ketik Topik Video:</label>
+              <select id="topicTone" style="width:auto; padding:5px 10px; font-size:12px;">
+                <option value="hook">Gaya Content Engine (@jipraks Hook 10 Menit)</option>
+                <option value="story">Gaya Storytelling Problem-Solution</option>
+                <option value="saas">Gaya Showcase Produk / SaaS</option>
+              </select>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <input type="text" id="topicInput" placeholder="Contoh: AI Content Engine 10 Menit / Aplikasi Keuangan Keluarga..." value="AI Content Engine" />
+              <button class="btn-outline" id="autoScriptBtn" onclick="autoWriteScript()" style="width:auto; white-space:nowrap; background:#141413; color:#fff; border-color:#141413;">✨ Buat Naskah Otomatis</button>
+            </div>
+          </div>
 
           <!-- Direct TTS Generator -->
           <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
@@ -764,7 +793,7 @@
               <div class="card-desc">Instruksi alur adegan dan pilihan font utama</div>
             </div>
           </div>
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:14px;">
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1.2fr; gap:16px; margin-bottom:14px;">
             <div>
               <label>Bahasa Video</label>
               <select id="langSelect">
@@ -781,10 +810,17 @@
                 <option value="Inter">Inter</option>
               </select>
             </div>
+            <div>
+              <label>Gaya Subtitle Karaoke</label>
+              <select id="subVariantSelect">
+                <option value="inverted-box">Inverted Box (@jipraks · 2-3 kata kotak solid)</option>
+                <option value="pill">Capsule Pill (Kapsul 4 kata di bawah)</option>
+              </select>
+            </div>
           </div>
           <div>
             <label>Brief Singkat / Pembagian Adegan</label>
-            <textarea id="briefInput" rows="4">Video tutorial / showcase 40 detik dengan hook kuat di 3 detik pertama. Gunakan tema Dark UI (#0F0F0E dengan titik halus & radial glow), Top HUD Bar di atas, kartu Faux-UI dengan animasi spring & kursor klik, transisi diagonal stripe wipe antar langkah, subtitle karaoke sinkron per kata di bawah, dan akhiri dengan scene CTA Comment "MAU" untuk dapat link Remotion-nya.</textarea>
+            <textarea id="briefInput" rows="4">Video 32 detik gaya Content Engine (@jipraks) dengan hook kuat di 3 detik pertama. Gunakan <ShotcraftCanvas />, <MinimalEyebrowHeader />, <CircularTimerRing />, <FileTreeCard />, <DashedConnectionGrid /> (kartu dashed menyala tepat saat kata diucapkan VO), <PipelineCheckStepper />, <BeforeAfterFootageCard />, dan <KaraokeSubtitle variant="inverted-box" />.</textarea>
           </div>
         </section>
 
@@ -796,7 +832,7 @@
           <span style="font-size:12px; font-weight:700; color:var(--muted);">Style dipilih (1 dari 25)</span>
           <button onclick="scrollToSec('sec-style')" style="border:none; background:none; color:#B83B22; font-size:12px; font-weight:800; cursor:pointer; padding:0;">Ganti Style ↓</button>
         </div>
-        <div id="selectedStylePreview" onclick="scrollToSec('sec-style')" style="cursor:pointer; padding:12px; border-radius:12px; background:#141413; color:#fff; margin-bottom:10px;">
+        <div id="selectedStylePreview" onclick="openStylePreviewModal(state.styleId)" style="cursor:pointer; padding:12px; border-radius:12px; background:#141413; color:#fff; margin-bottom:10px;">
           <div style="border-radius:8px; overflow:hidden; margin-bottom:10px; border:1px solid rgba(255,255,255,0.14); background:#0F0F0E;">
             <img id="sumStyleThumb" src="/public/style-previews/L01.webp" alt="Preview Template" style="width:100%; height:220px; object-fit:cover; object-position:top center; display:block;" />
           </div>
@@ -805,12 +841,51 @@
           <div style="font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:4px;" id="sumStyleDesc">tutorial · faux-ui · spark</div>
         </div>
         <button class="btn-outline" style="margin-bottom:8px; font-size:12.5px;" onclick="scrollToSec('sec-style')">🎨 Lihat Galeri 25 Template ↓</button>
-        <a class="btn-outline" id="openSelectedInStudioBtn" href="http://localhost:3000/L01-AntigravityDarkUI" target="_blank" style="font-size:12.5px; margin-bottom:4px;">🎬 Preview L01 di Studio ↗</a>
+        <button class="btn-outline" id="openSelectedInStudioBtn" onclick="openStylePreviewModal(state.styleId)" style="font-size:12.5px; margin-bottom:4px;">🎬 Preview Template & Audio</button>
         <button class="btn-submit" onclick="submitPrepPanel()">Submit & Buat Prompt</button>
         <div class="sub-hint" style="margin-top:10px; line-height:1.45;">
           Menyimpan semua bahan ke <code>public/&lt;project&gt;/</code> lalu membuka <code>prompt.txt</code> siap salin untuk Claude Code / Antigravity.
         </div>
       </aside>
+    </div>
+  </div>
+
+  <!-- Interactive Template Preview Modal -->
+  <div class="modal-backdrop" id="stylePreviewModal">
+    <div class="modal" style="max-width:680px;">
+      <div class="modal-head">
+        <div>
+          <div style="font-weight:800; font-size:15px;" id="prevModalTitle">L01 — Antigravity Dark UI</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted);" id="prevModalSub">Clean · tutorial · faux-ui · spark</div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <a class="btn-outline" id="prevModalStudioLink" href="http://localhost:3000/L01-AntigravityDarkUI" target="_blank" style="width:auto; padding:7px 12px;">Buka Studio Lokal (:3000) ↗</a>
+          <button class="btn-submit" style="width:auto; margin:0; padding:7px 14px;" onclick="closeStylePreviewModal()">Pakai Template Ini ✓</button>
+        </div>
+      </div>
+      <div style="padding:20px; display:grid; grid-template-columns: 240px 1fr; gap:20px; align-items:start; background:#FAF9F6;">
+        <div style="border-radius:12px; overflow:hidden; border:1.5px solid var(--border); background:#0F0F0E;">
+          <img id="prevModalImg" src="/public/style-previews/L01.webp" alt="Preview" style="width:100%; display:block;" />
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div style="padding:12px 14px; border-radius:10px; background:#fff; border:1px solid var(--border);">
+            <div style="font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">Preview Audio Demo (VO + SFX + Musik)</div>
+            <audio id="prevModalAudio" controls src="/public/content-engine/audio.wav" style="width:100%; height:36px;"></audio>
+          </div>
+          <div style="padding:12px 14px; border-radius:10px; background:#fff; border:1px solid var(--border); font-size:12.5px; line-height:1.55;">
+            <strong>Fitur Template Ini:</strong>
+            <ul style="margin-top:6px; padding-left:18px; color:var(--muted);">
+              <li>Kanvas 1080×1920 (60%+ ruang lega bersih)</li>
+              <li>Kartu progresif: garis <code>dashed</code> menyala tepat saat kata diucapkan VO</li>
+              <li>Subtitle Karaoke Inverted Box (2–3 kata, tanpa kapsul luar)</li>
+              <li>9 Efek Suara Studio (<code>tick</code>, <code>switch</code>, <code>chime</code>, <code>type</code>, <code>pop</code>, <code>whoosh</code>)</li>
+            </ul>
+          </div>
+          <div class="sub-hint">
+            💡 Jika Remotion Studio lokal (<code>npm run studio</code>) sedang jalan di komputer kamu, klik <strong>Buka Studio Lokal (:3000)</strong> untuk edit timeline per frame.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -879,7 +954,6 @@
     };
 
     document.getElementById('openStudioSidebarBtn').href = STUDIO_BASE_URL;
-    document.getElementById('openSelectedInStudioBtn').href = `${STUDIO_BASE_URL}/L01-AntigravityDarkUI`;
 
     function renderCategories() {
       const cats = ['Semua', 'Clean', 'Type', '3D', 'Handmade', 'Bold', 'Digital', 'Data', 'Character'];
@@ -898,7 +972,6 @@
       const grid = document.getElementById('styleGrid');
       grid.innerHTML = list.map(s => {
         const active = state.styleId === s.id ? 'active' : '';
-        const studioUrl = `${STUDIO_BASE_URL}/${s.id}-${s.slug}`;
         return `
           <div class="style-card ${active}" onclick="selectStyle('${s.id}')">
             <div class="style-Stage" style="height:260px; padding:0; background:${s.bg};">
@@ -911,12 +984,28 @@
               </div>
               <div class="style-tags">${s.tags}</div>
               <div style="margin-top:8px;">
-                <a href="${studioUrl}" target="_blank" onclick="event.stopPropagation();" style="font-size:11px; font-weight:700; color:#B83B22; text-decoration:none;">🎬 Buka di Studio ↗</a>
+                <button onclick="event.stopPropagation(); openStylePreviewModal('${s.id}');" style="border:none; background:none; padding:0; font-size:11px; font-weight:700; color:#B83B22; cursor:pointer;">🎬 Preview Template & Audio</button>
               </div>
             </div>
           </div>
         `;
       }).join('');
+    }
+
+    function openStylePreviewModal(id) {
+      selectStyle(id);
+      const st = STYLES.find(x => x.id === id) || STYLES[0];
+      document.getElementById('prevModalTitle').textContent = `${st.id} — ${st.name}`;
+      document.getElementById('prevModalSub').textContent = `${st.cat.toUpperCase()} · ${st.tags}`;
+      document.getElementById('prevModalImg').src = `/public/style-previews/${st.id}.webp`;
+      document.getElementById('prevModalStudioLink').href = `${STUDIO_BASE_URL}/${st.id}-${st.slug}`;
+      document.getElementById('stylePreviewModal').classList.add('open');
+    }
+
+    function closeStylePreviewModal() {
+      const audio = document.getElementById('prevModalAudio');
+      if (audio) audio.pause();
+      document.getElementById('stylePreviewModal').classList.remove('open');
     }
 
     function filterCat(cat) {
@@ -937,8 +1026,7 @@
       document.getElementById('sumStyleDesc').textContent = st.tags;
       document.getElementById('sumStyleThumb').src = `/public/style-previews/${st.id}.webp`;
       const studioBtn = document.getElementById('openSelectedInStudioBtn');
-      studioBtn.href = `${STUDIO_BASE_URL}/${st.id}-${st.slug}`;
-      studioBtn.textContent = `🎬 Preview ${st.id} di Studio ↗`;
+      studioBtn.textContent = `🎬 Preview ${st.id} & Audio`;
       renderStyles();
     }
 
@@ -954,8 +1042,62 @@
     function setSource(type) {
       state.sourceType = type;
       document.getElementById('srcVoBtn').classList.toggle('active', type === 'vo');
+      document.getElementById('srcFootageBtn').classList.toggle('active', type === 'footage');
       document.getElementById('srcClipBtn').classList.toggle('active', type === 'clipper');
+      document.getElementById('footageBox').style.display = type === 'footage' ? 'block' : 'none';
       document.getElementById('clipperBox').style.display = type === 'clipper' ? 'block' : 'none';
+    }
+
+    async function autoWriteScript() {
+      const topic = document.getElementById('topicInput').value.trim();
+      const tone = document.getElementById('topicTone').value;
+      const btn = document.getElementById('autoScriptBtn');
+      if (!topic) return alert('Ketik topik video terlebih dahulu!');
+      btn.disabled = true;
+      btn.textContent = '⏳ Menyusun...';
+      try {
+        const res = await fetch('/api/generate-script', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ topic, tone }),
+        }).then(r => r.json());
+        if (!res.ok) throw new Error(res.error);
+        document.getElementById('voScriptText').value = res.script;
+        document.getElementById('briefInput').value = res.brief;
+        document.getElementById('ttsFeedback').textContent = '✓ Naskah & Brief otomatis siap! Klik "⚡ Generate VO + Timestamp" untuk membuat suara.';
+      } catch (e) {
+        alert('Error: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '✨ Buat Naskah Otomatis';
+      }
+    }
+
+    async function uploadAndCutFootage(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const hint = document.getElementById('rawFootageHint');
+      const title = document.getElementById('rawFootageFileName');
+      hint.textContent = 'Mengupload & memotong jeda diam (FFmpeg silence cut)...';
+      const dataBase64 = await fileToBase64(file);
+      await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project: state.project, kind: 'root', fileName: 'raw-footage.mp4', dataBase64 }),
+      });
+      const text = document.getElementById('voScriptText').value.trim();
+      const cutRes = await fetch('/api/edit-footage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project: state.project, text }),
+      }).then(r => r.json());
+      if (!cutRes.ok) {
+        hint.textContent = 'Gagal memproses video: ' + cutRes.error;
+        return;
+      }
+      title.textContent = `🎬 footage-clean.mp4 (${cutRes.originalDuration}s → ${cutRes.cleanedDuration}s · ${cutRes.silenceCount} jeda dipotong)`;
+      hint.textContent = `✓ Hemat ${cutRes.savedSeconds}s! Audio & ${cutRes.wordCount} word-timestamp siap di data.json`;
+      document.getElementById('voPlayer').src = `${cutRes.audioUrl}?t=${Date.now()}`;
     }
 
     function setAspect(ratio) {
@@ -1103,6 +1245,7 @@
         referenceNotes: document.getElementById('refNotes').value,
         language: document.getElementById('langSelect').value,
         font: document.getElementById('fontSelect').value,
+        subtitleVariant: document.getElementById('subVariantSelect').value,
         brief: document.getElementById('briefInput').value,
       };
       const res = await fetch('/api/submit', {

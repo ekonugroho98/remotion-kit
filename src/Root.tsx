@@ -1,8 +1,10 @@
 import React from 'react';
 import { Composition, Folder } from 'remotion';
+import contentEngineData from '../public/content-engine/data.json';
 import showcaseData from '../public/karaya-showcase/data.json';
 import templateDemoData from '../public/template-demo/data.json';
 import { STYLE_LIST } from './components/stylePresets';
+import { ContentEngineVideo } from './content-engine/ContentEngineVideo';
 import { KarayaShowcaseVideo } from './karaya-showcase/KarayaShowcaseVideo';
 import {
   All25StylesReel,
@@ -19,7 +21,17 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
-      {/* 1. Full Multi-Scene Showcase Video with Voice-Over & Karaoke */}
+      {/* 1. Flagship Shotcraft / Content Engine Video (Dashed-to-Lit + Inverted Box Karaoke) */}
+      <Composition
+        id="ContentEngineShowcase"
+        component={ContentEngineVideo}
+        durationInFrames={contentEngineData.durationInFrames || 1000}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* 2. Full Multi-Scene Showcase Video with Voice-Over & Karaoke */}
       <Composition
         id="KarayaShowcase"
         component={KarayaShowcaseVideo}

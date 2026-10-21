@@ -1,0 +1,888 @@
+{
+  "project": "content-engine",
+  "voice": "id-ID-ArdiNeural",
+  "duration": 32.822,
+  "fps": 30,
+  "durationInFrames": 1000,
+  "text": "Bikin video dari nol sampai terjadwal, sekarang cuma butuh sepuluh menit. Semuanya ada di satu folder project lengkap, dari panel web, template, sampai efek suara. Isinya empat bagian yang saling nyambung: brand kamu, otak AI, puluhan komponen, dan koneksi otomatis. Cara pakainya gampang, cukup ketik topik video, lalu naskah, suara, render, dan jadwal beres otomatis. Punya rekaman mentah? AI otomatis potong jeda diam, pasang animasi, dan subtitle karaoke siap upload!",
+  "spokenText": "Bikin video dari nol sampai terjadwal, sekarang cuma butuh sepuluh menit. Semuanya ada di satu folder project lengkap, dari panel web, templeit, sampai efek suara. Isinya empat bagian yang saling nyambung: brand kamu, otak e-ai, puluhan komponen, dan koneksi otomatis. Cara pakainya gampang, cukup ketik topik video, lalu naskah, suara, render, dan jadwal beres otomatis. Punya rekaman mentah? e-ai otomatis potong jeda diam, pasang animasi, dan sab-taitel karaoke siap aplod!",
+  "words": [
+    {
+      "word": "Bikin",
+      "start": 0.1,
+      "end": 0.45
+    },
+    {
+      "word": "video",
+      "start": 0.45,
+      "end": 0.8
+    },
+    {
+      "word": "dari",
+      "start": 0.8,
+      "end": 1.08
+    },
+    {
+      "word": "nol",
+      "start": 1.08,
+      "end": 1.29
+    },
+    {
+      "word": "sampai",
+      "start": 1.29,
+      "end": 1.71
+    },
+    {
+      "word": "terjadwal,",
+      "start": 1.71,
+      "end": 2.409
+    },
+    {
+      "word": "sekarang",
+      "start": 2.409,
+      "end": 2.968
+    },
+    {
+      "word": "cuma",
+      "start": 2.968,
+      "end": 3.248
+    },
+    {
+      "word": "butuh",
+      "start": 3.248,
+      "end": 3.598
+    },
+    {
+      "word": "sepuluh",
+      "start": 3.598,
+      "end": 4.088
+    },
+    {
+      "word": "menit.",
+      "start": 4.088,
+      "end": 4.506
+    },
+    {
+      "word": "Semuanya",
+      "start": 4.456,
+      "end": 5.069
+    },
+    {
+      "word": "ada",
+      "start": 5.069,
+      "end": 5.299
+    },
+    {
+      "word": "di",
+      "start": 5.299,
+      "end": 5.452
+    },
+    {
+      "word": "satu",
+      "start": 5.452,
+      "end": 5.758
+    },
+    {
+      "word": "folder",
+      "start": 5.758,
+      "end": 6.218
+    },
+    {
+      "word": "project",
+      "start": 6.218,
+      "end": 6.754
+    },
+    {
+      "word": "lengkap,",
+      "start": 6.754,
+      "end": 7.367
+    },
+    {
+      "word": "dari",
+      "start": 7.367,
+      "end": 7.673
+    },
+    {
+      "word": "panel",
+      "start": 7.673,
+      "end": 8.056
+    },
+    {
+      "word": "web,",
+      "start": 8.056,
+      "end": 8.362
+    },
+    {
+      "word": "template,",
+      "start": 8.362,
+      "end": 9.052
+    },
+    {
+      "word": "sampai",
+      "start": 9.052,
+      "end": 9.512
+    },
+    {
+      "word": "efek",
+      "start": 9.512,
+      "end": 9.818
+    },
+    {
+      "word": "suara.",
+      "start": 9.818,
+      "end": 10.279
+    },
+    {
+      "word": "Isinya",
+      "start": 10.279,
+      "end": 10.743
+    },
+    {
+      "word": "empat",
+      "start": 10.743,
+      "end": 11.13
+    },
+    {
+      "word": "bagian",
+      "start": 11.13,
+      "end": 11.594
+    },
+    {
+      "word": "yang",
+      "start": 11.594,
+      "end": 11.904
+    },
+    {
+      "word": "saling",
+      "start": 11.904,
+      "end": 12.368
+    },
+    {
+      "word": "nyambung:",
+      "start": 12.368,
+      "end": 13.065
+    },
+    {
+      "word": "brand",
+      "start": 13.065,
+      "end": 13.452
+    },
+    {
+      "word": "kamu,",
+      "start": 13.452,
+      "end": 13.839
+    },
+    {
+      "word": "otak",
+      "start": 13.839,
+      "end": 14.149
+    },
+    {
+      "word": "AI,",
+      "start": 14.149,
+      "end": 14.536
+    },
+    {
+      "word": "puluhan",
+      "start": 14.536,
+      "end": 15.078
+    },
+    {
+      "word": "komponen,",
+      "start": 15.078,
+      "end": 15.775
+    },
+    {
+      "word": "dan",
+      "start": 15.775,
+      "end": 16.007
+    },
+    {
+      "word": "koneksi",
+      "start": 16.007,
+      "end": 16.549
+    },
+    {
+      "word": "otomatis.",
+      "start": 16.549,
+      "end": 17.245
+    },
+    {
+      "word": "Cara",
+      "start": 17.245,
+      "end": 17.591
+    },
+    {
+      "word": "pakainya",
+      "start": 17.591,
+      "end": 18.282
+    },
+    {
+      "word": "gampang,",
+      "start": 18.282,
+      "end": 18.973
+    },
+    {
+      "word": "cukup",
+      "start": 18.973,
+      "end": 19.405
+    },
+    {
+      "word": "ketik",
+      "start": 19.405,
+      "end": 19.837
+    },
+    {
+      "word": "topik",
+      "start": 19.837,
+      "end": 20.269
+    },
+    {
+      "word": "video,",
+      "start": 20.269,
+      "end": 20.787
+    },
+    {
+      "word": "lalu",
+      "start": 20.787,
+      "end": 21.133
+    },
+    {
+      "word": "naskah,",
+      "start": 21.133,
+      "end": 21.738
+    },
+    {
+      "word": "suara,",
+      "start": 21.738,
+      "end": 22.256
+    },
+    {
+      "word": "render,",
+      "start": 22.256,
+      "end": 22.861
+    },
+    {
+      "word": "dan",
+      "start": 22.861,
+      "end": 23.12
+    },
+    {
+      "word": "jadwal",
+      "start": 23.12,
+      "end": 23.638
+    },
+    {
+      "word": "beres",
+      "start": 23.638,
+      "end": 24.07
+    },
+    {
+      "word": "otomatis.",
+      "start": 24.07,
+      "end": 24.849
+    },
+    {
+      "word": "Punya",
+      "start": 24.849,
+      "end": 25.356
+    },
+    {
+      "word": "rekaman",
+      "start": 25.356,
+      "end": 26.065
+    },
+    {
+      "word": "mentah?",
+      "start": 26.065,
+      "end": 26.774
+    },
+    {
+      "word": "AI",
+      "start": 26.774,
+      "end": 27.091
+    },
+    {
+      "word": "otomatis",
+      "start": 27.091,
+      "end": 27.726
+    },
+    {
+      "word": "potong",
+      "start": 27.726,
+      "end": 28.202
+    },
+    {
+      "word": "jeda",
+      "start": 28.202,
+      "end": 28.519
+    },
+    {
+      "word": "diam,",
+      "start": 28.519,
+      "end": 28.916
+    },
+    {
+      "word": "pasang",
+      "start": 28.916,
+      "end": 29.392
+    },
+    {
+      "word": "animasi,",
+      "start": 29.392,
+      "end": 30.027
+    },
+    {
+      "word": "dan",
+      "start": 30.027,
+      "end": 30.265
+    },
+    {
+      "word": "subtitle",
+      "start": 30.265,
+      "end": 31.058
+    },
+    {
+      "word": "karaoke",
+      "start": 31.058,
+      "end": 31.613
+    },
+    {
+      "word": "siap",
+      "start": 31.613,
+      "end": 31.93
+    },
+    {
+      "word": "upload!",
+      "start": 31.93,
+      "end": 32.407
+    }
+  ],
+  "phrases": [
+    {
+      "text": "Bikin video dari nol",
+      "start": 0.1,
+      "end": 1.29,
+      "words": [
+        {
+          "word": "Bikin",
+          "start": 0.1,
+          "end": 0.45
+        },
+        {
+          "word": "video",
+          "start": 0.45,
+          "end": 0.8
+        },
+        {
+          "word": "dari",
+          "start": 0.8,
+          "end": 1.08
+        },
+        {
+          "word": "nol",
+          "start": 1.08,
+          "end": 1.29
+        }
+      ]
+    },
+    {
+      "text": "sampai terjadwal,",
+      "start": 1.29,
+      "end": 2.409,
+      "words": [
+        {
+          "word": "sampai",
+          "start": 1.29,
+          "end": 1.71
+        },
+        {
+          "word": "terjadwal,",
+          "start": 1.71,
+          "end": 2.409
+        }
+      ]
+    },
+    {
+      "text": "sekarang cuma butuh",
+      "start": 2.409,
+      "end": 3.598,
+      "words": [
+        {
+          "word": "sekarang",
+          "start": 2.409,
+          "end": 2.968
+        },
+        {
+          "word": "cuma",
+          "start": 2.968,
+          "end": 3.248
+        },
+        {
+          "word": "butuh",
+          "start": 3.248,
+          "end": 3.598
+        }
+      ]
+    },
+    {
+      "text": "sepuluh menit.",
+      "start": 3.598,
+      "end": 4.506,
+      "words": [
+        {
+          "word": "sepuluh",
+          "start": 3.598,
+          "end": 4.088
+        },
+        {
+          "word": "menit.",
+          "start": 4.088,
+          "end": 4.506
+        }
+      ]
+    },
+    {
+      "text": "Semuanya ada di satu",
+      "start": 4.456,
+      "end": 5.758,
+      "words": [
+        {
+          "word": "Semuanya",
+          "start": 4.456,
+          "end": 5.069
+        },
+        {
+          "word": "ada",
+          "start": 5.069,
+          "end": 5.299
+        },
+        {
+          "word": "di",
+          "start": 5.299,
+          "end": 5.452
+        },
+        {
+          "word": "satu",
+          "start": 5.452,
+          "end": 5.758
+        }
+      ]
+    },
+    {
+      "text": "folder project lengkap,",
+      "start": 5.758,
+      "end": 7.367,
+      "words": [
+        {
+          "word": "folder",
+          "start": 5.758,
+          "end": 6.218
+        },
+        {
+          "word": "project",
+          "start": 6.218,
+          "end": 6.754
+        },
+        {
+          "word": "lengkap,",
+          "start": 6.754,
+          "end": 7.367
+        }
+      ]
+    },
+    {
+      "text": "dari panel web,",
+      "start": 7.367,
+      "end": 8.362,
+      "words": [
+        {
+          "word": "dari",
+          "start": 7.367,
+          "end": 7.673
+        },
+        {
+          "word": "panel",
+          "start": 7.673,
+          "end": 8.056
+        },
+        {
+          "word": "web,",
+          "start": 8.056,
+          "end": 8.362
+        }
+      ]
+    },
+    {
+      "text": "template, sampai efek",
+      "start": 8.362,
+      "end": 9.818,
+      "words": [
+        {
+          "word": "template,",
+          "start": 8.362,
+          "end": 9.052
+        },
+        {
+          "word": "sampai",
+          "start": 9.052,
+          "end": 9.512
+        },
+        {
+          "word": "efek",
+          "start": 9.512,
+          "end": 9.818
+        }
+      ]
+    },
+    {
+      "text": "suara. Isinya empat",
+      "start": 9.818,
+      "end": 11.13,
+      "words": [
+        {
+          "word": "suara.",
+          "start": 9.818,
+          "end": 10.279
+        },
+        {
+          "word": "Isinya",
+          "start": 10.279,
+          "end": 10.743
+        },
+        {
+          "word": "empat",
+          "start": 10.743,
+          "end": 11.13
+        }
+      ]
+    },
+    {
+      "text": "bagian yang saling",
+      "start": 11.13,
+      "end": 12.368,
+      "words": [
+        {
+          "word": "bagian",
+          "start": 11.13,
+          "end": 11.594
+        },
+        {
+          "word": "yang",
+          "start": 11.594,
+          "end": 11.904
+        },
+        {
+          "word": "saling",
+          "start": 11.904,
+          "end": 12.368
+        }
+      ]
+    },
+    {
+      "text": "nyambung: brand kamu,",
+      "start": 12.368,
+      "end": 13.839,
+      "words": [
+        {
+          "word": "nyambung:",
+          "start": 12.368,
+          "end": 13.065
+        },
+        {
+          "word": "brand",
+          "start": 13.065,
+          "end": 13.452
+        },
+        {
+          "word": "kamu,",
+          "start": 13.452,
+          "end": 13.839
+        }
+      ]
+    },
+    {
+      "text": "otak AI,",
+      "start": 13.839,
+      "end": 14.536,
+      "words": [
+        {
+          "word": "otak",
+          "start": 13.839,
+          "end": 14.149
+        },
+        {
+          "word": "AI,",
+          "start": 14.149,
+          "end": 14.536
+        }
+      ]
+    },
+    {
+      "text": "puluhan komponen,",
+      "start": 14.536,
+      "end": 15.775,
+      "words": [
+        {
+          "word": "puluhan",
+          "start": 14.536,
+          "end": 15.078
+        },
+        {
+          "word": "komponen,",
+          "start": 15.078,
+          "end": 15.775
+        }
+      ]
+    },
+    {
+      "text": "dan koneksi otomatis.",
+      "start": 15.775,
+      "end": 17.245,
+      "words": [
+        {
+          "word": "dan",
+          "start": 15.775,
+          "end": 16.007
+        },
+        {
+          "word": "koneksi",
+          "start": 16.007,
+          "end": 16.549
+        },
+        {
+          "word": "otomatis.",
+          "start": 16.549,
+          "end": 17.245
+        }
+      ]
+    },
+    {
+      "text": "Cara pakainya gampang,",
+      "start": 17.245,
+      "end": 18.973,
+      "words": [
+        {
+          "word": "Cara",
+          "start": 17.245,
+          "end": 17.591
+        },
+        {
+          "word": "pakainya",
+          "start": 17.591,
+          "end": 18.282
+        },
+        {
+          "word": "gampang,",
+          "start": 18.282,
+          "end": 18.973
+        }
+      ]
+    },
+    {
+      "text": "cukup ketik topik video,",
+      "start": 18.973,
+      "end": 20.787,
+      "words": [
+        {
+          "word": "cukup",
+          "start": 18.973,
+          "end": 19.405
+        },
+        {
+          "word": "ketik",
+          "start": 19.405,
+          "end": 19.837
+        },
+        {
+          "word": "topik",
+          "start": 19.837,
+          "end": 20.269
+        },
+        {
+          "word": "video,",
+          "start": 20.269,
+          "end": 20.787
+        }
+      ]
+    },
+    {
+      "text": "lalu naskah,",
+      "start": 20.787,
+      "end": 21.738,
+      "words": [
+        {
+          "word": "lalu",
+          "start": 20.787,
+          "end": 21.133
+        },
+        {
+          "word": "naskah,",
+          "start": 21.133,
+          "end": 21.738
+        }
+      ]
+    },
+    {
+      "text": "suara, render,",
+      "start": 21.738,
+      "end": 22.861,
+      "words": [
+        {
+          "word": "suara,",
+          "start": 21.738,
+          "end": 22.256
+        },
+        {
+          "word": "render,",
+          "start": 22.256,
+          "end": 22.861
+        }
+      ]
+    },
+    {
+      "text": "dan jadwal beres",
+      "start": 22.861,
+      "end": 24.07,
+      "words": [
+        {
+          "word": "dan",
+          "start": 22.861,
+          "end": 23.12
+        },
+        {
+          "word": "jadwal",
+          "start": 23.12,
+          "end": 23.638
+        },
+        {
+          "word": "beres",
+          "start": 23.638,
+          "end": 24.07
+        }
+      ]
+    },
+    {
+      "text": "otomatis. Punya rekaman",
+      "start": 24.07,
+      "end": 26.065,
+      "words": [
+        {
+          "word": "otomatis.",
+          "start": 24.07,
+          "end": 24.849
+        },
+        {
+          "word": "Punya",
+          "start": 24.849,
+          "end": 25.356
+        },
+        {
+          "word": "rekaman",
+          "start": 25.356,
+          "end": 26.065
+        }
+      ]
+    },
+    {
+      "text": "mentah? AI otomatis",
+      "start": 26.065,
+      "end": 27.726,
+      "words": [
+        {
+          "word": "mentah?",
+          "start": 26.065,
+          "end": 26.774
+        },
+        {
+          "word": "AI",
+          "start": 26.774,
+          "end": 27.091
+        },
+        {
+          "word": "otomatis",
+          "start": 27.091,
+          "end": 27.726
+        }
+      ]
+    },
+    {
+      "text": "potong jeda diam,",
+      "start": 27.726,
+      "end": 28.916,
+      "words": [
+        {
+          "word": "potong",
+          "start": 27.726,
+          "end": 28.202
+        },
+        {
+          "word": "jeda",
+          "start": 28.202,
+          "end": 28.519
+        },
+        {
+          "word": "diam,",
+          "start": 28.519,
+          "end": 28.916
+        }
+      ]
+    },
+    {
+      "text": "pasang animasi,",
+      "start": 28.916,
+      "end": 30.027,
+      "words": [
+        {
+          "word": "pasang",
+          "start": 28.916,
+          "end": 29.392
+        },
+        {
+          "word": "animasi,",
+          "start": 29.392,
+          "end": 30.027
+        }
+      ]
+    },
+    {
+      "text": "dan subtitle karaoke siap",
+      "start": 30.027,
+      "end": 31.93,
+      "words": [
+        {
+          "word": "dan",
+          "start": 30.027,
+          "end": 30.265
+        },
+        {
+          "word": "subtitle",
+          "start": 30.265,
+          "end": 31.058
+        },
+        {
+          "word": "karaoke",
+          "start": 31.058,
+          "end": 31.613
+        },
+        {
+          "word": "siap",
+          "start": 31.613,
+          "end": 31.93
+        }
+      ]
+    },
+    {
+      "text": "upload!",
+      "start": 31.93,
+      "end": 32.407,
+      "words": [
+        {
+          "word": "upload!",
+          "start": 31.93,
+          "end": 32.407
+        }
+      ]
+    }
+  ]
+}

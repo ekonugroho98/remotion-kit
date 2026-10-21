@@ -3,6 +3,7 @@
 Generates studio-clean procedural UI sound effects and ambient background loop
 into public/sfx/ using pure Python standard library (wave, math, struct, random).
 """
+import json
 import math
 import os
 import random
@@ -37,6 +38,57 @@ def gen_pop() -> list[float]:
         env = math.sin(math.pi * t) * ((1.0 - t) ** 0.6)
         phase += 2.0 * math.pi * freq / SAMPLE_RATE
         out.append(math.sin(phase) * env * 0.55)
+    return out
+
+
+def gen_switch() -> list[float]:
+    # Card activation snap (dashed ghost -> solid card light-up)
+    dur = 0.068
+    n = int(SAMPLE_RATE * dur)
+    out = []
+    phase = 0.0
+    for i in range(n):
+        t = i / n
+        freq = 240.0 + 520.0 * (t ** 1.15)
+        env = math.sin(math.pi * t) * ((1.0 - t) ** 0.45)
+        phase += 2.0 * math.pi * freq / SAMPLE_RATE
+        harmonic = math.sin(phase * 1.5) * 0.25
+        out.append((math.sin(phase) + harmonic) * env * 0.5)
+    return out
+
+
+def gen_tick() -> list[float]:
+    # Crisp digital timer / counter tick (22ms)
+    dur = 0.022
+    n = int(SAMPLE_RATE * dur)
+    out = []
+    for i in range(n):
+        t = i / SAMPLE_RATE
+        env = math.exp(-t * 360.0)
+        sig = (
+            math.sin(2.0 * math.pi * 2400.0 * t) * 0.55
+            + math.sin(2.0 * math.pi * 880.0 * t) * 0.35
+        ) * env
+        out.append(sig)
+    return out
+
+
+def gen_chime() -> list[float]:
+    # Crisp checkmark verification ding (E6 -> B6 bell harmonic, 420ms)
+    dur = 0.42
+    n = int(SAMPLE_RATE * dur)
+    notes = [(1318.51, 0.0, 0.48), (1975.53, 0.045, 0.62)]
+    out = [0.0] * n
+    for freq, start, amp in notes:
+        start_idx = int(start * SAMPLE_RATE)
+        for i in range(start_idx, n):
+            t = (i - start_idx) / SAMPLE_RATE
+            env = math.exp(-t * 9.5) * min(1.0, t / 0.004)
+            sig = (
+                math.sin(2.0 * math.pi * freq * t) * 0.75
+                + math.sin(2.0 * math.pi * (freq * 2.0) * t) * 0.20
+            )
+            out[i] += sig * env * amp * 0.45
     return out
 
 
@@ -147,19 +199,42 @@ def gen_music_loop() -> list[float]:
 
 
 def main() -> None:
-    base_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "public", "sfx")
+    root_dir = os.path.dirname(os.path.dirname(__file__))
+    base_dir = os.path.join(root_dir, "public", "sfx")
     files = {
-        "pop.wav": gen_pop(),
-        "click.wav": gen_click(),
-        "type.wav": gen_type(),
-        "whoosh.wav": gen_whoosh(),
-        "success.wav": gen_success(),
-        "music-loop.wav": gen_music_loop(),
+        "pop.wav": (gen_pop(), 0.28, "Bubble pop saat badge atau kartu muncul"),
+        "switch.wav": (gen_switch(), 0.30, "Snap saat kartu dashed menyala mengikuti kata VO"),
+        "tick.wav": (gen_tick(), 0.22, "Detak halus untuk timer melingkar atau counter angka"),
+        "chime.wav": (gen_chime(), 0.32, "Dentingan verifikasi saat centang hijau (✓) menyala"),
+        "click.wav": (gen_click(), 0.35, "Klik kursor mouse pada tombol UI"),
+        "type.wav": (gen_type(), 0.20, "Ketikan tombol mekanik saat mengetik prompt"),
+        "whoosh.wav": (gen_whoosh(), 0.26, "Transisi sapuan halus antar scene / bab"),
+        "success.wav": (gen_success(), 0.32, "Kord berhasil di akhir pipeline atau CTA"),
+        "music-loop.wav": (gen_music_loop(), 0.14, "Musik latar ambient synth 100 BPM (auto-ducking)"),
     }
-    for name, samples in files.items():
+    manifest = {
+        "name": "Karaya × Shotcraft Audio Pack",
+        "version": "2.0.0",
+        "sampleRate": SAMPLE_RATE,
+        "sfx": {},
+    }
+    for name, (samples, rec_vol, usage) in files.items():
         path = os.path.join(base_dir, name)
         save_wav(path, samples)
-        print(f"Generated {path} ({len(samples)/SAMPLE_RATE:.2f}s)")
+        dur = round(len(samples) / SAMPLE_RATE, 3)
+        key = name.replace(".wav", "")
+        manifest["sfx"][key] = {
+            "file": f"sfx/{name}",
+            "duration": dur,
+            "recommendedVolume": rec_vol,
+            "usage": usage,
+        }
+        print(f"Generated {path} ({dur:.3f}s)")
+
+    pack_path = os.path.join(root_dir, "audio-pack.json")
+    with open(pack_path, "w", encoding="utf-8") as f:
+        json.dump(manifest, f, indent=2, ensure_ascii=False)
+    print(f"Saved {pack_path}")
 
 
 if __name__ == "__main__":

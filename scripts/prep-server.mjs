@@ -114,6 +114,23 @@ function getStyleRecipe(styleId, styleName) {
   return `Terapkan preset visual "${styleName || styleId}" dari src/components/stylePresets.ts (getStylePreset("${styleId || 'L01'}")) secara konsisten pada kanvas, tipografi, dan panggung utama (Y: 540px–1460px).`;
 }
 
+function generateScriptFromTopic(topic, tone = 'hook') {
+  const cleanTopic = String(topic || 'AI Content Engine').trim();
+  if (tone === 'story') {
+    const script = `Pernah nggak habis waktu berjam-jam cuma buat ngedit satu video tentang ${cleanTopic}? Sekarang semuanya bisa diberesin dalam sepuluh menit. Di dalam satu folder project ini, udah ada empat bagian yang saling nyambung: brand kamu, otak AI, puluhan komponen animasi, dan koneksi otomatis. Cukup ketik topik ${cleanTopic}, lalu naskah, suara, render, sampai jadwal posting beres otomatis. Punya rekaman mentah? AI otomatis potong jeda diam dan pasang subtitle karaoke siap upload!`;
+    const brief = `Video 5 adegan gaya Shotcraft / @jipraks tentang "${cleanTopic}": (1) Hook CircularTimerRing 10 Menit, (2) FileTreeCard struktur folder, (3) DashedConnectionGrid 4 bagian menyala sesuai kata VO, (4) PipelineCheckStepper Naskah/Suara/Render/Jadwal ✓, (5) BeforeAfterFootageCard potong jeda otomatis + Inverted Box Karaoke Subtitle.`;
+    return { script, brief };
+  }
+  if (tone === 'saas') {
+    const script = `Kenalin cara paling cepat bikin konten ${cleanTopic} tanpa buka software editing rumit. Semua aset, warna brand, dan efek suara udah tersimpan rapi di satu engine. Begitu kamu ketik prompt ${cleanTopic}, sistem otomatis nyusun naskah hook tajam, bikin voice over natural, ngerender animasi enam puluh frame per detik, dan siap dijadwalkan ke TikTok, Reels, dan Shorts. Yuk cobain sekarang!`;
+    const brief = `Video promo produk "${cleanTopic}" dengan kanvas gelap #0A0B0A, eyebrow minimalis, kartu UI progresif (dashed ke solid saat disebut VO), SFX chime/switch/type dari audio-pack.json, dan subtitle karaoke inverted-box.`;
+    return { script, brief };
+  }
+  const script = `Bikin video soal ${cleanTopic} dari nol sampai terjadwal, sekarang cuma butuh sepuluh menit. Semuanya ada di satu folder project lengkap, dari panel web, template, sampai efek suara. Isinya empat bagian yang saling nyambung: brand kamu, otak AI, puluhan komponen, dan koneksi otomatis. Cara pakainya gampang, cukup ketik topik ${cleanTopic}, lalu naskah, suara, render, dan jadwal beres otomatis. Punya rekaman mentah? AI otomatis potong jeda diam, pasang animasi, dan subtitle karaoke siap upload!`;
+  const brief = `Video 32 detik gaya Content Engine (@jipraks) tentang "${cleanTopic}". Gunakan <ShotcraftCanvas />, <MinimalEyebrowHeader />, <CircularTimerRing />, <FileTreeCard />, <DashedConnectionGrid /> (kartu dashed menyala saat kata diucapkan VO), <PipelineCheckStepper />, <BeforeAfterFootageCard />, dan <KaraokeSubtitle variant="inverted-box" />.`;
+  return { script, brief };
+}
+
 function buildPromptTxt(payload) {
   const slug = sanitizeSlug(payload.project);
   const compId = toPascalCase(slug);
@@ -126,10 +143,11 @@ function buildPromptTxt(payload) {
   const assetLines =
     assets.length > 0
       ? assets.map((a) => `  - ${a} -> gunakan <Img src={staticFile('${slug}/assets/${a}')} />`).join('\n')
-      : '  - (tidak ada file aset gambar, gunakan komponen React & TemplateStage murni)';
+      : '  - (tidak ada file aset gambar, gunakan komponen React, ShotcraftComponents & TemplateStage murni)';
 
   const styleId = payload.styleId || 'L01';
   const styleName = payload.styleName || 'Antigravity Dark UI';
+  const subtitleVariant = payload.subtitleVariant || 'inverted-box';
   const styleInfo =
     payload.styleMode === 'reference'
       ? `Clone style dari video referensi: public/${slug}/reference.mp4 (${payload.referenceNotes || 'warna, tipografi, ritme'})`
@@ -142,6 +160,8 @@ function buildPromptTxt(payload) {
   const sourceLine =
     payload.sourceType === 'clipper'
       ? `YouTube Clipper (${payload.youtubeUrl || '-'} | segmen: ${JSON.stringify(payload.clipSegments || [])})`
+      : payload.sourceType === 'footage'
+      ? `Edit Footage Mentah (public/${slug}/footage-clean.mp4 + public/${slug}/cuts-report.json)`
       : 'Voice-over';
 
   return `PROMPT • REMOTION VIDEO • ${slug}
@@ -159,10 +179,20 @@ Semua proses (baca transkrip, susun adegan, coding komponen React, cek still fra
 • Bahasa         : ${payload.language || 'Indonesia'}
 • Font           : ${payload.font || 'Plus Jakarta Sans (default)'}
 • Style visual   : ${styleInfo}
+• Gaya Subtitle  : ${subtitleVariant === 'inverted-box' ? 'Inverted Highlight Box (@jipraks style, maks 2-3 kata tanpa kapsul luar)' : 'Capsule Pill Karaoke'}
 
-▌ RESEP GAYA VISUAL & PRESET KODE (${styleId})
+▌ RESEP GAYA VISUAL & KOMPONEN SHOTCRAFT (${styleId})
 • ${styleRecipe}
-• Preset lengkap tersedia di \`src/components/stylePresets.ts\` (\`getStylePreset('${styleId}')\`) dan panggung siap pakai di \`src/templates/TemplateStage.tsx\` (\`<TemplateStage preset={getStylePreset('${styleId}')} items={[...]} />\`).
+• Preset 25 template tersedia di \`src/components/stylePresets.ts\` (\`getStylePreset('${styleId}')\`) & \`src/templates/TemplateStage.tsx\`.
+• Komponen Micro-Interaction ala @jipraks tersedia siap pakai di \`src/library/ShotcraftComponents.tsx\`:
+  - \`<ShotcraftCanvas glowColor="#B6F000" secondaryGlow="#3B82F6" />\` (kanvas obsidian bersih dengan negative space >60%)
+  - \`<MinimalEyebrowHeader eyebrow="CONTENT ENGINE" titleLine1="..." titleLine2="..." accentText="..." />\`
+  - \`<CircularTimerRing morphFrame={...} headlineAfterMorph="10 MENIT" />\`
+  - \`<FileTreeCard items={[...]} />\` (baris folder dashed menyala sesuai frame kata VO)
+  - \`<DashedConnectionGrid nodes={[...]} summaryFrame={...} />\` (4 kartu dashed outline -> menyala solid tepat di frame kata VO + badge ✓)
+  - \`<PipelineCheckStepper promptText="..." stepFrames={[...]} />\` (ketikan prompt + 4 centang Naskah/Suara/Render/Jadwal + TikTok/IG/YT terjadwal ✓)
+  - \`<BeforeAfterFootageCard editActivateFrame={...} />\` (perbandingan video MENTAH jeda merah vs DIEDIT AI hijau)
+• Manifest efek suara tersedia di \`audio-pack.json\` (\`public/sfx/\`: \`pop.wav\`, \`switch.wav\`, \`tick.wav\`, \`chime.wav\`, \`click.wav\`, \`type.wav\`, \`whoosh.wav\`, \`success.wav\`, \`music-loop.wav\`).
 
 ▌ BAHAN
 • Sumber utama   : ${sourceLine}
@@ -176,11 +206,7 @@ ${assetLines}
 ▌ ATURAN TEKNIS REMOTION 4.x (WAJIB DIIKUTI AGENT)
 1. Import resmi dari 'remotion': AbsoluteFill, Sequence, Audio, Img, staticFile, useCurrentFrame, useVideoConfig, spring, interpolate.
 2. WAJIB tampilkan semua file di public/${slug}/assets/ menggunakan <Img src={staticFile('${slug}/assets/<nama-file>')} /> (DILARANG memakai tag <img> HTML biasa agar tidak flicker saat render).
-3. Susun 4-Layer Kanvas (1080×1920) dengan meneruskan \`styleId="${styleId}"\`:
-   - Layer 1: \`<BackgroundCanvas styleId="${styleId}" />\`.
-   - Layer 2: \`<TopHudBar styleId="${styleId}" leftLabel="REMOTION × ANTIGRAVITY" steps={[...]} activeStepIndex={...} />\`.
-   - Layer 3: \`<SceneHeader styleId="${styleId}" ... />\` + Panggung Tengah (\`<TemplateStage preset={getStylePreset('${styleId}')} items={[...]} />\`, \`WindowCard\`, \`PromptInputCard\`, \`AnimatedCursor\`, atau showcase aset gambar).
-   - Layer 4: \`<KaraokeSubtitle styleId="${styleId}" phrases={data.phrases} />\` (1 baris, maks 4 kata) + \`<DiagonalStripeTransition />\` + SFX dari \`public/sfx/\`.
+3. Sinkronkan kemunculan / penyalaan kartu (\`activateFrame\`) tepat dengan nomor frame di \`public/${slug}/transcript.txt\` (pola Progressive Dashed-to-Lit Activation) dan pasang \`<KaraokeSubtitle variant="${subtitleVariant}" styleId="${styleId}" phrases={data.phrases} />\`.
 4. Semua animasi wajib deterministik dari useCurrentFrame() + spring() / interpolate(..., { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }). Dilarang memakai CSS transition/@keyframes.
 
 ▌ INSTRUKSI EKSEKUSI
@@ -266,6 +292,36 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
+    if (req.method === 'POST' && url.pathname === '/api/generate-script') {
+      const body = await readJsonBody(req);
+      const topic = String(body.topic || '').trim();
+      const tone = String(body.tone || 'hook');
+      if (!topic) {
+        return sendJson(res, 400, { ok: false, error: 'Masukkan topik video terlebih dahulu' });
+      }
+      const { script, brief } = generateScriptFromTopic(topic, tone);
+      return sendJson(res, 200, { ok: true, script, brief });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/api/edit-footage') {
+      const body = await readJsonBody(req);
+      const slug = sanitizeSlug(body.project);
+      const projDir = path.join(publicDir, slug);
+      const args = [path.join(rootDir, 'scripts', 'edit-footage.py'), '--project', slug];
+      if (body.text) {
+        args.push('--text', String(body.text));
+      }
+      execFileSync('python3', args, { cwd: rootDir, stdio: 'inherit' });
+      const report = JSON.parse(fs.readFileSync(path.join(projDir, 'cuts-report.json'), 'utf-8'));
+      const dataJson = JSON.parse(fs.readFileSync(path.join(projDir, 'data.json'), 'utf-8'));
+      return sendJson(res, 200, {
+        ok: true,
+        ...report,
+        wordCount: dataJson.words.length,
+        phraseCount: dataJson.phrases.length,
+      });
+    }
+
     if (req.method === 'POST' && url.pathname === '/api/generate-vo') {
       const body = await readJsonBody(req);
       const slug = sanitizeSlug(body.project);
@@ -326,6 +382,7 @@ const server = http.createServer(async (req, res) => {
         'package-lock.json',
         'tsconfig.json',
         'remotion.config.ts',
+        'audio-pack.json',
         'CLAUDE.md',
         'README.md',
         '.gitignore',
@@ -336,6 +393,7 @@ const server = http.createServer(async (req, res) => {
         'public/sfx',
         'public/style-previews',
         'public/template-demo',
+        'public/content-engine',
         'public/karaya-showcase',
         `public/${slug}`,
       ];
