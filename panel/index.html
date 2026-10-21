@@ -550,7 +550,7 @@
 
     <div class="sidebar-footer">
       <button class="btn-outline" onclick="createNewProject()">+ Project baru</button>
-      <a class="btn-outline" id="openStudioSidebarBtn" href="https://remotion.cortex-ai.my.id" target="_blank">Buka Studio (25 Template) ↗</a>
+      <a class="btn-outline" id="openStudioSidebarBtn" href="http://localhost:3000" target="_blank">Buka Studio (25 Template) ↗</a>
     </div>
   </aside>
 
@@ -805,7 +805,7 @@
           <div style="font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:4px;" id="sumStyleDesc">tutorial · faux-ui · spark</div>
         </div>
         <button class="btn-outline" style="margin-bottom:8px; font-size:12.5px;" onclick="scrollToSec('sec-style')">🎨 Lihat Galeri 25 Template ↓</button>
-        <a class="btn-outline" id="openSelectedInStudioBtn" href="https://remotion.cortex-ai.my.id/L01-AntigravityDarkUI" target="_blank" style="font-size:12.5px; margin-bottom:4px;">🎬 Preview L01 di Studio ↗</a>
+        <a class="btn-outline" id="openSelectedInStudioBtn" href="http://localhost:3000/L01-AntigravityDarkUI" target="_blank" style="font-size:12.5px; margin-bottom:4px;">🎬 Preview L01 di Studio ↗</a>
         <button class="btn-submit" onclick="submitPrepPanel()">Submit & Buat Prompt</button>
         <div class="sub-hint" style="margin-top:10px; line-height:1.45;">
           Menyimpan semua bahan ke <code>public/&lt;project&gt;/</code> lalu membuka <code>prompt.txt</code> siap salin untuk Claude Code / Antigravity.
@@ -833,9 +833,7 @@
   </div>
 
   <script>
-    const STUDIO_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-      ? 'http://localhost:3000'
-      : 'https://remotion.cortex-ai.my.id';
+    const STUDIO_BASE_URL = 'http://localhost:3000';
 
     const STYLES = [
       { id: 'L01', slug: 'AntigravityDarkUI', name: 'Antigravity Dark UI', cat: 'Clean', tags: 'tutorial · faux-ui · spark', bg: '#121210', fg: '#E07A5F', label: 'REMOTION × AGY' },
