@@ -1,6 +1,7 @@
 import React from 'react';
 import { Composition, Folder } from 'remotion';
 import showcaseData from '../public/karaya-showcase/data.json';
+import templateDemoData from '../public/template-demo/data.json';
 import { STYLE_LIST } from './components/stylePresets';
 import { KarayaShowcaseVideo } from './karaya-showcase/KarayaShowcaseVideo';
 import {
@@ -14,6 +15,8 @@ const TypedStyleTemplateVideo = StyleTemplateVideo as unknown as React.FC<
 >;
 
 export const RemotionRoot: React.FC = () => {
+  const templateDuration = templateDemoData.durationInFrames || 275;
+
   return (
     <>
       {/* 1. Full Multi-Scene Showcase Video with Voice-Over & Karaoke */}
@@ -36,7 +39,7 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
 
-      {/* 3. Folder of All 25 Individual Style Templates (L01 - L25) */}
+      {/* 3. Folder of All 25 Individual Style Templates (L01 - L25) with Voice-Over & Karaoke */}
       <Folder name="Templates-L01-L25">
         {STYLE_LIST.map((preset) => {
           const defaultProps: StyleTemplateVideoProps = {
@@ -47,13 +50,15 @@ export const RemotionRoot: React.FC = () => {
             accentWord: preset.sampleTitle[1]?.accentWord || '',
             subtitle: preset.sampleSubtitle,
             stickerText: preset.sampleSticker,
+            audioFile: 'template-demo/audio.wav',
+            withAudio: true,
           };
           return (
             <Composition
               key={preset.id}
               id={`${preset.id}-${preset.slug}`}
               component={TypedStyleTemplateVideo}
-              durationInFrames={180}
+              durationInFrames={templateDuration}
               fps={30}
               width={1080}
               height={1920}

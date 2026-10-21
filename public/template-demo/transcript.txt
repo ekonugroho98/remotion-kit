@@ -1,0 +1,13 @@
+# Transcript — template-demo (8.68s / 275 frames @ 30fps)
+
+Pilih satu dari dua puluh lima template Remotion siap pakai di Prep Panel, lalu render otomatis jadi video MP4 lengkap dengan voice over dan subtitle karaoke!
+
+## Word-Level Timestamps
+[00.10s - 01.03s | F0003-F0031] Pilih satu dari dua
+[01.03s - 02.02s | F0031-F0061] puluh lima template
+[02.02s - 03.19s | F0061-F0096] Remotion siap pakai di
+[03.19s - 03.77s | F0096-F0113] Prep Panel,
+[03.77s - 05.06s | F0113-F0152] lalu render otomatis jadi
+[05.06s - 06.63s | F0152-F0199] video MP4 lengkap dengan
+[06.63s - 07.86s | F0199-F0236] voice over dan subtitle
+[07.86s - 08.32s | F0236-F0250] karaoke!

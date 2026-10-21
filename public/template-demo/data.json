@@ -1,0 +1,329 @@
+{
+  "project": "template-demo",
+  "voice": "id-ID-ArdiNeural",
+  "duration": 8.678,
+  "fps": 30,
+  "durationInFrames": 275,
+  "text": "Pilih satu dari dua puluh lima template Remotion siap pakai di Prep Panel, lalu render otomatis jadi video MP4 lengkap dengan voice over dan subtitle karaoke!",
+  "spokenText": "Pilih satu dari dua puluh lima templeit rimousyen siap pakai di Prep Panel, lalu render otomatis jadi video em-pi-for lengkap dengan vois over dan sab-taitel karaoke!",
+  "words": [
+    {
+      "word": "Pilih",
+      "start": 0.1,
+      "end": 0.392
+    },
+    {
+      "word": "satu",
+      "start": 0.392,
+      "end": 0.625
+    },
+    {
+      "word": "dari",
+      "start": 0.625,
+      "end": 0.858
+    },
+    {
+      "word": "dua",
+      "start": 0.858,
+      "end": 1.033
+    },
+    {
+      "word": "puluh",
+      "start": 1.033,
+      "end": 1.325
+    },
+    {
+      "word": "lima",
+      "start": 1.325,
+      "end": 1.558
+    },
+    {
+      "word": "template",
+      "start": 1.558,
+      "end": 2.025
+    },
+    {
+      "word": "Remotion",
+      "start": 2.025,
+      "end": 2.55
+    },
+    {
+      "word": "siap",
+      "start": 2.55,
+      "end": 2.783
+    },
+    {
+      "word": "pakai",
+      "start": 2.783,
+      "end": 3.075
+    },
+    {
+      "word": "di",
+      "start": 3.075,
+      "end": 3.192
+    },
+    {
+      "word": "Prep",
+      "start": 3.192,
+      "end": 3.425
+    },
+    {
+      "word": "Panel,",
+      "start": 3.425,
+      "end": 3.775
+    },
+    {
+      "word": "lalu",
+      "start": 3.775,
+      "end": 4.008
+    },
+    {
+      "word": "render",
+      "start": 4.008,
+      "end": 4.358
+    },
+    {
+      "word": "otomatis",
+      "start": 4.358,
+      "end": 4.825
+    },
+    {
+      "word": "jadi",
+      "start": 4.825,
+      "end": 5.058
+    },
+    {
+      "word": "video",
+      "start": 5.058,
+      "end": 5.35
+    },
+    {
+      "word": "MP4",
+      "start": 5.35,
+      "end": 5.875
+    },
+    {
+      "word": "lengkap",
+      "start": 5.875,
+      "end": 6.283
+    },
+    {
+      "word": "dengan",
+      "start": 6.283,
+      "end": 6.633
+    },
+    {
+      "word": "voice",
+      "start": 6.633,
+      "end": 6.866
+    },
+    {
+      "word": "over",
+      "start": 6.866,
+      "end": 7.099
+    },
+    {
+      "word": "dan",
+      "start": 7.099,
+      "end": 7.274
+    },
+    {
+      "word": "subtitle",
+      "start": 7.274,
+      "end": 7.857
+    },
+    {
+      "word": "karaoke!",
+      "start": 7.857,
+      "end": 8.325
+    }
+  ],
+  "phrases": [
+    {
+      "text": "Pilih satu dari dua",
+      "start": 0.1,
+      "end": 1.033,
+      "words": [
+        {
+          "word": "Pilih",
+          "start": 0.1,
+          "end": 0.392
+        },
+        {
+          "word": "satu",
+          "start": 0.392,
+          "end": 0.625
+        },
+        {
+          "word": "dari",
+          "start": 0.625,
+          "end": 0.858
+        },
+        {
+          "word": "dua",
+          "start": 0.858,
+          "end": 1.033
+        }
+      ]
+    },
+    {
+      "text": "puluh lima template",
+      "start": 1.033,
+      "end": 2.025,
+      "words": [
+        {
+          "word": "puluh",
+          "start": 1.033,
+          "end": 1.325
+        },
+        {
+          "word": "lima",
+          "start": 1.325,
+          "end": 1.558
+        },
+        {
+          "word": "template",
+          "start": 1.558,
+          "end": 2.025
+        }
+      ]
+    },
+    {
+      "text": "Remotion siap pakai di",
+      "start": 2.025,
+      "end": 3.192,
+      "words": [
+        {
+          "word": "Remotion",
+          "start": 2.025,
+          "end": 2.55
+        },
+        {
+          "word": "siap",
+          "start": 2.55,
+          "end": 2.783
+        },
+        {
+          "word": "pakai",
+          "start": 2.783,
+          "end": 3.075
+        },
+        {
+          "word": "di",
+          "start": 3.075,
+          "end": 3.192
+        }
+      ]
+    },
+    {
+      "text": "Prep Panel,",
+      "start": 3.192,
+      "end": 3.775,
+      "words": [
+        {
+          "word": "Prep",
+          "start": 3.192,
+          "end": 3.425
+        },
+        {
+          "word": "Panel,",
+          "start": 3.425,
+          "end": 3.775
+        }
+      ]
+    },
+    {
+      "text": "lalu render otomatis jadi",
+      "start": 3.775,
+      "end": 5.058,
+      "words": [
+        {
+          "word": "lalu",
+          "start": 3.775,
+          "end": 4.008
+        },
+        {
+          "word": "render",
+          "start": 4.008,
+          "end": 4.358
+        },
+        {
+          "word": "otomatis",
+          "start": 4.358,
+          "end": 4.825
+        },
+        {
+          "word": "jadi",
+          "start": 4.825,
+          "end": 5.058
+        }
+      ]
+    },
+    {
+      "text": "video MP4 lengkap dengan",
+      "start": 5.058,
+      "end": 6.633,
+      "words": [
+        {
+          "word": "video",
+          "start": 5.058,
+          "end": 5.35
+        },
+        {
+          "word": "MP4",
+          "start": 5.35,
+          "end": 5.875
+        },
+        {
+          "word": "lengkap",
+          "start": 5.875,
+          "end": 6.283
+        },
+        {
+          "word": "dengan",
+          "start": 6.283,
+          "end": 6.633
+        }
+      ]
+    },
+    {
+      "text": "voice over dan subtitle",
+      "start": 6.633,
+      "end": 7.857,
+      "words": [
+        {
+          "word": "voice",
+          "start": 6.633,
+          "end": 6.866
+        },
+        {
+          "word": "over",
+          "start": 6.866,
+          "end": 7.099
+        },
+        {
+          "word": "dan",
+          "start": 7.099,
+          "end": 7.274
+        },
+        {
+          "word": "subtitle",
+          "start": 7.274,
+          "end": 7.857
+        }
+      ]
+    },
+    {
+      "text": "karaoke!",
+      "start": 7.857,
+      "end": 8.325,
+      "words": [
+        {
+          "word": "karaoke!",
+          "start": 7.857,
+          "end": 8.325
+        }
+      ]
+    }
+  ]
+}

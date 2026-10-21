@@ -1,10 +1,12 @@
 import React from 'react';
-import { AbsoluteFill, Sequence } from 'remotion';
+import { AbsoluteFill, Audio, Sequence, staticFile } from 'remotion';
+import templateDemoData from '../../public/template-demo/data.json';
 import { BackgroundCanvas } from '../components/BackgroundCanvas';
 import { KaraokeSubtitle, PhraseTimestamp } from '../components/KaraokeSubtitle';
 import { SceneHeader } from '../components/SceneHeader';
 import { getStylePreset, STYLE_LIST, StyleId } from '../components/stylePresets';
 import { TopHudBar } from '../components/TopHudBar';
+import { DiagonalStripeTransition } from '../components/Transitions';
 import { TemplateStage } from './TemplateStage';
 
 export interface StyleTemplateVideoProps {
@@ -15,33 +17,13 @@ export interface StyleTemplateVideoProps {
   accentWord?: string;
   subtitle?: string;
   stickerText?: string;
+  audioFile?: string;
+  withAudio?: boolean;
   phrases?: PhraseTimestamp[];
 }
 
-const DEFAULT_DEMO_PHRASES: PhraseTimestamp[] = [
-  {
-    text: 'TEMPLATE SIAP PAKAI',
-    start: 0.1,
-    end: 2.8,
-    words: [
-      { word: 'TEMPLATE', start: 0.1, end: 0.8 },
-      { word: 'SIAP', start: 0.8, end: 1.5 },
-      { word: 'PAKAI', start: 1.5, end: 2.2 },
-      { word: 'OTOMATIS', start: 2.2, end: 2.8 },
-    ],
-  },
-  {
-    text: 'RENDER MP4 60FPS',
-    start: 2.85,
-    end: 5.9,
-    words: [
-      { word: 'LANGSUNG', start: 2.85, end: 3.5 },
-      { word: 'RENDER', start: 3.5, end: 4.2 },
-      { word: 'MP4', start: 4.2, end: 4.9 },
-      { word: 'TAJAM', start: 4.9, end: 5.9 },
-    ],
-  },
-];
+const DEFAULT_DEMO_PHRASES: PhraseTimestamp[] =
+  (templateDemoData.phrases as PhraseTimestamp[]) || [];
 
 export const StyleTemplateVideo: React.FC<StyleTemplateVideoProps> = ({
   styleId,
@@ -51,6 +33,8 @@ export const StyleTemplateVideo: React.FC<StyleTemplateVideoProps> = ({
   accentWord,
   subtitle,
   stickerText,
+  audioFile = 'template-demo/audio.wav',
+  withAudio = true,
   phrases = DEFAULT_DEMO_PHRASES,
 }) => {
   const preset = getStylePreset(styleId);
@@ -71,6 +55,20 @@ export const StyleTemplateVideo: React.FC<StyleTemplateVideoProps> = ({
 
   return (
     <AbsoluteFill>
+      {/* Audio Track: Voice-Over + Backsound + Entrance SFX */}
+      {withAudio && (
+        <>
+          <Audio src={staticFile(audioFile)} volume={1.0} />
+          <Audio src={staticFile('sfx/music-loop.wav')} volume={0.14} />
+          <Sequence from={0} durationInFrames={35}>
+            <Audio src={staticFile('sfx/whoosh.wav')} volume={0.26} />
+          </Sequence>
+          <Sequence from={12} durationInFrames={30}>
+            <Audio src={staticFile('sfx/pop.wav')} volume={0.28} />
+          </Sequence>
+        </>
+      )}
+
       {/* Layer 1: Dynamic Style Canvas */}
       <BackgroundCanvas styleId={preset.id} />
 
@@ -113,6 +111,7 @@ export const All25StylesReel: React.FC = () => {
   const framesPerStyle = 60;
   return (
     <AbsoluteFill>
+      <Audio src={staticFile('sfx/music-loop.wav')} volume={0.22} loop />
       {STYLE_LIST.map((preset, index) => (
         <Sequence
           key={preset.id}
@@ -120,7 +119,8 @@ export const All25StylesReel: React.FC = () => {
           durationInFrames={framesPerStyle}
           name={`${preset.id} - ${preset.name}`}
         >
-          <StyleTemplateVideo styleId={preset.id} />
+          <StyleTemplateVideo styleId={preset.id} withAudio={false} />
+          {index > 0 && <DiagonalStripeTransition startFrame={0} durationInFrames={16} />}
         </Sequence>
       ))}
     </AbsoluteFill>

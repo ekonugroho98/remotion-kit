@@ -335,6 +335,7 @@ const server = http.createServer(async (req, res) => {
         'scripts',
         'public/sfx',
         'public/style-previews',
+        'public/template-demo',
         'public/karaya-showcase',
         `public/${slug}`,
       ];
