@@ -550,7 +550,7 @@
 
     <div class="sidebar-footer">
       <button class="btn-outline" onclick="createNewProject()">+ Project baru</button>
-      <a class="btn-outline" href="http://localhost:3000" target="_blank">Buka Studio ↗</a>
+      <a class="btn-outline" id="openStudioSidebarBtn" href="https://remotion.cortex-ai.my.id" target="_blank">Buka Studio (25 Template) ↗</a>
     </div>
   </aside>
 
@@ -792,12 +792,20 @@
 
       <!-- Sticky Right Summary Column -->
       <aside class="summary-card">
-        <div style="font-size:12px; font-weight:700; color:var(--muted); margin-bottom:8px;">Style dipilih</div>
-        <div id="selectedStylePreview" style="padding:14px; border-radius:10px; background:#141413; color:#fff; margin-bottom:14px;">
-          <div style="font-size:11px; color:#E07A5F; font-weight:800;" id="sumStyleCode">L01 · CLAUDE DARK</div>
-          <div style="font-size:15px; font-weight:800; margin-top:2px;" id="sumStyleName">Claude Dark UI</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span style="font-size:12px; font-weight:700; color:var(--muted);">Style dipilih (1 dari 25)</span>
+          <button onclick="scrollToSec('sec-style')" style="border:none; background:none; color:#B83B22; font-size:12px; font-weight:800; cursor:pointer; padding:0;">Ganti Style ↓</button>
+        </div>
+        <div id="selectedStylePreview" onclick="scrollToSec('sec-style')" style="cursor:pointer; padding:12px; border-radius:12px; background:#141413; color:#fff; margin-bottom:10px;">
+          <div style="border-radius:8px; overflow:hidden; margin-bottom:10px; border:1px solid rgba(255,255,255,0.14); background:#0F0F0E;">
+            <img id="sumStyleThumb" src="/public/style-previews/L01.webp" alt="Preview Template" style="width:100%; height:220px; object-fit:cover; object-position:top center; display:block;" />
+          </div>
+          <div style="font-size:11px; color:#E07A5F; font-weight:800;" id="sumStyleCode">L01 · CLEAN</div>
+          <div style="font-size:15px; font-weight:800; margin-top:2px;" id="sumStyleName">Antigravity Dark UI</div>
           <div style="font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:4px;" id="sumStyleDesc">tutorial · faux-ui · spark</div>
         </div>
+        <button class="btn-outline" style="margin-bottom:8px; font-size:12.5px;" onclick="scrollToSec('sec-style')">🎨 Lihat Galeri 25 Template ↓</button>
+        <a class="btn-outline" id="openSelectedInStudioBtn" href="https://remotion.cortex-ai.my.id/L01-AntigravityDarkUI" target="_blank" style="font-size:12.5px; margin-bottom:4px;">🎬 Preview L01 di Studio ↗</a>
         <button class="btn-submit" onclick="submitPrepPanel()">Submit & Buat Prompt</button>
         <div class="sub-hint" style="margin-top:10px; line-height:1.45;">
           Menyimpan semua bahan ke <code>public/&lt;project&gt;/</code> lalu membuka <code>prompt.txt</code> siap salin untuk Claude Code / Antigravity.
@@ -825,32 +833,36 @@
   </div>
 
   <script>
+    const STUDIO_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000'
+      : 'https://remotion.cortex-ai.my.id';
+
     const STYLES = [
-      { id: 'L01', name: 'Antigravity Dark UI', cat: 'Clean', tags: 'tutorial · faux-ui · spark', bg: '#121210', fg: '#E07A5F', label: 'REMOTION × AGY' },
-      { id: 'L02', name: 'Kinetic Typography', cat: 'Type', tags: 'hook · voice-over · quote', bg: '#0E0E0E', fg: '#FACC15', label: 'WORDS MOVE' },
-      { id: 'L03', name: 'Isometric 3D', cat: '3D', tags: 'tech · proses · data', bg: '#EEF2FF', fg: '#4F46E5', label: 'ISO BLOCKS' },
-      { id: 'L04', name: 'Doodle / Hand-drawn', cat: 'Handmade', tags: 'tutorial · edukasi · tips', bg: '#FFFBEB', fg: '#D97706', label: 'BIG IDEA!' },
-      { id: 'L05', name: 'Comic / Pop Art', cat: 'Bold', tags: 'promo · energik · seru', bg: '#FEF08A', fg: '#E11D48', label: 'POW!' },
-      { id: 'L06', name: '3D / CGI Motion', cat: '3D', tags: 'produk · futuristik · depth', bg: '#1E1B4B', fg: '#A855F7', label: 'REAL-TIME 3D' },
-      { id: 'L07', name: 'Swiss / Editorial', cat: 'Clean', tags: 'grid · korporat · rapi', bg: '#F5F5F0', fg: '#DC2626', label: 'SWISS GRID' },
-      { id: 'L08', name: 'Glitch / Digital', cat: 'Digital', tags: 'cyber · tech · hook', bg: '#09090B', fg: '#22D3EE', label: 'GLITCH //' },
-      { id: 'L09', name: 'Memphis Geometric', cat: 'Bold', tags: 'fun · warna-warni · gen-z', bg: '#FFF7ED', fg: '#EC4899', label: 'MEMPHIS' },
-      { id: 'L10', name: 'Infographic Data', cat: 'Data', tags: 'chart · finansial · riset', bg: '#0F172A', fg: '#38BDF8', label: '78% GROWTH' },
-      { id: 'L11', name: 'Paper Cutout', cat: 'Handmade', tags: 'kolase · cerita · hangat', bg: '#E0F2FE', fg: '#15803D', label: 'PAPER WORLD' },
-      { id: 'L12', name: '2D Character', cat: 'Character', tags: 'maskot · cerita · edukasi', bg: '#ECFDF5', fg: '#EA580C', label: 'HI THERE!' },
-      { id: 'L13', name: 'Liquid Motion', cat: 'Digital', tags: 'fluid · gradien · modern', bg: '#0F0728', fg: '#C084FC', label: 'LIQUID' },
-      { id: 'L14', name: 'Flat Design Clean', cat: 'Clean', tags: 'minimal · ikon · jelas', bg: '#F0F9FF', fg: '#0284C7', label: 'FLAT CLEAN' },
-      { id: 'L15', name: 'Corporate Growth', cat: 'Data', tags: 'b2b · saas · presentasi', bg: '#FFFFFF', fg: '#1D4ED8', label: '$4.8M ARR' },
-      { id: 'L16', name: 'Retro / Vintage', cat: 'Handmade', tags: 'klasik · 70s · badge', bg: '#FEF3C7', fg: '#78350F', label: 'RETRO 1970' },
-      { id: 'L17', name: 'Cyberpunk Neon', cat: 'Digital', tags: 'neon · gaming · malam', bg: '#180926', fg: '#38BDF8', label: 'NEO-2099' },
-      { id: 'L18', name: 'Abstract Particles', cat: 'Digital', tags: 'visual · eksperimen · musik', bg: '#09090B', fg: '#F472B6', label: 'RADIAL DOTS' },
-      { id: 'L19', name: 'Kinetic Collage', cat: 'Type', tags: 'zine · sticker · potongan', bg: '#F5F5F4', fg: '#18181B', label: 'CUT & REMIX' },
-      { id: 'L20', name: 'UI/UX App Promo', cat: 'Clean', tags: 'aplikasi · saas · mockup', bg: '#F8FAFC', fg: '#7C3AED', label: 'UPGRADED ✓' },
-      { id: 'L21', name: 'Claymation 3D', cat: '3D', tags: 'clay · playful · lembut', bg: '#FDE68A', fg: '#EA580C', label: 'C L A Y' },
-      { id: 'L22', name: 'Stop Motion', cat: 'Handmade', tags: 'sticky-notes · taktil · unik', bg: '#D97706', fg: '#FEF08A', label: 'STOP MOTION' },
-      { id: 'L23', name: 'Parallax 2.5D', cat: '3D', tags: 'layer · sinematik · dalam', bg: '#0F172A', fg: '#E2E8F0', label: 'D E P T H' },
-      { id: 'L24', name: 'Cinematic Trailer', cat: 'Bold', tags: 'film · dramatis · flare', bg: '#09151B', fg: '#FDE047', label: 'THE LAST FRAME' },
-      { id: 'L25', name: 'Mixed Media', cat: 'Handmade', tags: 'kertas · 3d · coretan', bg: '#F5EFE6', fg: '#E11D48', label: 'MIXED MEDIA' },
+      { id: 'L01', slug: 'AntigravityDarkUI', name: 'Antigravity Dark UI', cat: 'Clean', tags: 'tutorial · faux-ui · spark', bg: '#121210', fg: '#E07A5F', label: 'REMOTION × AGY' },
+      { id: 'L02', slug: 'KineticTypography', name: 'Kinetic Typography', cat: 'Type', tags: 'hook · voice-over · quote', bg: '#0E0E0E', fg: '#FACC15', label: 'WORDS MOVE' },
+      { id: 'L03', slug: 'Isometric3D', name: 'Isometric 3D', cat: '3D', tags: 'tech · proses · data', bg: '#EEF2FF', fg: '#4F46E5', label: 'ISO BLOCKS' },
+      { id: 'L04', slug: 'DoodleHandDrawn', name: 'Doodle / Hand-drawn', cat: 'Handmade', tags: 'tutorial · edukasi · tips', bg: '#FFFBEB', fg: '#D97706', label: 'BIG IDEA!' },
+      { id: 'L05', slug: 'ComicPopArt', name: 'Comic / Pop Art', cat: 'Bold', tags: 'promo · energik · seru', bg: '#FEF08A', fg: '#E11D48', label: 'POW!' },
+      { id: 'L06', slug: 'CgiMotion3D', name: '3D / CGI Motion', cat: '3D', tags: 'produk · futuristik · depth', bg: '#1E1B4B', fg: '#A855F7', label: 'REAL-TIME 3D' },
+      { id: 'L07', slug: 'SwissEditorial', name: 'Swiss / Editorial', cat: 'Clean', tags: 'grid · korporat · rapi', bg: '#F5F5F0', fg: '#DC2626', label: 'SWISS GRID' },
+      { id: 'L08', slug: 'GlitchDigital', name: 'Glitch / Digital', cat: 'Digital', tags: 'cyber · tech · hook', bg: '#09090B', fg: '#22D3EE', label: 'GLITCH //' },
+      { id: 'L09', slug: 'MemphisGeometric', name: 'Memphis Geometric', cat: 'Bold', tags: 'fun · warna-warni · gen-z', bg: '#FFF7ED', fg: '#EC4899', label: 'MEMPHIS' },
+      { id: 'L10', slug: 'InfographicData', name: 'Infographic Data', cat: 'Data', tags: 'chart · finansial · riset', bg: '#0F172A', fg: '#38BDF8', label: '78% GROWTH' },
+      { id: 'L11', slug: 'PaperCutout', name: 'Paper Cutout', cat: 'Handmade', tags: 'kolase · cerita · hangat', bg: '#E0F2FE', fg: '#15803D', label: 'PAPER WORLD' },
+      { id: 'L12', slug: 'Character2D', name: '2D Character', cat: 'Character', tags: 'maskot · cerita · edukasi', bg: '#ECFDF5', fg: '#EA580C', label: 'HI THERE!' },
+      { id: 'L13', slug: 'LiquidMotion', name: 'Liquid Motion', cat: 'Digital', tags: 'fluid · gradien · modern', bg: '#0F0728', fg: '#C084FC', label: 'LIQUID' },
+      { id: 'L14', slug: 'FlatDesignClean', name: 'Flat Design Clean', cat: 'Clean', tags: 'minimal · ikon · jelas', bg: '#F0F9FF', fg: '#0284C7', label: 'FLAT CLEAN' },
+      { id: 'L15', slug: 'CorporateGrowth', name: 'Corporate Growth', cat: 'Data', tags: 'b2b · saas · presentasi', bg: '#FFFFFF', fg: '#1D4ED8', label: '$4.8M ARR' },
+      { id: 'L16', slug: 'RetroVintage', name: 'Retro / Vintage', cat: 'Handmade', tags: 'klasik · 70s · badge', bg: '#FEF3C7', fg: '#78350F', label: 'RETRO 1970' },
+      { id: 'L17', slug: 'CyberpunkNeon', name: 'Cyberpunk Neon', cat: 'Digital', tags: 'neon · gaming · malam', bg: '#180926', fg: '#38BDF8', label: 'NEO-2099' },
+      { id: 'L18', slug: 'AbstractParticles', name: 'Abstract Particles', cat: 'Digital', tags: 'visual · eksperimen · musik', bg: '#09090B', fg: '#F472B6', label: 'RADIAL DOTS' },
+      { id: 'L19', slug: 'KineticCollage', name: 'Kinetic Collage', cat: 'Type', tags: 'zine · sticker · potongan', bg: '#F5F5F4', fg: '#18181B', label: 'CUT & REMIX' },
+      { id: 'L20', slug: 'UiUxAppPromo', name: 'UI/UX App Promo', cat: 'Clean', tags: 'aplikasi · saas · mockup', bg: '#F8FAFC', fg: '#7C3AED', label: 'UPGRADED ✓' },
+      { id: 'L21', slug: 'Claymation3D', name: 'Claymation 3D', cat: '3D', tags: 'clay · playful · lembut', bg: '#FDE68A', fg: '#EA580C', label: 'C L A Y' },
+      { id: 'L22', slug: 'StopMotion', name: 'Stop Motion', cat: 'Handmade', tags: 'sticky-notes · taktil · unik', bg: '#D97706', fg: '#FEF08A', label: 'STOP MOTION' },
+      { id: 'L23', slug: 'Parallax25D', name: 'Parallax 2.5D', cat: '3D', tags: 'layer · sinematik · dalam', bg: '#0F172A', fg: '#E2E8F0', label: 'D E P T H' },
+      { id: 'L24', slug: 'CinematicTrailer', name: 'Cinematic Trailer', cat: 'Bold', tags: 'film · dramatis · flare', bg: '#09151B', fg: '#FDE047', label: 'THE LAST FRAME' },
+      { id: 'L25', slug: 'MixedMedia', name: 'Mixed Media', cat: 'Handmade', tags: 'kertas · 3d · coretan', bg: '#F5EFE6', fg: '#E11D48', label: 'MIXED MEDIA' },
     ];
 
     let state = {
@@ -864,9 +876,12 @@
       styleMode: 'template',
       selectedCat: 'Semua',
       styleId: 'L01',
-      styleName: 'Claude Dark UI',
+      styleName: 'Antigravity Dark UI',
       styleDesc: 'tutorial · faux-ui · spark',
     };
+
+    document.getElementById('openStudioSidebarBtn').href = STUDIO_BASE_URL;
+    document.getElementById('openSelectedInStudioBtn').href = `${STUDIO_BASE_URL}/L01-AntigravityDarkUI`;
 
     function renderCategories() {
       const cats = ['Semua', 'Clean', 'Type', '3D', 'Handmade', 'Bold', 'Digital', 'Data', 'Character'];
@@ -885,12 +900,11 @@
       const grid = document.getElementById('styleGrid');
       grid.innerHTML = list.map(s => {
         const active = state.styleId === s.id ? 'active' : '';
+        const studioUrl = `${STUDIO_BASE_URL}/${s.id}-${s.slug}`;
         return `
           <div class="style-card ${active}" onclick="selectStyle('${s.id}')">
-            <div class="style-Stage" style="background:${s.bg}; color:${s.fg};">
-              <div class="anim-target" style="padding:8px 12px; border:2px solid ${s.fg}; border-radius:8px; font-weight:900; font-size:14px; letter-spacing:0.05em; text-align:center;">
-                ${s.label}
-              </div>
+            <div class="style-Stage" style="height:260px; padding:0; background:${s.bg};">
+              <img src="/public/style-previews/${s.id}.webp" alt="${s.name}" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:top center; display:block;" />
             </div>
             <div class="style-meta">
               <div class="style-meta-top">
@@ -898,6 +912,9 @@
                 <span class="style-code">${s.id}</span>
               </div>
               <div class="style-tags">${s.tags}</div>
+              <div style="margin-top:8px;">
+                <a href="${studioUrl}" target="_blank" onclick="event.stopPropagation();" style="font-size:11px; font-weight:700; color:#B83B22; text-decoration:none;">🎬 Buka di Studio ↗</a>
+              </div>
             </div>
           </div>
         `;
@@ -920,6 +937,10 @@
       document.getElementById('sumStyleCode').textContent = `${st.id} · ${st.cat.toUpperCase()}`;
       document.getElementById('sumStyleName').textContent = st.name;
       document.getElementById('sumStyleDesc').textContent = st.tags;
+      document.getElementById('sumStyleThumb').src = `/public/style-previews/${st.id}.webp`;
+      const studioBtn = document.getElementById('openSelectedInStudioBtn');
+      studioBtn.href = `${STUDIO_BASE_URL}/${st.id}-${st.slug}`;
+      studioBtn.textContent = `🎬 Preview ${st.id} di Studio ↗`;
       renderStyles();
     }
 
